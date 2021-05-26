@@ -10,22 +10,28 @@ class Engine extends Application {
 
 	private $_loader;
 
-	public function __construct()
-	{
-		parent::__construct();
-		$this->init();
+	public function bootstrap() {
+
+		// $this->handleRoutes();
+
+		$this->_loader = Loader::instance();
+
+		$this->autoDiscoverRouting();
+		$this->autoDiscoverConfig();
+
+		return $this;
+	}
+
+	public function handleRoutes() {
+		// $this->delegate('web', 'BlueFission\Framework\Web')
+		// 	->register('web', 'test', 'handleGet');
 	}
 
 	private function autoDiscoverRouting() {
-		$this->_loader->load("routing");
+		$this->_loader->load("routing.*");
 	}
 
 	private function autoDiscoverConfig() {
-		$this->_loader->load("common.config");
-	}
-
-	protected function init() {
-		parent::init();
-		$this->_loader = Loader::instance();
+		// $this->_loader->load("common.config.*");
 	}
 }
