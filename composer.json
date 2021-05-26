@@ -23,7 +23,7 @@
     ],
     "require": {
         "php": "^7.1.3",
-        "bluefission/develation": "dev-master", 
+        "bluefission/develation": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.5"
