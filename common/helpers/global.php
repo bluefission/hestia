@@ -18,6 +18,23 @@ if(!function_exists('env')) {
 }
 
 
+if (!function_exists( 'get_site_url' )) {
+	function get_site_url( $app_id = null, $path = '', $scheme = null ) {
+	    if ( empty( $app_id ) ) {
+	        // $url = 'http://leads.local:8080';
+	        $url = ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] )  ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'];
+	    } else {
+	        $url = '/';
+	    }
+	 
+	    if ( $path && is_string( $path ) ) {
+	        $url .= '/' . ltrim( $path, '/' );
+	    }
+	 
+	    return $url;
+	}
+}
+
 if (!function_exists( 'dash_get_template' )) {
 	function dash_get_template( $file, $values = [] ) {
 		foreach ( $values as $var=>$value ) {

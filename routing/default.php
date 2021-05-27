@@ -9,11 +9,11 @@ $app
 
 // Index Page
 ->map('get', '/', function() {
-	echo "Hello, World";
+	return template('default.html', ['title'=>"Welcome", 'name'=>env('APP_NAME')]);
 })
 
 ->map('get', '/about', function() {
-	echo "This is the Blue Fission Framework";
+	return "This is the Blue Fission Framework";
 })
 
 ->delegate('responder', Response::class)

@@ -17,6 +17,7 @@ class Engine extends Application {
 		$this->_loader = Loader::instance();
 
 		$this->autoDiscoverRouting();
+		$this->autoDiscoverHelpers();
 		$this->autoDiscoverConfig();
 
 		return $this;
@@ -29,6 +30,10 @@ class Engine extends Application {
 
 	private function autoDiscoverRouting() {
 		$this->_loader->load("routing.*");
+	}
+
+	private function autoDiscoverHelpers() {
+		$this->_loader->load("common.helpers.*");
 	}
 
 	private function autoDiscoverConfig() {
