@@ -16,20 +16,22 @@ class Engine extends Application {
 
 		$this->_loader = Loader::instance();
 
-		$this->autoDiscoverRouting();
+		$this->autoDiscoverMapping();
 		$this->autoDiscoverHelpers();
 		$this->autoDiscoverConfig();
+
+		$this->loadRegistrations();
 
 		return $this;
 	}
 
-	public function handleRoutes() {
+	public function loadRegistrations() {
 		// $this->delegate('web', 'BlueFission\Framework\Web')
 		// 	->register('web', 'test', 'handleGet');
 	}
 
-	private function autoDiscoverRouting() {
-		$this->_loader->load("routing.*");
+	private function autoDiscoverMapping() {
+		$this->_loader->load("mapping.*");
 	}
 
 	private function autoDiscoverHelpers() {

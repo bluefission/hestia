@@ -1,6 +1,6 @@
 <?php
 use BlueFission\HTML\Template;
-use BlueFission\Service\Response;
+use BlueFission\Services\Response;
 
 function template(String $file, Array $data = []) {
 	$template = new Template();
@@ -23,5 +23,5 @@ function response($data) {
 
 	$response->data = $data;
 
-	return $response->message();
+	return $response->send();
 }

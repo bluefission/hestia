@@ -1,9 +1,9 @@
 <?php
-namespace App\Domain\User;
+namespace App\Domain;
 
-use BlueFission\Data\Storage\Mysql;
+use BlueFission\DevObject;
 
-class User extends Mysql {
+class User extends DevObject {
 	protected $_data = [
 		'id'=>'',
 		'username' => '',
