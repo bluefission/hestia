@@ -5,7 +5,7 @@ return [
 		'file'=>'',
 		'cache'=>true,
 		'cache_expire'=>60,
-		'cache_directory'=>'cache/',
+		'cache_directory'=>env('CACHE_DIRECTORY', 'cache/').'template',
 		'max_records'=>1000, 
 		'delimiter_start'=>'{', 
 		'delimiter_end'=>'}',

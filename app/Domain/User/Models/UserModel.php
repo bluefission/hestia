@@ -1,5 +1,5 @@
 <?php
-namespace App\Domain;
+namespace App\Domain\User\Models;
 
 use BlueFission\Data\Storage\Mysql;
 

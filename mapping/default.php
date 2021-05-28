@@ -1,27 +1,22 @@
 <?php
-use BlueFission\Services\Service;
-use BlueFission\Services\Response;
-use BlueFission\Framework\Engine as App;
+use BlueFission\Services\Mapping;
+// use BlueFission\Services\Service;
+// use BlueFission\Services\Response;
+// use BlueFission\Behavioral\Behaviors\Behavior;
+// use BlueFission\Framework\Engine as App;
 
-$app = App::instance();
+// $app = App::instance();
 
-$app
-
-// Index Page
+// $app
 // ->map('get', '/', function() {
-// 	return template('default.html', ['title'=>"Welcome", 'name'=>env('APP_NAME')]);
+// 	return template('default.html', ['title'=>"Welcome", 'name'=>env('APP_NAME')], 'index');
 // })
+// ->map('get', '/api/users', ['App\Business\Api\UserController', 'index'], 'api.users')
 
-->map('get', '/', ['App\Business\Api\UserController', 'index'])
+// ;
 
-->map('get', '/about', function() {
-	return "This is the Blue Fission Framework";
-})
+Mapping::add('/', function() {
+	return template('default.html', ['title'=>"Welcome", 'name'=>env('APP_NAME')], 'index');
+}, 'get');
 
-->register('api', 'test', function( $behavior ) {
-	if (\is_array($behavior)) {
-		die(json_encode($behavior));
-	}
-	die(json_encode($behavior->_context));
-})
-;
+Mapping::add('/api/users', ['App\Business\Api\UserController', 'index'], 'api.users', 'get')->gateway('auth');

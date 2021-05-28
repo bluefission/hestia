@@ -21,7 +21,8 @@ function template(String $file, Array $data = []) {
 function response($data) {
 	$response = new Response();
 
-	$response->data = $data;
-
+	// $response->data = $data;
+	$response->fill($data);
+	
 	return $response->send();
 }
