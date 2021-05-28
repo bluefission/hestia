@@ -49,7 +49,7 @@ class Engine extends Application {
 		}
 
 		foreach ( $config['gateways'] as $name=>$gateway ) {
-			$this->_gateways[$name] => $gateway;
+			$this->gateway($name, $gateway);
 		}
 	}
 
