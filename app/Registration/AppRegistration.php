@@ -31,5 +31,6 @@ class AppRegistration {
 	public function bindings()
 	{
 		$this->_app->bind('App\Domain\User\Queries\IAllUsersQuery', 'App\Domain\User\Queries\AllUsersQuerySql');
+		$this->_app->bind('BlueFission\Data\Storage\Storage', 'BlueFission\Data\Storage\Session');
 	}
 }
