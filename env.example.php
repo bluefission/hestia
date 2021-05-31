@@ -3,9 +3,9 @@
   $variables = [
       'ADMIN_THEME_NAME' => 'admin.php',
       'LOGIN_THEME_NAME' => 'login.php',
-      'DASHBOARD_DIRECTORY' => 'dashboard/',
+      'DASHBOARD_DIRECTORY' => 'admin/',
       'HOME_MODULE' => 'dashboard/',
-      'CACHE_DIRECTORY' => 'cache/'
+      'CACHE_DIRECTORY' => 'cache/',
       'APP_NAME' => 'BlueFission Opus',
       'LOGO_IMG' => 'assets/media/logos/logo.png',
       'FAVICON' => 'assets/media/logos/favicon.ico',

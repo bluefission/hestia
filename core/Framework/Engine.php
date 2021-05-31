@@ -12,6 +12,7 @@ class Engine extends Application {
 	private $_loader;
 
 	private $_extensions = [];
+	private $_configurations = [];
 
 	public function bootstrap() {
 
@@ -35,7 +36,17 @@ class Engine extends Application {
 
 	public function loadConfiguration() {
 
+		// Data
+
+		$database = require dirname( getcwd() ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'database.php';
+
+		$this->_configurations['database'] = $database;
+
+		// Application Logic
+
 		$config = require dirname( getcwd() ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'application.php';
+
+		$this->_configurations['app'] = $config;
 
 		foreach ( $config['aliases'] as $alias=>$classname ) {
 			class_alias($classname, $alias);
@@ -51,6 +62,14 @@ class Engine extends Application {
 		foreach ( $config['gateways'] as $name=>$gateway ) {
 			$this->gateway($name, $gateway);
 		}
+	}
+
+	public function configuration(string $key = '')
+	{
+		if ( $key ) {
+			return $this->_configurations[$key];
+		}
+		return $this->_configurations;
 	}
 
 	private function autoDiscoverMapping() {

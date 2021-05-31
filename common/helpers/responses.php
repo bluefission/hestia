@@ -106,5 +106,6 @@ function response($data) {
 	// $response->data = $data;
 	$response->fill($data);
 	
+	header('Content-type: application/json');
 	return $response->send();
 }

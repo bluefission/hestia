@@ -1,21 +1,5 @@
 <?php
 
-if(file_exists(dirname(dirname(dirname(__FILE__))).'/env.php')) {
-  include_once( dirname(dirname(dirname(__FILE__))).'/env.php' );
-}
-
-if(!function_exists('env')) {
-  function env($key, $default = null)
-  {
-      $value = getenv($key);
-
-      if ($value === false) {
-          return $default;
-      }
-      return $value;
-  }
-}
-
 if (!defined("SITE_ROOT") ){
 	define('SITE_ROOT', dirname(dirname(dirname(__FILE__))).'/');	
 }
@@ -30,7 +14,7 @@ return [
 
 	// Class alias for scope and extensibility 
 	'aliases'=>[
-		'\App'				=>'\BlueFission\Framework\Engine'
+		'\App'			=>'\BlueFission\Framework\Engine'
 	],
 
 	// Extensions to the application functionality
@@ -40,7 +24,7 @@ return [
 
 	// Gateways for processing requests
 	'gateways'=> [
-		'auth'				=>'\BlueFission\Framework\Gateways\AuthenticationGateway',
+		'auth'			=>'\BlueFission\Framework\Gateway\AuthenticationGateway',
 		'admin:auth'	=>'\App\Business\Gateways\AdminAuthenticationGateway',
 	],
 ];

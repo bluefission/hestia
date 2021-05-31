@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework\Gateways;
+namespace BlueFission\Framework\Gateway;
 
 use BlueFission\Services\Gateway;
 use BlueFission\Services\Request;
@@ -16,11 +16,11 @@ class AuthenticationGateway extends Gateway {
 	{
 		$auth = new Authenticator( new Storage );
 
-		if ( $auth->isAuthenticated ) {
+		if ( $auth->isAuthenticated() ) {
 			$auth->setSession();
 		} else {
-			// $auth->destroySession();
-			// $this->redirect();
+			$auth->destroySession();
+			$this->redirect();
 		}
 	}
 

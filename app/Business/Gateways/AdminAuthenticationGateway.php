@@ -1,7 +1,7 @@
 <?php
 namespace App\Business\Gateways;
 
-use BlueFission\Framework\Gateways\AuthenticationGateway;
+use BlueFission\Framework\Gateway\AuthenticationGateway;
 
 class AdminAuthenticationGateway extends AuthenticationGateway {
 

@@ -1,14 +1,15 @@
 <?php
-namespace App\Business\Api;
+namespace App\Business;
 
 use BlueFission\Services\Service;
 use BlueFission\Services\Request;
+// use App\Domain\User\Repositories\IUserRepository;
 use BlueFission\Data\Storage\Mysql;
 use BlueFission\Services\Authenticator;
 
 class AuthenticationController extends Service {
 
-	public function login( Request $request, IUserRepository $repository ) {
+	public function login( Request $request, Mysql $datasource ) {
         $auth = new Authenticator( $datasource );
 
 		$login = $request->login;
@@ -17,7 +18,7 @@ class AuthenticationController extends Service {
 
             if ( $auth->isAuthenticated() ) {
                 $setSession = $auth->setSession();
-                $status = $auth->getStatus();
+                $status = $auth->status();
                 
                 $response = array( 'status'=>$status, 'data' => $setSession);
                 return json_encode($response);
@@ -34,7 +35,7 @@ class AuthenticationController extends Service {
             $authResult = $auth->authenticate( $username, $password );
             $setSession = $auth->setSession();
 
-            $status = $auth->getStatus();
+            $status = $auth->status();
 
             $response = array( 'status'=>$status, 'data' => empty($status));
             
@@ -42,7 +43,7 @@ class AuthenticationController extends Service {
         }
 	}
 
-	public function logout( Request $request, Mysql $datasource  )
+	public function logout( Request $request, Mysql $datasource )
     {
         $auth = new Authenticator( $datasource );
 
@@ -50,9 +51,7 @@ class AuthenticationController extends Service {
 
         if ( $logout !== false ) {
             $auth->destroySession();
-            header("location: ".ROOT_URL);
-            
-            return;
+            return header("location: ".ROOT_URL);
         }
     }
 }

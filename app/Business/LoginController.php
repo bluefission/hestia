@@ -16,7 +16,7 @@ class LoginController extends Service {
         return template('login.html');
     }
 
-    public function register( )
+    public function registration( )
     {
         return template('register.html');
     }

@@ -11,11 +11,10 @@ class AdminController extends Service {
 
 	public function index( Storage $datasource ) 
     {
-        return template('admin/default.html'); // Temporary
         $auth = new Authenticator( $datasource );
 
-        if ( $auth->isAuthenticated ) {
-            return template('admin/default.html');
+        if ( $auth->isAuthenticated() ) {
+            return template('admin/default.html',['csrf_token'=>HTTP::session('_token')]);
         } else {
             return template('admin/login.html');
         }
