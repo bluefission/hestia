@@ -9,9 +9,9 @@ Mapping::add('/', function() {
 Mapping::add('/login', ['App\Business\LoginController', 'login'], 'login', 'get');
 Mapping::add('/register', ['App\Business\LoginController', 'registration'], 'register', 'get');
 Mapping::add('/forgotpassword', ['App\Business\LoginController', 'forgotpassword'], 'forgotpassword', 'get');
+
 Mapping::add('/login', ['App\Business\AuthenticationController', 'login'], 'api.login', 'post');
 Mapping::add('/logout', ['App\Business\AuthenticationController', 'logout'], 'api.logout', 'post')->gateway('auth');
-
 
 // Admin
 Mapping::add('/admin', ['App\Business\AdminController', 'index'], 'admin', 'get');

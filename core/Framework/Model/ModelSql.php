@@ -9,7 +9,8 @@ class ModelSql extends BaseModel {
 	protected $_table = '';
 	protected $_fields = [];
 
-	protected $_autojoin = false;
+	protected $_autojoin = true;
+	protected $_ignore_null = true;
 
 	public function __construct( )
 	{
@@ -17,7 +18,8 @@ class ModelSql extends BaseModel {
 		$this->_dataObject = new MysqlBulk([
 			'name'=>$this->_table,
 			'fields'=>$this->_fields,
-			'auto_join'=>$this->_autojoin
+			'auto_join'=>$this->_autojoin,
+			'ignore_null'=>$this->_ignore_null,
 		]);
 		$this->init();
 	}

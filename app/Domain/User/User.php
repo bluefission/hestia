@@ -5,8 +5,8 @@ use BlueFission\DevObject;
 
 class User extends DevObject {
 	protected $_data = [
-		'id'=>'',
-		'username' => '',
-		'password' => '',
+		'user_id'=>'',
+		'realname' => '',
+		'displayname' => '',
 	];
 }

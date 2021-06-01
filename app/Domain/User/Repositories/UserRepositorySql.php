@@ -3,9 +3,9 @@ namespace App\Domain\User\Repositories;
 
 use BlueFission\Connections\Database\MysqlLink;
 // use BlueFission\Data\Storage\Mysql;
-use App\Domain\User\Models\UserModel;
 use BlueFission\Framework\Repository\RepositorySql;
 use App\Domain\User\Repositories\IUserRepository;
+use App\Domain\User\Models\UserModel as Model;
 use App\Domain\User\User;
 
 class UserRepositorySql extends RepositorySql implements IUserRepository
@@ -13,14 +13,14 @@ class UserRepositorySql extends RepositorySql implements IUserRepository
     // protected $_db;
     protected $_name = "users";
 
-    public function __construct(MysqlLink $link, UserModel $model)
+    public function __construct(MysqlLink $link, Model $model)
     {
         parent::__construct($link, $model);
     }
 
-    public function find($id)
+    public function find($user_id)
     {
-        $this->_model->id = $id;
+        $this->_model->user_id = $user_id;
         $this->_model->read();
 
         return $this->_model->response();
@@ -28,13 +28,13 @@ class UserRepositorySql extends RepositorySql implements IUserRepository
 
     public function save(User $user)
     {
-        $this->_db->assign($user);
-        $this->_db->write();
+        $this->_model->assign($user);
+        $this->_model->write();
     }
 
-    public function remove($id)
+    public function remove($user_id)
     {
-        $this->_db->id($id);
-        $this->_db->delete();
+        $this->_model->id($user_id);
+        $this->_model->delete();
     }
 }

@@ -40,7 +40,6 @@ session_start();
 if (empty(HTTP::session('_token'))) {
     HTTP::session('_token', Util::csrf_token());
 }
-$token = HTTP::session('_token');
 
 $app = App::instance();
 $app

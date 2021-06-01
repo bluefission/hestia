@@ -71,6 +71,17 @@ class BaseModel extends DevObject implements IData {
 
 	public function config( $config = null, $value = null ) {}
 
+	public function assign( $data )
+	{
+		if ( is_object( $data ) || DevArray::isAssoc( $data ) ) {
+			foreach ( $data as $a=>$b ) {
+				$this->field($a, $b);
+			}
+		}
+		else
+			throw new \InvalidArgumentException( "Can't import from variable type " . gettype($data) );
+	}
+
 	public function response()
 	{
 		$response = [

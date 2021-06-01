@@ -4,6 +4,7 @@ namespace App\Business;
 use BlueFission\Services\Service;
 use BlueFission\Services\Request;
 use BlueFission\Services\Authenticator;
+use BlueFission\Net\HTTP;
 
 use BlueFission\Data\Storage\Storage;
 
@@ -16,7 +17,7 @@ class AdminController extends Service {
         if ( $auth->isAuthenticated() ) {
             return template('admin/default.html',['csrf_token'=>HTTP::session('_token')]);
         } else {
-            return template('admin/login.html');
+            return template('admin/login.html',['csrf_token'=>HTTP::session('_token')]);
         }
     }
 
