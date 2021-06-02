@@ -44,7 +44,7 @@ class AuthenticationController extends Service {
 
             $status = $auth->status();
 
-            $response = array( 'status'=>$status, 'data' => empty($status));
+            $response = array( 'status'=>$status, 'data' => empty($status) ? 'true' : 'false' );
             
             return response($response);
         }

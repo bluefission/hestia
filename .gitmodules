@@ -1,0 +1,3 @@
+[submodule "dashboard-ui"]
+	path = resource/scripts/dashboard-ui
+	url = https://github.com/bluefission/DashboardUI
