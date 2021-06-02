@@ -7,8 +7,8 @@ use BlueFission\Connections\Database\MysqlLink;
 use App\Domain\User\Models\CredentialModel;
 use App\Domain\User\Repositories\IUserRepository;
 use App\Domain\User\Queries\IAllUsersQuery;
+use App\Domain\User\Queries\IAllCredentialStatusesQuery;
 use App\Domain\User\User;
-
 
 class UserController extends Service {
 
@@ -36,7 +36,7 @@ class UserController extends Service {
         // Create new user model
         $user = new User;
         $user->user_id = $request->user_id;
-        $user->username = $request->username;
+        $user->realname = $request->realname;
         $user->displayname = $request->displayname;
 
         // Save the new user
@@ -46,10 +46,10 @@ class UserController extends Service {
         return response(['user_id' => $user->user_id]);
     }
 
-    public function updateCredentials( Request $request, CredentialModel $credential )
+    public function updateCredentials( Request $request, MysqlLink $link )
     {
-        $credential->credential_id = $request->credential_id;
-        $credential->read();
+        // $credential->credential_id = $request->credential_id;
+        // $credential->read();
 
         $password = $request->password;
         $password_confirm = $request->password_confirm;
@@ -58,9 +58,21 @@ class UserController extends Service {
             return response("Passwords do not match");
         }
         
-        $credential->password = password_hash($password, PASSWORD_DEFAULT);
-        $credential->write();
+        // $credential->password = password_hash($password, PASSWORD_DEFAULT);
+        // $credential->credential_status_id = $request->credential_status_id;
 
-        return response($credential->response());
+        // $credential->write();
+
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $credential_id = $request->credential_id;
+
+        $link->query("UPDATE `credentials` SET `password` = '".$password."' where `credential_id` = '".$credential_id."';");
+        return response($link->status());
+    }
+
+    public function credentialStatuses( IAllCredentialStatusesQuery $query )
+    {
+        $credentialStatuses = $query->fetch();
+        return response($credentialStatuses);
     }
 }

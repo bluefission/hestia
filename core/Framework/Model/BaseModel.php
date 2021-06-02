@@ -23,7 +23,8 @@ class BaseModel extends DevObject implements IData {
 
 	protected function generateTimestamp()
 	{
-		if (!$this->id) {
+		$id = $this->_idField;
+		if (!$this->_dataObject->$id) {
 			$this->created = date($this->_timestampFormat);
 		}
 		$this->updated = date($this->_timestampFormat);
@@ -49,6 +50,7 @@ class BaseModel extends DevObject implements IData {
 		return $this->_dataObject->read();
 	}
 	public function write() {
+		$this->generateTimestamp();
 		$this->_dataObject->activate();
 		return $this->_dataObject->write();
 	}

@@ -1,14 +1,10 @@
 <?php
 namespace App\Domain\User;
 
-use BlueFission\DevObject;
-
-class Credential extends DevObject {
-	protected $_data = [
-		'credential_id'=>'',
-		'username' => '',
-		'password' => '',
-		'credential_status_id'=>'',
-		'is_primary'=>'',
-	];
+class Credential {
+	public $credential_id;
+	public $username;
+	public $password;
+	public $credential_status_id;
+	public $is_primary;
 }

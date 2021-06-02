@@ -78,7 +78,8 @@ var BlueFissionCrud = function( endpoint ) {
 
 var BlueFissionApp = {
 	user: new BlueFissionCrud('users'),
-	admin_user: new BlueFissionCrud('admin/users')
+	admin_user: new BlueFissionCrud('admin/users'),
+	credential_status: new BlueFissionCrud('admin/credential_statuses'),
 };
 
 BlueFissionApp.admin_user.credentials = function(data, callback) {

@@ -1,13 +1,9 @@
 <?php
 namespace App\Domain\User;
 
-use BlueFission\DevObject;
-
-class LoginAttempt extends DevObject {
-	protected $_data = [
-		'login_attempt_id'=>'',
-		'ip_address' => '',
-		'attempts'=>'',
-		'last_attempt'=>'',
-	];
+class LoginAttempt {
+	public $login_attempt_id;
+	public $ip_address;
+	public $attempts;
+	public $last_attempt;
 }

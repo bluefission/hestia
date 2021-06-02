@@ -1,9 +1,8 @@
 <?php
 namespace App\Domain\User\Queries;
 
-use App\Domain\User\Models\UserModel as Model;
-// use BlueFission\Data\Storage\MysqlBulk;
 use BlueFission\Connections\Database\MysqlLink;
+use App\Domain\User\Models\UserModel as Model;
 
 use App\Domain\User\Queries\IAllUserQuery;
 

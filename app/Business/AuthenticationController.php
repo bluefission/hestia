@@ -3,16 +3,22 @@ namespace App\Business;
 
 use BlueFission\Services\Service;
 use BlueFission\Services\Request;
-// use App\Domain\User\Repositories\IUserRepository;
+use BlueFission\Connections\Database\MysqlLink;
 use BlueFission\Data\Storage\Mysql;
 use BlueFission\Services\Authenticator;
 
 class AuthenticationController extends Service {
 
+    public function __construct( MysqlLink $link )
+    {
+        parent::__construct();
+        $link->open();
+    }
+
 	public function login( Request $request, Mysql $datasource ) {
         $auth = new Authenticator( $datasource );
 
-		$login = $request->login;
+        $login = $request->login;
 
         if ( $login !== false ) {
 
@@ -27,19 +33,20 @@ class AuthenticationController extends Service {
             $username = $request->username;
             $password = $request->password;
             $remember = $request->remember;
-
-            if ( $remember ){
-                $auth->set('sessionDuration', 3600 * 24 * 7 * 4);
+            if ( $remember ) {
+                $auth->config('duration', 3600 * 24 * 7 * 4);
             }
 
             $authResult = $auth->authenticate( $username, $password );
-            $setSession = $auth->setSession();
+            if ( $authResult ) {
+                $setSession = $auth->setSession();
+            }
 
             $status = $auth->status();
 
             $response = array( 'status'=>$status, 'data' => empty($status));
             
-            return json_encode($response);
+            return response($response);
         }
 	}
 
