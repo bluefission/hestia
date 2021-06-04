@@ -24,9 +24,7 @@ class UserController extends Service {
         return response($users);
     }
 
-    public function find( Request $request, IUserRepository $repository ) {
-
-        $user_id = $request->user_id;
+    public function find( $user_id, IUserRepository $repository ) {
         $user = $repository->find($user_id);
         return response($user);
     }

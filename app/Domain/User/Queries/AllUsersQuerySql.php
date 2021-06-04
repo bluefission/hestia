@@ -21,7 +21,6 @@ class AllUsersQuerySql implements IAllUsersQuery {
 		$model = $this->_model;
 		$model->read();
 		$data = $model->result()->toArray();
-
-		return response($data);
+		return $data;
 	}
 }
