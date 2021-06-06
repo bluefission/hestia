@@ -38,10 +38,10 @@ class UserController extends Service {
         $user->displayname = $request->displayname;
 
         // Save the new user
-        $repository->save($user);
+        $response = $repository->save($user);
 
         // Return the id
-        return response(['user_id' => $user->user_id]);
+        return response($response);
     }
 
     public function updateCredentials( Request $request, MysqlLink $link )

@@ -7,10 +7,9 @@ use App\Domain\User\Repositories\IUserRepository;
 
 class UserController extends Service {
 
-    public function find( Request $request, IUserRepository $repository ) {
+    public function find( $user_id, IUserRepository $repository ) {
 
-        $id = $request->id;
-        $user = $repository->find($id);
+        $user = $repository->find($user_id);
         return response($user);
     }
 }

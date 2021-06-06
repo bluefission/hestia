@@ -29,6 +29,8 @@ class UserRepositorySql extends RepositorySql implements IUserRepository
     {
         $this->_model->assign($user);
         $this->_model->write();
+
+        return $this->_model->response();
     }
 
     public function remove($user_id)
