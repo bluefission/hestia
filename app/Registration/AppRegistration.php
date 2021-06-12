@@ -1,6 +1,9 @@
 <?php
 namespace App\Registration;
 
+use App\Business\MysqlConnector;
+use BlueFission\Services\Service;
+
 class AppRegistration {
 
 	private $_app;
@@ -20,13 +23,14 @@ class AppRegistration {
 	{
 		$this->bindings();
 		$this->arguments();
+
+		$this->registrations();
 	}
 
 	public function registrations()
 	{
-		$this->_app->delegate('responder', Response::class);
-		$this->_app->register('responder', 'post', 'send', Service::SCOPE_LEVEL);
-		$this->_app->register('responder', 'get', 'send', Service::SCOPE_LEVEL);
+		$this->_app->delegate('mysql', MysqlConnector::class);
+		$this->_app->register('mysql', 'OnAppLoaded', 'open', Service::SCOPE_LEVEL);
 	}
 
 	public function bindings()
