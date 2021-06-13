@@ -30,7 +30,6 @@ class AppRegistration {
 	public function registrations()
 	{
 		$this->_app->delegate('mysql', MysqlConnector::class);
-		$this->_app->register('mysql', 'OnAppLoaded', 'open', Service::SCOPE_LEVEL);
 	}
 
 	public function bindings()

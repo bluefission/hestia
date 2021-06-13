@@ -84,33 +84,36 @@ class ModelSql extends BaseModel {
 		return $this->_dataObject->query();
 	}
 
-	private function parent($model, $from_id_name, $on_id_name = '')
+	protected function parent($modelClass, $from_id_name, $on_id_name = '')
 	{
-		$model = new \ReflectionClass($model);
+		$refClass = new \ReflectionClass($modelClass);
+		$model = $refClass->newInstance();
 		$id = $on_id_name ?? $from_id_name;
 		$model->$id = $this->$from_id_name;
 		$model->read();
-		$data = $model->data();
-		return $data;
+		// $data = $model->data();
+		return $model;
 	}
 
-	private function child($model, $on_id_name, $from_id_name = '')
+	protected function child($modelClass, $on_id_name, $from_id_name = '')
 	{
-		$model = new \ReflectionClass($model);
+		$refClass = new \ReflectionClass($modelClass);
+		$model = $refClass->newInstance();
 		$id = $from_id_name ?? $on_id_name;
 		$model->$on_id_name = $this->$id;
 		$model->read();
-		$data = $model->data();
-		return $data;
+		// $data = $model->data();
+		return $model;
 	}
 
-	private function children($model, $on_id_name, $from_id_name = '')
+	protected function children($modelClass, $on_id_name, $from_id_name = '')
 	{
-		$model = new \ReflectionClass($model);
+		$refClass = new \ReflectionClass($modelClass);
+		$model = $refClass->newInstance();
 		$id = $from_id_name ?? $on_id_name;
 		$model->$on_id_name = $this->$id;
 		$model->read();
-		$data = $model->result();
-		return $data;
+		// $data = $model->result();
+		return $model;
 	}
 }
