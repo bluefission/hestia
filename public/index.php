@@ -13,20 +13,8 @@ set_time_limit(3000);
 // TODO: set this in a config file
 date_default_timezone_set('America/New_York');
 
-if(file_exists( dirname(dirname(__FILE__)).'/env.php')) {
-  include_once( dirname(dirname(__FILE__)).'/env.php' );
-}
-
-if(!function_exists('env')) {
-  function env($key, $default = null)
-  {
-      $value = getenv($key);
-
-      if ($value === false) {
-          return $default;
-      }
-      return $value;
-  }
+if(file_exists( dirname(dirname(__FILE__)).'/.env')) {
+  import_env_vars(dirname(dirname(__FILE__)).'/.env');
 }
 
 $autoloader = require '../vendor/autoload.php';

@@ -17,6 +17,26 @@ if (!function_exists( 'get_site_url' )) {
 	}
 }
 
+function import_env_vars( $file ) {
+	$variables = file($file);
+	foreach ($variables as $var) {
+		putenv($var);
+	}
+}
+
+
+if(!function_exists('env')) {
+  function env($key, $default = null)
+  {
+      $value = getenv($key);
+
+      if ($value === false) {
+          return $default;
+      }
+      return $value;
+  }
+}
+
 if (!defined("ROOT_URL") ){
 	define('ROOT_URL',get_site_url(null, '/' . env('DASHBOARD_DIRECTORY', 'dashboard/')));
 }
