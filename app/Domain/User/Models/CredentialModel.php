@@ -6,5 +6,5 @@ use BlueFission\Data\Storage\MysqlBulk;
 
 class CredentialModel extends Model {
 	protected $_table = ['credentials'];
-	protected $_fields = ['credential_id', 'user_id', 'username', 'password'];
+	protected $_fields = ['credential_id', 'credential_status_id', 'user_id', 'is_primary' 'username', 'password'];
 }

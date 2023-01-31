@@ -1,15 +1,5 @@
 <?php
 
-if (!defined("SITE_ROOT") ){
-	define('SITE_ROOT', dirname(dirname(dirname(__FILE__))).'/');	
-}
-if (!defined("DASH_ROOT") ){
-	define('DASH_ROOT', dirname(dirname(dirname(__FILE__))).'/');	
-}
-if (!defined("DEBUG") ){
-	define('DEBUG', false);
-}
-
 return [
 
 	// Class alias for scope and extensibility 

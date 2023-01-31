@@ -5,8 +5,8 @@ use BlueFission\Framework\Model\ModelSql as Model;
 use BlueFission\Data\Storage\MysqlBulk;
 
 class UserModel extends Model {
-	protected $_table = ['users','credentials'];
-	protected $_fields = ['user_id', 'credential_id', 'username', 'realname', 'displayname'];
+	protected $_table = ['users'];
+	protected $_fields = ['user_id', 'realname', 'displayname'];
 
 	protected $_ignore_null = true;
 

@@ -3,6 +3,7 @@ namespace BlueFission\Framework\Model;
 
 use BlueFission\Framework\Model\BaseModel;
 use BlueFission\Data\Storage\MysqlBulk;
+use BlueFission\Connections\Database\MysqlLink;
 
 class ModelSql extends BaseModel {
 
@@ -13,8 +14,12 @@ class ModelSql extends BaseModel {
 	protected $_ignore_null = true;
 	protected $_save_related_tables = false;
 
-	public function __construct( )
+	public function __construct( MysqlLink $link = null )
 	{
+		if ($link) {
+			$link->open();
+		}
+
 		$this->_type = get_class($this);
 		$this->_dataObject = new MysqlBulk([
 			'name'=>$this->_table,
@@ -74,6 +79,11 @@ class ModelSql extends BaseModel {
 		return $result;
 	}
 
+	public function condition( $field, $condition = '', $value = '')
+	{
+		$this->_dataObject->condition( $field, $condition, $value);
+	}
+
 	public function result()
 	{
 		return $this->_dataObject->result();
@@ -82,38 +92,5 @@ class ModelSql extends BaseModel {
 	public function query()
 	{
 		return $this->_dataObject->query();
-	}
-
-	protected function parent($modelClass, $from_id_name, $on_id_name = '')
-	{
-		$refClass = new \ReflectionClass($modelClass);
-		$model = $refClass->newInstance();
-		$id = $on_id_name ?? $from_id_name;
-		$model->$id = $this->$from_id_name;
-		$model->read();
-		// $data = $model->data();
-		return $model;
-	}
-
-	protected function child($modelClass, $on_id_name, $from_id_name = '')
-	{
-		$refClass = new \ReflectionClass($modelClass);
-		$model = $refClass->newInstance();
-		$id = $from_id_name ?? $on_id_name;
-		$model->$on_id_name = $this->$id;
-		$model->read();
-		// $data = $model->data();
-		return $model;
-	}
-
-	protected function children($modelClass, $on_id_name, $from_id_name = '')
-	{
-		$refClass = new \ReflectionClass($modelClass);
-		$model = $refClass->newInstance();
-		$id = $from_id_name ?? $on_id_name;
-		$model->$on_id_name = $this->$id;
-		$model->read();
-		// $data = $model->result();
-		return $model;
 	}
 }

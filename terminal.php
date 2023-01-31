@@ -1,20 +1,39 @@
-#/usr/bin/php
+#!/usr/bin/php
 <?php
+use BlueFission\Utils\Loader;
+use BlueFission\Utils\Util;
+use BlueFission\Net\HTTP;
+use BlueFission\Framework\Engine as App;
 
+require 'vendor/autoload.php';
+
+$autoloader = require 'common/config/settings.php';
+
+// Loder utility for non-composer compatible scripts
+$loader = Loader::instance();
+$loader->addPath(getcwd());
+$loader->addPath(getcwd().DIRECTORY_SEPARATOR."app");
+
+
+$app = App::instance();
+$app
+    ->bootstrap()
+    ->args()
+    ->run();
 /*
  * Nodes
  Input
 
  Sensory Drives
  Calibrate
- 	Granular
- 		Signal
- 		Noise
- 		Boundaries
- 	Translate
- 		tolerance
- 		flags
- 		map
+    Granular
+        Signal
+        Noise
+        Boundaries
+    Translate
+        tolerance
+        flags
+        map
 
  Engine
 
@@ -31,6 +50,7 @@
  Face
 */
 
+/*
 ini_set('display_errors', 1);
 set_time_limit(3000);
 date_default_timezone_set('America/New_York');
@@ -88,30 +108,30 @@ $app
 // ->delegate('foundation', 'Eidolon\Foundation')
 // ->register('foundation', 'get', 'run')
 // ->register('eidolon', 'OnComplete', function() {
-// 	if ( !headers_sent() ) {
-// 		$responder = $this->service('responder');
+//  if ( !headers_sent() ) {
+//      $responder = $this->service('responder');
 
-// 		$terminal = $this->service('terminal');
-// 		$responder->data = $terminal->respond();
-// 		$responder->send();
-// 	}
+//      $terminal = $this->service('terminal');
+//      $responder->data = $terminal->respond();
+//      $responder->send();
+//  }
 // })
 // ->register('eidolon', 'DoConfirm', function( $behavior ) {
-// 	$message = "Cannot complete action {$behavior->_context['service']}.{$behavior->_context['behavior']}";
-// 	$user_queue = 'user_0001_messages';
+//  $message = "Cannot complete action {$behavior->_context['service']}.{$behavior->_context['behavior']}";
+//  $user_queue = 'user_0001_messages';
 
-// 	Queue::enqueue($user_queue, $message);
+//  Queue::enqueue($user_queue, $message);
 // })
 ->delegate('terminal', 'Terminal')
 ->register('terminal', 'get', 'start', Service::LOCAL_LEVEL)
 ->register('eidolon', 'continue', function() {
-	// echo 'test';
-	// die('something');
+    // echo 'test';
+    // die('something');
 })
 ->register('terminal', 'post', 'command', Service::LOCAL_LEVEL)
 ->register('chat', 'start', function() {
-	echo "hi\n";
-	die('howdy');
+    echo "hi\n";
+    die('howdy');
 })
 // ->route('eidolon', 'sense', 'OnComplete', 'DoProcess')
 
@@ -123,9 +143,9 @@ $app
 
 
 // ->register('eidolon','get', function($data) {
-// 	// $content = file_get_contents($url);
-// 	// $drive = new SensoryDrive($data);
-// 	// $drive->setParent($this->_parent);
+//  // $content = file_get_contents($url);
+//  // $drive = new SensoryDrive($data);
+//  // $drive->setParent($this->_parent);
 //     // $data = $drive->invoke($content);
 //     // var_dump($data);
 //     include('app/includes/home.php');
@@ -143,21 +163,19 @@ $app
 // ->strategy('prediction', '\BlueFission\Intelligence\Strategies\Predictor')
 
 // ->register('xml', 'url', function( $url ) {
-// 	// echo $url;
-// 	$this->parseXML( $url );
-// 	// echo $this->status();
-// 	var_dump($this->_data);
-// 	// echo 'done';
+//  // echo $url;
+//  $this->parseXML( $url );
+//  // echo $this->status();
+//  var_dump($this->_data);
+//  // echo 'done';
 // })
-/*
-Classify
-part of self of not
-self or other
-directional trigger
-duty trigger
-creativity trigger
 
-*/
+// Classify
+// part of self of not
+// self or other
+// directional trigger
+// duty trigger
+// creativity trigger
 
 // ->route('browse', 'sense', 'OnComplete', 'DoProcess')
 // ->route('sense', 'brain', 'OnCapture', 'DoQueueInput')
@@ -166,3 +184,4 @@ creativity trigger
 ->args()
 ->run()
 ;
+*/
