@@ -7,13 +7,41 @@ use BlueFission\Services\Response;
 use BlueFission\Behavioral\Behaviors\Event;
 use BlueFission\Utils\Loader;
 
+/**
+ * Class Engine
+ *
+ * The Engine class is a subclass of Application that sets up and starts the BlueFission application.
+ *
+ * @package BlueFission\Framework
+ */
 class Engine extends Application {
 
+	/**
+	 * The loader object
+	 *
+	 * @var Loader
+	 */
 	private $_loader;
 
+	/**
+	 * An array of registered extensions
+	 *
+	 * @var array
+	 */
 	private $_extensions = [];
+
+	/**
+	 * An array of configurations for the application
+	 *
+	 * @var array
+	 */
 	private $_configurations = [];
 
+	/**
+	 * Bootstraps the application, loading configurations and auto-discovering helpers and mappings
+	 *
+	 * @return Engine
+	 */
 	public function bootstrap() {
 
 		// $this->handleRoutes();
@@ -28,12 +56,16 @@ class Engine extends Application {
 
 		$this->autoDiscoverMapping();
 
-
 		$this->boost(new Event('OnAppLoaded'));
 		
 		return $this;
 	}
 
+	/**
+	 * Loads the database and application configurations
+	 *
+	 * @return void
+	 */
 	public function loadConfiguration() {
 
 		// Data
@@ -64,6 +96,13 @@ class Engine extends Application {
 		}
 	}
 
+	/**
+	 * Returns the configuration values for a specific key or all configuration values
+	 *
+	 * @param string $key The key for the configuration values to return
+	 *
+	 * @return mixed The configuration values for the specified key or all configuration values
+	 */
 	public function configuration(string $key = '')
 	{
 		if ( $key ) {
@@ -72,14 +111,31 @@ class Engine extends Application {
 		return $this->_configurations;
 	}
 
+	/**
+	 * Automatically discover the mapping files and load them.
+	 * 
+	 * @return void
+	 */
 	private function autoDiscoverMapping() {
 		$this->_loader->load("mapping.*");
 	}
 
+	/**
+	 * Automatically discover the helper files and load them.
+	 * 
+	 * @return void
+	 */
 	private function autoDiscoverHelpers() {
 		$this->_loader->load("common.helpers.*");
 	}
 
+	/**
+	 * Add an extension to the extensions array.
+	 * 
+	 * @param string $extension The name of the extension to add.
+	 * 
+	 * @return void
+	 */
 	private function addExtension( $extension ) {
 		$this->_extensions[] = $extension;
 	}

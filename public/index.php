@@ -1,23 +1,35 @@
 <?php
+/**
+ * This script requires and initializes the autoloader, sets up the
+ * Loader utility, starts a session, sets a CSRF token in the session,
+ * and runs the BlueFission Framework Engine.
+ */
+
 use BlueFission\Utils\Loader;
 use BlueFission\Utils\Util;
 use BlueFission\Net\HTTP;
 use BlueFission\Framework\Engine as App;
 
+// Require the autoloader for composer-based dependencies
 require '../vendor/autoload.php';
 
+// Require the autoloader for non-composer based scripts
 $autoloader = require '../common/config/settings.php';
 
-// Loder utility for non-composer compatible scripts
+// Initialize the Loader utility for non-composer compatible scripts
 $loader = Loader::instance();
 $loader->addPath(dirname(getcwd()));
 $loader->addPath(dirname(getcwd()).DIRECTORY_SEPARATOR."app");
 
+// Start a session
 session_start();
+
+// Set a CSRF token in the session
 if (empty(HTTP::session('_token'))) {
     HTTP::session('_token', Util::csrf_token());
 }
 
+// Initialize the BlueFission Framework Engine and run it
 $app = App::instance();
 $app
 	->bootstrap()

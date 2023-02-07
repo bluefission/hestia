@@ -4,8 +4,21 @@ namespace BlueFission\Framework;
 use BlueFission\Services\Service;
 use BlueFission\Services\Model\BaseModel;
 
+/**
+ * Class BaseController
+ *
+ * This class extends the Service class and is used as a base class for controllers.
+ * It contains a `response` method to handle the response of the data received from a model.
+ */
 class BaseController extends Service {
 
+	/**
+	 * Creates a response from the data received from a model.
+	 *
+	 * @param mixed $data The data received from a model.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	protected function response( $data )
 	{
 		$response = [];

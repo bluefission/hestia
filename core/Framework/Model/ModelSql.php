@@ -5,15 +5,56 @@ use BlueFission\Framework\Model\BaseModel;
 use BlueFission\Data\Storage\MysqlBulk;
 use BlueFission\Connections\Database\MysqlLink;
 
+/**
+ * Class ModelSql
+ *
+ * This class extends the BaseModel class to create a Model for working with SQL databases.
+ * It provides a convenient way to interact with SQL databases by wrapping the MysqlBulk data storage object.
+ *
+ * @package BlueFission\Framework\Model
+ */
 class ModelSql extends BaseModel {
 
+	/**
+	 * The name of the database table associated with the model
+	 *
+	 * @var string
+	 */
 	protected $_table = '';
+
+	/**
+	 * The fields in the database table associated with the model
+	 *
+	 * @var array
+	 */
 	protected $_fields = [];
 
+	/**
+	 * Whether to automatically join related tables when performing a query
+	 *
+	 * @var bool
+	 */
 	protected $_autojoin = true;
+
+	/**
+	 * Whether to ignore null values when performing a write operation
+	 *
+	 * @var bool
+	 */
 	protected $_ignore_null = true;
+
+	/**
+	 * Whether to save related tables when performing a write operation
+	 *
+	 * @var bool
+	 */
 	protected $_save_related_tables = false;
 
+	/**
+	 * ModelSql constructor.
+	 *
+	 * @param MysqlLink|null $link The database link to use for the model.
+	 */
 	public function __construct( MysqlLink $link = null )
 	{
 		if ($link) {
@@ -33,11 +74,23 @@ class ModelSql extends BaseModel {
 		$this->_idField = $this->_dataObject->primary();
 	}
 
+	/**
+	 * Initializes the model.
+	 * This function can be overridden in child classes to perform custom configurations.
+	 */
 	protected function init()
 	{
 		// With inheritance, configure the model here 
 	}
 
+	/**
+	 * Gets or sets the value of a field in the model.
+	 *
+	 * @param string $field The name of the field to access.
+	 * @param mixed|null $value The value to set for the field.
+	 *
+	 * @return mixed|null The value of the field, or null if the field does not exist.
+	 */
 	public function field($field, $value = null)
 	{
 		if ( array_key_exists($field, $this->_dataObject->_data) || in_array($field, $this->_fields) ) {
@@ -47,6 +100,15 @@ class ModelSql extends BaseModel {
 		return null;
 	}
 
+	/**
+	 * Writes the current record to the database.
+	 *
+	 * This method adds the "created" and "updated" fields to the current record
+	 * if they do not already exist, then performs the actual write. The added
+	 * fields are removed before returning.
+	 *
+	 * @return bool True on success, false on failure
+	 */
 	public function write()
 	{
 		$force_created_timestamp = false;
@@ -79,18 +141,36 @@ class ModelSql extends BaseModel {
 		return $result;
 	}
 
+	/**
+	 * Adds a condition to the current query.
+	 *
+	 * @param string $field The field to use in the condition
+	 * @param string $condition The condition to use (e.g. "=", "<>", "LIKE")
+	 * @param mixed $value The value to compare with
+	 */
 	public function condition( $field, $condition = '', $value = '')
 	{
 		$this->_dataObject->condition( $field, $condition, $value);
 	}
 
+	/**
+	 * Returns the result of the current query.
+	 *
+	 * @return mixed The result of the query
+	 */
 	public function result()
 	{
 		return $this->_dataObject->result();
 	}
 
+	/**
+	 * Returns the raw query string.
+	 *
+	 * @return string The raw query string
+	 */
 	public function query()
 	{
 		return $this->_dataObject->query();
 	}
+
 }

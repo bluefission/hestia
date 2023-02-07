@@ -1,25 +1,36 @@
 #!/usr/bin/php
 <?php
 use BlueFission\Utils\Loader;
-use BlueFission\Utils\Util;
-use BlueFission\Net\HTTP;
 use BlueFission\Framework\Engine as App;
 
+/**
+ * Include the autoloader for the dependencies.
+ */
 require 'vendor/autoload.php';
 
+/**
+ * Load the autoloader from the settings file.
+ */
 $autoloader = require 'common/config/settings.php';
 
-// Loder utility for non-composer compatible scripts
+// Loader utility for non-composer compatible scripts
 $loader = Loader::instance();
 $loader->addPath(getcwd());
 $loader->addPath(getcwd().DIRECTORY_SEPARATOR."app");
 
-
+/**
+ * Create a new instance of the BlueFission App Engine.
+ */
 $app = App::instance();
+
+/**
+ * Bootstrap the application, set arguments, and run it.
+ */
 $app
     ->bootstrap()
     ->args()
     ->run();
+
 /*
  * Nodes
  Input
