@@ -15,6 +15,8 @@ return [
 	// Gateways for processing requests
 	'gateways'=> [
 		'auth'			=>'\BlueFission\Framework\Gateway\AuthenticationGateway',
+		'cache'			=>'\BlueFission\Framework\Gateway\CacheGateway',
+		'csrf'			=>'\BlueFission\Framework\Gateway\CsrfGateway',
 		'admin:auth'	=>'\App\Business\Gateways\AdminAuthenticationGateway',
 	],
 ];

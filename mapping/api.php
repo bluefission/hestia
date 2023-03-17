@@ -4,6 +4,8 @@ use BlueFission\Services\Mapping;
 // Users
 Mapping::add('/api/users/$user_id', ['App\Business\Api\UserController', 'find'], 'api.users.find', 'get')->gateway('auth');
 
+Mapping::add('/api/chat', ['App\Business\Http\Api\ChatController', 'send'], 'chat', 'post')->gateway('csrf');
+
 ///
 // Admin
 ///////

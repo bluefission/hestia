@@ -1,5 +1,5 @@
 <?php
-namespace App\Business;
+namespace App\Business\Http;
 
 use BlueFission\Services\Service;
 use BlueFission\Services\Request;

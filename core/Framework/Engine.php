@@ -74,6 +74,12 @@ class Engine extends Application {
 
 		$this->_configurations['database'] = $database;
 
+		// Machine Learning
+
+		$machinelearning = require dirname( dirname( dirname( __FILE__ ) ) ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'machinelearning.php';
+
+		$this->_configurations['machinelearning'] = $machinelearning;
+
 		// Application Logic
 
 		$config = require dirname( dirname( dirname( __FILE__ ) ) ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'application.php';

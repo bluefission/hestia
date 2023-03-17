@@ -9,7 +9,6 @@ use BlueFission\Utils\Loader;
 use BlueFission\Utils\Util;
 use BlueFission\Net\HTTP;
 use BlueFission\Framework\Engine as App;
-
 // Require the autoloader for composer-based dependencies
 require '../vendor/autoload.php';
 
@@ -34,5 +33,6 @@ $app = App::instance();
 $app
 	->bootstrap()
 	->args()
+	->process()
 	->validateCsrf()
 	->run();

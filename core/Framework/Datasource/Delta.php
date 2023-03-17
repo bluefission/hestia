@@ -1,5 +1,6 @@
 <?php
 namespace BlueFission\Framework\Datasource;
+
 use BlueFission\Connections\Database\MysqlLink;
 
 /**

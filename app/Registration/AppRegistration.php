@@ -1,4 +1,17 @@
 <?php
+namespace App\Registration;
+
+use App\Business\Managers\SkillManager;
+use App\Business\MysqlConnector;
+
+use BlueFission\Services\Service;
+
+// For Conversations
+use BotMan\BotMan\BotManFactory;
+use BotMan\BotMan\BotMan;
+use BotMan\BotMan\Drivers\DriverManager;
+use BotMan\BotMan\Cache\SymfonyCache;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 /**
  * Class AppRegistration
@@ -51,7 +64,13 @@ class AppRegistration {
 	 * Register different components in the app
 	 */
 	public function registrations() {
+		$this->_app->delegate('skills', SkillManager::class);
 		$this->_app->delegate('mysql', MysqlConnector::class);
+
+		DriverManager::loadDriver(\BotMan\Drivers\Web\WebDriver::class);
+		$adapter = new FilesystemAdapter();
+		$botman = BotManFactory::create([], new SymfonyCache($adapter));
+		$this->_app->delegate('bot', $botman);
 	}
 
 	/**
@@ -62,6 +81,8 @@ class AppRegistration {
 		$this->_app->bind('App\Domain\User\Queries\IAllCredentialStatusesQuery', 'App\Domain\User\Queries\AllCredentialStatusesQuerySql');
 		$this->_app->bind('App\Domain\User\Repositories\IUserRepository', 'App\Domain\User\Repositories\UserRepositorySql');
 		$this->_app->bind('BlueFission\Data\Storage\Storage', 'BlueFission\Data\Storage\Mysql');
+
+		$this->_app->bind('BlueFission\Framework\Skill\IAnalyzer', 'BlueFission\Framework\Skill\Analyzer');
 	}
 
 	/**
@@ -69,5 +90,6 @@ class AppRegistration {
 	 */
 	public function arguments() {
 		$this->_app->bindArgs( ['config'=>$this->_app->configuration('database')['mysql']], 'BlueFission\Connections\Database\MysqlLink');
+		$this->_app->bindArgs( ['config'=>$this->_app->configuration('machinelearning')['sagemaker']], 'BlueFission\Framework\Datasource\SageMaker');
 	}
 }
