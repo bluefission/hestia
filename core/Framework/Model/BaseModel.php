@@ -1,6 +1,7 @@
 <?php
 namespace BlueFission\Framework\Model;
 
+use BlueFission\Collections\Collection;
 use BlueFission\Data\IData;
 use BlueFission\Data\Storage\Storage;
 use BlueFission\DevString;
@@ -156,7 +157,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 * @return array Array of descendent objects.
 	 */
 	public function children() {
-		return isset($this->_relationships['descendents']) ? $this->{$this->_relationships['descendents'][0]}() : [];
+		return isset($this->_relationships['descendents']) ? $this->{$this->_relationships['descendents']->first()}() : new Collection();
 	}
 
 	/**
@@ -263,10 +264,35 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 		$model->$on_id_name = $this->$id;
 		$model->read();
 		$data = $model->result()->toArray();
-		$result = [];
+		$result = new Collection();
 		foreach ( $data as $row ) {
 			$model->clear();
 			$model->assign($row);
+			$model->read();
+			$result[] = clone $model;
+		}
+		return $result;
+	}
+
+	protected function associates($modelClass, $pivotClass, $on_id_name, $to_id_name = null, $from_id_name = null)
+	{
+		if ( !$this->id() ) {
+			return new Collection();
+		}
+
+		$model = \App::makeInstance($modelClass);
+		$pivot = \App::makeInstance($pivotClass);
+		$id1 = $from_id_name ?? $this->_idField;
+		$id2 = $to_id_name ?? $on_id_name;
+		$pivot->$id1 = $this->id();
+		$pivot->read();
+
+		$data = $pivot->result()->toArray();
+
+		$result = new Collection();
+		foreach ( $data as $row ) {
+			$model->clear();
+			$model->$on_id_name = $row[$id2];
 			$model->read();
 			$result[] = clone $model;
 		}
@@ -283,6 +309,9 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 */
 	protected function addRelationship( $type, $name )
 	{
+		if ( !isset( $this->_relationships[$type]) ) {
+			$this->_relationships[$type] = new Collection();
+		}
 		$this->_relationships[$type][] = $name;
 	}
 
@@ -317,7 +346,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	public function response()
 	{
 		$response = [
-			'id' => $this->data()[$this->_idField],
+			'id' => $this->id(),
 			'children' => isset($this->_relationships['descendents']) ? $this->{$this->_relationships['descendents'][0]}() : [],
 			'list' => $this->contents(),
 			'data' => $this->data(),
@@ -335,7 +364,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 *
 	 * @return array Data of this object to be serialized
 	 */
-	public function jsonSerialize() {
+	public function jsonSerialize() : mixed {
 	    return $this->data();
 	}
 

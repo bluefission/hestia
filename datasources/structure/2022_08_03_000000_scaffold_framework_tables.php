@@ -31,7 +31,7 @@ class ScaffoldFrameworkTables extends Delta
 			$entity->text('password');
 			$entity->numeric('credential_status_id')
 				->foreign('credential_statuses', 'credential_status_id');
-			$entity->numeric('is_primary', 1)->null;
+			$entity->numeric('is_primary', 1)->null();
 			$entity->timestamps();
 			$entity->comment("The table holding user credentials for password authentication.");
 		});

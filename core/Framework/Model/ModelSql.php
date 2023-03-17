@@ -63,6 +63,7 @@ class ModelSql extends BaseModel {
 
 		$this->_type = get_class($this);
 		$this->_dataObject = new MysqlBulk([
+			'location'=>null,
 			'name'=>$this->_table,
 			'fields'=>$this->_fields,
 			'auto_join'=>$this->_autojoin,

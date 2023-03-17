@@ -6,6 +6,7 @@ use BlueFission\Services\Service;
 class DatabaseManager extends Service {
 
 	private $_deltaDir = OPUS_ROOT.'/datasources/structure/';
+	private $_generatorDir = OPUS_ROOT.'/datasources/generator/';
 
 	public function __construct( )
     {
@@ -21,6 +22,7 @@ class DatabaseManager extends Service {
 				$classname = $this->findClassName( $this->_deltaDir . $delta );
 				if ( $classname ) {
 					include_once($this->_deltaDir . $delta);
+					// $object = new $classname();
 					$object = \App::makeInstance($classname);
 					call_user_func([$object, 'change']);
 				}
@@ -37,6 +39,7 @@ class DatabaseManager extends Service {
 				$classname = $this->findClassName( $this->_deltaDir . $delta );
 				if ( $classname ) {
 					include_once($this->_deltaDir . $delta);
+					// $object = new $classname();
 					$object = \App::makeInstance($classname);
 					call_user_func([$object, 'revert']);
 				}
@@ -44,7 +47,29 @@ class DatabaseManager extends Service {
 		}
 	}
 
-	private function loadDeltas( $reverse = null )
+	public function populate()
+	{
+		$generators = $this->loadGenerators();
+		foreach ( $generators as $generator ) {
+			$classname = '';
+			if ( strpos($generator, '.') != 0 ) {
+				$classname = $this->findClassName( $this->_generatorDir . $generator );
+				if ( $classname ) {
+					include_once($this->_generatorDir . $generator);
+					// $object = new $classname();
+					$object = \App::makeInstance($classname);
+					call_user_func([$object, 'populate']);
+				}
+			}
+		}
+	}
+
+	private function loadGenerators()
+	{
+		return scandir($this->_generatorDir);
+	}
+
+	private function loadDeltas( $reverse = SCANDIR_SORT_ASCENDING )
 	{
 		return scandir($this->_deltaDir, $reverse);
 	}

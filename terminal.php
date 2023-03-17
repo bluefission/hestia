@@ -29,6 +29,7 @@ $app = App::instance();
 $app
     ->bootstrap()
     ->args()
+    ->process()
     ->run();
 
 /*

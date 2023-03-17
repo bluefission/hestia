@@ -17,6 +17,7 @@ return [
 		'auth'			=>'\BlueFission\Framework\Gateway\AuthenticationGateway',
 		'cache'			=>'\BlueFission\Framework\Gateway\CacheGateway',
 		'csrf'			=>'\BlueFission\Framework\Gateway\CsrfGateway',
+		'nocsrf'		=>'\BlueFission\Framework\Gateway\NoCsrfGateway',
 		'admin:auth'	=>'\App\Business\Gateways\AdminAuthenticationGateway',
 	],
 ];

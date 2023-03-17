@@ -18,3 +18,4 @@ $app->register('user', 'passwd', 'changePassword');
 $app->delegate('database', DatabaseManager::class);
 $app->register('database', 'delta', 'runMigrations');
 $app->register('database', 'revert', 'revertMigrations');
+$app->register('database', 'populate', 'populate');
