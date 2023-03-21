@@ -9,6 +9,6 @@ class CsrfGateway extends Gateway {
     public function __construct() {}
 
     public function process(Request $request, &$arguments) {
-        App::instance()->validateCsrf();
+        \App::instance()->validateCsrf();
     }
 }

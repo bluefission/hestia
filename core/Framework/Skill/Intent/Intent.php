@@ -1,19 +1,25 @@
 <?php
 namespace BlueFission\Framework\Skill\Intent;
 
+// Intent.php
 class Intent
 {
+    protected $label;
     protected $name;
     protected $criteria;
-    protected $actions = [];
-
     protected $relatedIntents;
 
-    public function __construct(string $name, array $criteria)
+    public function __construct(string $label, string $name, array $criteria = [])
     {
+        $this->label = $label;
         $this->name = $name;
         $this->criteria = $criteria;
         $this->relatedIntents = [];
+    }
+
+    public function getLabel(): string
+    {
+        return $this->label;
     }
 
     public function getName(): string
@@ -29,24 +35,5 @@ class Intent
     public function getRelatedIntents(): array
     {
         return $this->relatedIntents;
-    }
-
-    public function addAction(callable $action): self
-    {
-        $this->actions[] = $action;
-        return $this;
-    }
-
-    public function addRelatedIntent(Intent $intent, float $weight): self
-    {
-        $this->relatedIntents[$intent->name] = $weight;
-        return $this;
-    }
-
-    public function dispatch(): void
-    {
-        foreach ($this->actions as $action) {
-            $action($this);
-        }
     }
 }

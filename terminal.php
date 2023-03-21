@@ -3,6 +3,8 @@
 use BlueFission\Utils\Loader;
 use BlueFission\Framework\Engine as App;
 
+session_start();
+
 /**
  * Include the autoloader for the dependencies.
  */

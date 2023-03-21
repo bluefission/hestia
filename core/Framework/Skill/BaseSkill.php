@@ -1,27 +1,20 @@
 <?php
+// BaseSkill.php
 namespace BlueFission\Framework\Skill;
 
-class BaseSkill {
-	protected $_name = 'Base Skill';
-	protected $_command = '';
+use BlueFission\Framework\Skill\Intent\Context;
+abstract class BaseSkill {
+    protected $name;
 
-	public function __construct( $name = '', $command = '' ) {
-		$this->_name = $name;
-		$this->_command = $command;
-	}
+    public function __construct(string $name) {
+        $this->name = $name;
+    }
 
-	public function name() {
-		return $this->_name;
-	}
+    public function name(): string {
+        return $this->name;
+    }
 
-	public function command() {
-		return $this->_command;
-	}
+    abstract public function execute(Context $context);
 
-	public function execute( $prompt ) { }
-
-	public function response(): string 
-	{
-		return '';
-	}
+    abstract public function response(): string;
 }

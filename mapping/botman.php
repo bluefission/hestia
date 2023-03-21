@@ -6,9 +6,23 @@ use BotMan\BotMan\Drivers\DriverManager;
 use App\Business\Conversations;
 use App\Domain\Conversation\DialogueType;
 use BlueFission\Net\HTTP;
+use App\Business\Middleware\HearsIntentMiddleware;
+use BlueFission\Data\Storage\Session;
+use BlueFission\Framework\Command\CommandProcessor;
 
 $app = \App::instance();
-$botman = $app->service('bot');
+$botman = $app->service('botman');
+
+$hearsIntentMiddleware = $app->getDynamicInstance(HearsIntentMiddleware::class);
+$botman->middleware->received($hearsIntentMiddleware);
+$botman->middleware->sending($hearsIntentMiddleware);
+// $botman->middleware->received(function (IncomingMessage $message, $next, BotMan $bot) use ($hearsIntentMiddleware) {
+//     return $hearsIntentMiddleware->received($message, $next, $bot);
+// });
+
+// $botman->middleware->sending(function (OutgoingMessage $message, $next, BotMan $bot) use ($hearsIntentMiddleware) {
+//     return $hearsIntentMiddleware->sending($message, $next, $bot);
+// });
 
 // $dialogflow = DialogFlow::create('en');
 
@@ -23,9 +37,26 @@ $botman->hears('pause conversation', function(BotMan $bot) {
 	$bot->reply('stopped');
 })->skipsConversation();
 
-$botman->hears('Hello', function(BotMan $bot) {
-	$bot->reply("Hello, there!");
+$botman->hears('build ml', function(BotMan $bot) {
+	$bot->startConversation(new BlueFission\Framework\Conversation\ModelCriteriaConversation);
 });
+
+$botman->hears('onboard.machinelearning', function(BotMan $bot) {
+	$bot->startConversation(new BlueFission\Framework\Conversation\ModelBuilderConversation);
+});
+
+$botman->hears('{input}', function(BotMan $bot, $input) {
+	// $input = "create a model named products and generate a FileManager controller";
+	$sessionStorage = new Session(['location'=>'cache','name'=>'system']);
+	$commandProcessor = new CommandProcessor($sessionStorage);
+
+	$response = $commandProcessor->process($input);
+	$bot->reply($response);
+});
+
+// $botman->fallback(function($bot) {
+//     $bot->reply('Sorry, I did not understand these commands.');
+// });
 
 /*
 $botman->group(['middleware' => $dialogflow], function($botman) {

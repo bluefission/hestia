@@ -14,7 +14,7 @@ class ChatController extends BaseController {
     public function send( Request $request )
     {
         $app = \App::instance();
-        $botman = $app->service('bot');
+        $botman = $app->service('botman');
 
         $botman->listen();
     }

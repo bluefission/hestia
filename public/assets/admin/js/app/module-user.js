@@ -8,12 +8,11 @@ var ModuleUser = function() {
 				dataSrc: 'list'
 			},
 			aoColumnDefs: [
-		        { "bSortable": false, "aTargets": [ 3 ] }, 
-		        { "bSearchable": false, "aTargets": [ 3 ] }
+		        { "bSortable": false, "aTargets": [ 2 ] }, 
+		        { "bSearchable": false, "aTargets": [ 2 ] }
 		    ],
 			columns: [
 		        { data: 'realname' },
-		        { data: 'username' },
 		        { data: 'displayname' },
 		        {
 				  data: null,
@@ -35,7 +34,6 @@ var ModuleUser = function() {
 			BlueFissionApp.admin_user.read(user_id, function(response) {
 				$('#user-id').val(response.data.user_id);
 				$('#user-realname').val(response.data.realname);
-				$('#user-username').val(response.data.username);
 				$('#user-displayname').val(response.data.displayname);
 
 				$('#modalNewUser').modal('show');

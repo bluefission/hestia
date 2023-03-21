@@ -1,14 +1,29 @@
 <?php
 namespace BlueFission\Framework\Skill\Intent;
 
+// Context.php
 class Context
 {
-    public $name;
-    public $userID;
+    protected $data;
 
-    public function __construct(string $name, string $userID)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->userID = $userID;
+        $this->data = [];
+    }
+
+    public function set($key, $value): self
+    {
+        $this->data[$key] = $value;
+        return $this;
+    }
+
+    public function get($key, $default = null)
+    {
+        return $this->data[$key] ?? $default;
+    }
+
+    public function all(): array
+    {
+        return $this->data;
     }
 }

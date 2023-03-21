@@ -1,10 +1,9 @@
 <?php
-namespace App\Business\Http;
+namespace App\Business\Http\Api;
 
 use BlueFission\Services\Service;
 use BlueFission\Services\Request;
 use BlueFission\Connections\Database\MysqlLink;
-use BlueFission\Data\Storage\Mysql;
 use BlueFission\Services\Authenticator;
 
 class AuthenticationController extends Service {
@@ -15,9 +14,7 @@ class AuthenticationController extends Service {
         $link->open();
     }
 
-	public function login( Request $request, Mysql $datasource ) {
-        $auth = new Authenticator( $datasource );
-
+	public function login( Request $request, Authenticator $auth ) {
         $login = $request->login;
 
         if ( $login !== false ) {
@@ -50,10 +47,8 @@ class AuthenticationController extends Service {
         }
 	}
 
-	public function logout( Request $request, Mysql $datasource )
+	public function logout( Request $request, Authenticator $auth )
     {
-        $auth = new Authenticator( $datasource );
-
         $logout = $request->logout;
 
         if ( $logout !== false ) {

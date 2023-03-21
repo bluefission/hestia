@@ -20,4 +20,10 @@ class MysqlConnector extends Service
 	{
 		$this->_link->open();
 	}
+
+	public function test($arg)
+	{
+		echo "blah";
+		return $arg;
+	}
 }

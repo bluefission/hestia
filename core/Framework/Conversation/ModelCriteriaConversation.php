@@ -1,16 +1,64 @@
 <?php
+namespace BlueFission\Framework\Conversation;
 
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\Messages\Incoming\Answer;
 use BotMan\BotMan\Messages\Conversations\Conversation;
+use BotMan\BotMan\Messages\Outgoing\Question;
+use BotMan\BotMan\Messages\Outgoing\Actions\Button;
+use BlueFission\Framework\Generation\MachineLearning\ModelCriteria;
 
 class ModelCriteriaConversation extends Conversation
 {
     protected $modelCriteria;
 
+    protected $projectName = 'Untitled';
+    protected $tableName;
+
     public function __construct()
     {
         $this->modelCriteria = new ModelCriteria();
+    }
+
+    public function askProjectName()
+    {
+        $this->ask('What should we name your project?', function (Answer $answer) {
+            $this->projectName = $answer->getText();
+            $modelName = slugify($this->projectName).'-model';
+            $jobName = slugify($this->projectName).'-job';
+            
+            $this->modelCriteria->setModelName($modelName);
+            $this->modelCriteria->setTrainingJobName($jobName);
+            $this->askDatasetLocation();
+        });
+    }
+
+    public function askDatasetLocation()
+    {
+        $question = Question::create("Are you using a local or external dataset?")
+            ->fallback("Unable to ask question")
+            ->callbackId("ask_dataset_location")
+            ->addButtons([
+                Button::create('Local (in database)')->value('local'),
+                Button::create('External (file or api)')->value('external'),
+            ]);
+
+        $this->ask($question, function (Answer $answer) {
+            if ($answer->isInteractiveMessageReply()) {
+                $type = $answer->getValue();
+                switch ($type) {
+                    case 'local':
+                        $this->askDataSource();
+                    break;
+                    case 'external':
+                        $this->askDatasetType();
+                    break;
+                }
+                // Continue with the next step
+            } else {
+                $this->repeat("Please select one of the provided options.");
+            }
+        });
     }
 
     public function askModelName()
@@ -25,7 +73,7 @@ class ModelCriteriaConversation extends Conversation
     {
         $this->ask('What should we name your training job?', function (Answer $answer) {
             $this->modelCriteria->setTrainingJobName($answer->getText());
-            $this->askDataFormat();
+            $this->askDatasetLocation();
         });
     }
 
@@ -53,6 +101,7 @@ class ModelCriteriaConversation extends Conversation
             if ($answer->isInteractiveMessageReply()) {
                 $this->modelCriteria->setDatasetType($answer->getValue());
                 // Continue with the next step
+                $this->askDatasetSubmission();
             } else {
                 $this->repeat("Please select one of the provided options.");
             }
@@ -61,7 +110,7 @@ class ModelCriteriaConversation extends Conversation
 
     public function askDataSource()
     {
-        $appModels = $this->getExistingDatabaseModels(); // Function to retrieve existing database models from your application
+        $appModels = $this->retrieveAvailableTables(); // Function to retrieve existing database models from your application
 
         $question = Question::create("Which existing database model do you want to use?")
             ->fallback("Unable to ask question")
@@ -80,10 +129,13 @@ class ModelCriteriaConversation extends Conversation
                     $this->askNewDatasetNameAndType();
                 } else {
                     $this->modelCriteria->setDatabaseModelId($value);
+
+                    $this->tableName = $value;
                     
-                    $datasetSize = getDatasetSize($tableName);
+                    $datasetSize = $this->getDatasetSize($this->tableName);
                     $this->modelCriteria->setDatasetSize($datasetSize);
                     $this->retrieveAvailableTables();
+                    $this->askOutputLocation();
                 }
             } else {
                 $this->repeat("Please select one of the provided options.");
@@ -93,15 +145,17 @@ class ModelCriteriaConversation extends Conversation
 
     public function retrieveAvailableTables()
     {
-        $tables = $this->getTablesFromDatabaseModel($this->modelCriteria->getDatabaseModelId()); // Function to get tables from the chosen database model
+        // $tables = $this->getTablesFromDatabaseModel($this->modelCriteria->getDatabaseModelId()); // Function to get tables from the chosen database model
 
         // Process tables to determine the size of the dataset
         // ...
 
         // Continue with the next step
+        return [['id'=>'table1', 'name'=>'Table 1']];
     }
 
     private function getDatasetSize($tableName) {
+        return 10000;
         // Assuming you have a function to get the PDO connection
         $pdo = getPdoConnection();
 
@@ -145,6 +199,26 @@ class ModelCriteriaConversation extends Conversation
         });
     }
 
+    private function askDatasetSubmission()
+    {
+        $question = Question::create("How will you provide access to your dataset?")
+            ->fallback("Unable to ask question")
+            ->callbackId("ask_dataset_submission")
+            ->addButtons([
+                Button::create('Upload File')->value('upload'),
+                Button::create('Online Location')->value('online'),
+            ]);
+
+        $this->ask($question, function (Answer $answer) {
+            if ($answer->isInteractiveMessageReply()) {
+                $this->modelCriteria->setDatasetSubmission($answer->getValue());
+                $this->suggestBestAlgorithm();
+            } else {
+                $this->repeat("Please select one of the provided options.");
+            }
+        });
+    }
+
     public function suggestBestAlgorithm()
     {
         // Function to suggest the best algorithm based on the dataset and problem type
@@ -154,14 +228,13 @@ class ModelCriteriaConversation extends Conversation
         // Continue with the next step, such as generating code or asking for more preferences
     }
 
+    private function getBestAlgorithm( $datasetType, $problemType ) {
+        return 'xgboost';
+    }
+
 
     public function run()
     {
-        $this->askModelName();
+        $this->askProjectName();
     }
 }
-
-// Assuming you have a $botman instance
-$botman->hears('create_model', function (BotMan $bot) {
-    $bot->startConversation(new ModelCriteriaConversation());
-});

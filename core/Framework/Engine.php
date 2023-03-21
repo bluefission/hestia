@@ -117,6 +117,17 @@ class Engine extends Application {
 		return $this->_configurations;
 	}
 
+	public function command( $service, $behavior, $data = null, $callback = null )
+	{
+		$module = $this->_services[$service];
+		$result = $module->message($behavior, $data);
+
+		if ( $callback ) {
+			return $callback($result);
+		}
+		return 'test!';
+	}
+
 	/**
 	 * Automatically discover the mapping files and load them.
 	 * 
@@ -145,4 +156,27 @@ class Engine extends Application {
 	private function addExtension( $extension ) {
 		$this->_extensions[] = $extension;
 	}
+
+	public function getAbilities()
+    {
+        $abilities = [];
+
+        foreach ($this->_routes as $behaviorName => $senders) {
+
+            foreach ($senders as $senderName => $recipients) {
+            	foreach ( $recipients as $recipient ) {
+            		$service = $recipient['recipient'];
+	                if (!isset($abilities[$service])) {
+	                    $abilities[$service] = [];
+	                }
+
+	                if (!in_array($behaviorName, $abilities[$service])) {
+	                    $abilities[$service][] = $behaviorName;
+	                }
+	            }
+            }
+        }
+
+        return $abilities;
+    }
 }

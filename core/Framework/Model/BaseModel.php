@@ -47,13 +47,15 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 *
 	 * Initializes the _dataObject as a Storage object.
 	 */
-	public function __construct( )
-	{
+	public function __construct($values = null) 
+	{ 
+		$this->assign($values);
 		// Not using dependency injection because
 		// 	These objects are necessarily coupled.
 		// This is essentially just a container for a DB object.
 		// We'll just extend new classes for new storage types;
 		$this->_dataObject = new Storage();
+		return $this;
 	}
 
 	/**
@@ -99,15 +101,18 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	public function clear()
 	{
 		$this->_dataObject->clear();
+		return $this;
 	}
 
 	/**
 	 * Reads data from the storage.
 	 */
-	public function read() {
+	public function read($values = null) { 
+		$this->assign($values);
 		$this->_dataObject->activate();
 		$this->_dataObject->read();
 		$this->loadRelationships();
+		return $this;
 	}
 	
 	/**
@@ -116,10 +121,12 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 *
 	 * @return mixed Result of the write operation on the data object.
 	 */
-	public function write() {
+	public function write($values = null) { 
+		$this->assign($values);
 		$this->generateTimestamp();
 		$this->_dataObject->activate();
-		return $this->_dataObject->write();
+		$this->_dataObject->write();
+		return $this;
 	}
 
 	/**
@@ -127,9 +134,11 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 *
 	 * @return mixed Result of the delete operation on the data object.
 	 */
-	public function delete() { 
+	public function delete($values = null) { 
+		$this->assign($values);
 		$this->_dataObject->activate();
-		return $this->_dataObject->delete();
+		$this->_dataObject->delete();
+		return $this;
 	}
 
 	/**
@@ -170,6 +179,15 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	}
 
 	/**
+	 * Gets a recordset matching all data in the model
+	 *
+	 * @return mixed a collection of rows
+	 */
+	public function all() {
+		return $this->_dataObject->result();
+	}
+
+	/**
 	 * Gets the data of the object.
 	 *
 	 * @return mixed Data of the object.
@@ -195,6 +213,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 */
 	public function assign( $data )
 	{
+		$this->clear();
 		if ( is_object( $data ) || DevArray::isAssoc( $data ) ) {
 			foreach ( $data as $a=>$b ) {
 				$this->field($a, $b);
@@ -353,8 +372,8 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 			'status'=> $this->status(),
 		];
 
-		if ( env('DEBUG') && method_exists ( $this->_dataObject, 'query' )) {
-			$response['info'] = $this->_dataObject->query();
+		if ( env('DEBUG') && method_exists ( $this, 'query' )) {
+			$response['info'] = $this->query();
 		}
 		return $response;
 	}

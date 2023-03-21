@@ -26,9 +26,11 @@ class ScaffoldFrameworkTables extends Delta
 
 		Scaffold::create('credentials', function( Structure $entity ) {
 			$entity->incrementer('credential_id');
+			$entity->numeric('user_id')
+				->foreign('users', 'user_id');
 			$entity->text('username')
 				->unique();
-			$entity->text('password');
+			$entity->text('password', 255);
 			$entity->numeric('credential_status_id')
 				->foreign('credential_statuses', 'credential_status_id');
 			$entity->numeric('is_primary', 1)->null();

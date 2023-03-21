@@ -1,11 +1,8 @@
 <?php
 namespace App\Registration;
-
 use App\Business\Managers\SkillManager;
 use App\Business\MysqlConnector;
-
-use BlueFission\Services\Service;
-
+use BlueFission\Framework\Skill\Intent\Matcher;
 // For Conversations
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\BotMan;
@@ -64,13 +61,23 @@ class AppRegistration {
 	 * Register different components in the app
 	 */
 	public function registrations() {
-		$this->_app->delegate('skills', SkillManager::class);
-		$this->_app->delegate('mysql', MysqlConnector::class);
-
-		DriverManager::loadDriver(\BotMan\Drivers\Web\WebDriver::class);
+		// Check if running in command line or via HTTP
+		$isCommandLine = (php_sapi_name() === 'cli');
+		// Register the appropriate driver based on the environment
+		if ($isCommandLine) {
+			DriverManager::loadDriver(\App\Business\Console\BotMan\CommandLineDriver::class);
+		} else {
+		    DriverManager::loadDriver(\BotMan\Drivers\Web\WebDriver::class);
+		}
 		$adapter = new FilesystemAdapter();
-		$botman = BotManFactory::create([], new SymfonyCache($adapter));
-		$this->_app->delegate('bot', $botman);
+		$cache = new SymfonyCache($adapter);
+		$botman = BotManFactory::create([], $cache);
+		$this->_app->delegate('botman', $botman);
+
+		$this->_app->delegate('skill', SkillManager::class);
+
+		$this->_app->delegate('intentmatcher', Matcher::class);
+		$this->_app->delegate('mysql', MysqlConnector::class);
 	}
 
 	/**
@@ -82,7 +89,7 @@ class AppRegistration {
 		$this->_app->bind('App\Domain\User\Repositories\IUserRepository', 'App\Domain\User\Repositories\UserRepositorySql');
 		$this->_app->bind('BlueFission\Data\Storage\Storage', 'BlueFission\Data\Storage\Mysql');
 
-		$this->_app->bind('BlueFission\Framework\Skill\IAnalyzer', 'BlueFission\Framework\Skill\Analyzer');
+		$this->_app->bind('BlueFission\Framework\Skill\Intent\IAnalyzer', 'BlueFission\Framework\Skill\Intent\KeywordIntentAnalyzer');
 	}
 
 	/**
@@ -91,5 +98,6 @@ class AppRegistration {
 	public function arguments() {
 		$this->_app->bindArgs( ['config'=>$this->_app->configuration('database')['mysql']], 'BlueFission\Connections\Database\MysqlLink');
 		$this->_app->bindArgs( ['config'=>$this->_app->configuration('machinelearning')['sagemaker']], 'BlueFission\Framework\Datasource\SageMaker');
+		$this->_app->bindArgs( ['driverConfigurations']=>$this->_app->configuration('communication')['drivers'], 'App\Domain\Managers\CommunicationManager');
 	}
 }

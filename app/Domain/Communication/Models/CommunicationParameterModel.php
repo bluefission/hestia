@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Domain\Communication\Models;
+
+use BlueFission\Framework\Model\ModelSql as Model;
+
+class CommunicationParameterModel extends Model
+{
+    protected $_table = ['communication_parameters'];
+    protected $_fields = [
+        'communication_parameter_id',
+        'communication_id',
+        'name',
+        'value',
+    ];
+}

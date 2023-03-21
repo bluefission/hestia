@@ -23,6 +23,8 @@ class InitialUserData extends Generator
 			$status->name = $name; //strtolower($label);
 			$status->label = $label;
 			$status->write();
+
+			echo $status->status()."\n";
 		}
 
 		$status->clear();
@@ -31,7 +33,7 @@ class InitialUserData extends Generator
 
 		$password = DevString::random(null, 16, true);
 		if ( defined('STDIN') ) {
-			$password = readline("Enter an admin password: ");
+			$password = prompt_silent("Enter an admin password: ");
 		}
 
 		$user = new UserModel();
@@ -42,6 +44,8 @@ class InitialUserData extends Generator
 		$user->write();
 		$user->read();
 
+		echo $user->status()."\n";
+
 		$credential->username = 'admin';
 		$credential->password = $password;
 		$credential->is_primary = 1;
@@ -50,5 +54,8 @@ class InitialUserData extends Generator
 		$credential->user_id = $user->id();
 
 		$credential->write();
+		echo $credential->status()."\n";
+
+		echo "Complete.\n";
 	}
 }

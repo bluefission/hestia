@@ -10,6 +10,7 @@ $app = App::instance();
 
 $app->delegate('cmd', CliManager::class);
 $app->register('cmd', 'i', 'cmd');
+$app->register('cmd', 't', 'chat');
 
 $app->delegate('user', UserManager::class);
 $app->register('user', 'create', 'create');
@@ -19,3 +20,6 @@ $app->delegate('database', DatabaseManager::class);
 $app->register('database', 'delta', 'runMigrations');
 $app->register('database', 'revert', 'revertMigrations');
 $app->register('database', 'populate', 'populate');
+
+$app->delegate('code', CodeManager::class );
+$app->register('code', 'generate', 'generate');

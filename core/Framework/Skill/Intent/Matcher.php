@@ -1,59 +1,78 @@
 <?php
 namespace BlueFission\Framework\Skill\Intent;
 
+// Matcher.php
+use BlueFission\Framework\Skill\Intent\Context;
+use BlueFission\Framework\Skill\Intent\IAnalyzer;
+use BlueFission\Framework\Skill\BaseSkill;
+use BlueFission\Services\Service;
+
 class Matcher
 {
-    protected $intents = [];
     protected $intentAnalyzer;
+    
+    // Use static properties to store skills and intents globally
+    protected static $skills = [];
+    protected static $intents = [];
+    protected static $intentSkillMap = [];
+
 
     public function __construct(IAnalyzer $intentAnalyzer)
     {
         $this->intentAnalyzer = $intentAnalyzer;
     }
 
-    public function registerIntent(string $intent, array $criteria): self
+    public function registerSkill(BaseSkill $skill): self
     {
-        $this->intents[$intent->getName()] = $criteria;
+        self::$skills[$skill->name()] = $skill;
         return $this;
     }
 
-    public function match(array $input): ?string
+    public function registerIntent($intent): self
     {
-        $intentScores = [];
-        foreach ($this->intents as $intent) {
-            $intentScores[$intent->getName()] = $this->intentAnalyzer->analyze(array_merge($intent->getCriteria(), $input));
-        }
-
-        $bestMatch = $this->findBestMatch($intentScores);
-        $bestMatch = $this->applyRelatedIntentProximity($bestMatch, $intentScores);
-
-
-        return $bestMatchName ? $this->intents[$bestMatchName] : null;
+        // self::$intents[$intent->getName()] = $skillName;
+        self::$intents[$intent->getName()] = $intent;
+        return $this;
     }
 
-    protected function findBestMatch(array $intentScores): ?string
+    public function associate($intent, $skill): self
     {
-        $bestMatch = null;
-        $bestScore = -1;
+        $intentName = $intent->getName();
+        $skillName = $skill->name();
 
-        foreach ($intentScores as $intent => $score) {
-            if ($score > $bestScore) {
-                $bestMatch = $intent;
-                $bestScore = $score;
-            }
+        if (!isset($this->intentSkillMap[$intentName])) {
+            self::$intentSkillMap[$intentName] = [];
         }
 
-        return $bestMatch;
+        self::$intentSkillMap[$intentName][] = $skillName;
+
+        return $this;
     }
 
-    protected function applyRelatedIntentProximity(string $bestMatch, array $intentScores): string
+    public function map()
     {
-        $relatedIntents = $this->intents[$bestMatch]->relatedIntents;
+        return self::$intentSkillMap;
+    }
 
-        foreach ($relatedIntents as $relatedIntent => $weight) {
-            $intentScores[$relatedIntent] += $weight;
-        }
+    public function getIntent(string $intentName): ?Intent
+    {
+        return self::$intents[$intentName] ?? null;
+    }
 
-        return $this->findBestMatch($intentScores);
+    public function getSkill(string $skillName): ?BaseSkill
+    {
+        return self::$skills[$skillName] ?? null;
+    }
+
+    public function match($input, Context $context): ?BaseSkill
+    {
+        $intentScores = $this->intentAnalyzer->analyze($input, $context, self::$intents);
+
+        if (count($intentScores) <= 0) return null;
+
+        $bestMatchIntent = array_search(max($intentScores), $intentScores);
+        $bestMatchSkills = self::$intentSkillMap[$bestMatchIntent] ?? null;
+
+        return $bestMatchSkills ? self::$skills[$bestMatchSkills[0]] : null;
     }
 }

@@ -1,7 +1,5 @@
 <?php
-namespace App\AI\Generative;
-
-use BlueFission\AI\Generative\IGenerative;
+namespace BlueFission\Framework\Generation;
 
 interface IHTMLGenerator
 {
