@@ -98,6 +98,6 @@ class AppRegistration {
 	public function arguments() {
 		$this->_app->bindArgs( ['config'=>$this->_app->configuration('database')['mysql']], 'BlueFission\Connections\Database\MysqlLink');
 		$this->_app->bindArgs( ['config'=>$this->_app->configuration('machinelearning')['sagemaker']], 'BlueFission\Framework\Datasource\SageMaker');
-		$this->_app->bindArgs( ['driverConfigurations']=>$this->_app->configuration('communication')['drivers'], 'App\Domain\Managers\CommunicationManager');
+		$this->_app->bindArgs( ['driverConfigurations'=>$this->_app->configuration('communication')['drivers']], 'App\Domain\Managers\CommunicationManager');
 	}
 }
