@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Managers;
+namespace App\Business\Managers;
 
 use BlueFission\Services\Service;
 use BlueFission\Data\Storage\Storage;

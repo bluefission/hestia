@@ -69,12 +69,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/develation.git",
-                "reference": "66868e69ad202c7ddcd6a9e22afb1acdb6b87ffe"
+                "reference": "cdbfe57d20348f926373bfc467f7925d0d8b2058"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/develation/zipball/66868e69ad202c7ddcd6a9e22afb1acdb6b87ffe",
-                "reference": "66868e69ad202c7ddcd6a9e22afb1acdb6b87ffe",
+                "url": "https://api.github.com/repos/bluefission/develation/zipball/cdbfe57d20348f926373bfc467f7925d0d8b2058",
+                "reference": "cdbfe57d20348f926373bfc467f7925d0d8b2058",
                 "shasum": ""
             },
             "require-dev": {
@@ -115,7 +115,7 @@
                 "source": "https://github.com/bluefission/develation/tree/master",
                 "issues": "https://github.com/bluefission/develation/issues"
             },
-            "time": "2023-03-17T20:19:34+00:00"
+            "time": "2023-03-21T02:38:06+00:00"
         },
         {
             "name": "botman/botman",
@@ -1267,7 +1267,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v10.4.0",
+            "version": "v10.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -1322,7 +1322,7 @@
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v10.4.0",
+            "version": "v10.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -1368,7 +1368,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v10.4.0",
+            "version": "v10.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -1416,7 +1416,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v10.4.0",
+            "version": "v10.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
