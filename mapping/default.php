@@ -2,7 +2,7 @@
 use BlueFission\Services\Mapping;
 
 Mapping::add('/', function() {
-	return template('default.html', ['title'=>"Welcome", 'name'=>env('APP_NAME')], 'index');
+	return template('interactive.html', ['title'=>"Welcome", 'name'=>env('APP_NAME')], 'index');
 }, 'get');
 
 Mapping::add('/chatwindow', function() {
@@ -10,7 +10,7 @@ Mapping::add('/chatwindow', function() {
 }, 'get');
 
 // Conversations
-Mapping::add('/parse', ['App\Business\Managers\ConversationManager', 'parse'], 'parse', 'post');
+Mapping::add('/parse', ['App\Business\Managers\ConversationManager', 'parse'], 'parse', 'get');
 
 // Authentication
 Mapping::add('/login', ['App\Business\Http\LoginController', 'login'], 'login', 'get');

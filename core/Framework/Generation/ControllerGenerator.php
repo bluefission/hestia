@@ -1,7 +1,7 @@
 <?php
 namespace BlueFission\Framework\Generation;
 
-class ControllerGenerator extends ScaffoldGenerator
+class ControllerGenerator extends BaseGenerator
 {
     public function getType(): string
     {

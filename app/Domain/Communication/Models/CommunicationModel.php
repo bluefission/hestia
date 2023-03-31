@@ -6,6 +6,9 @@ use BlueFission\Framework\Model\ModelSql as Model;
 
 class CommunicationModel extends Model
 {
+    private $attachments = [];
+    private $parameters = [];
+
     protected $_table = ['communications'];
     protected $_fields = [
         'communication_id',
@@ -56,8 +59,41 @@ class CommunicationModel extends Model
         return $this->ancestor('App\Domain\Communication\Models\CommunicationChannelModel', 'communication_channel_id', );
     }
 
-    public function status()
+    public function communication_status()
     {
         return $this->ancestor('App\Domain\Communication\Models\CommunicationStatusModel', 'communication_status_id', );
+    }
+
+    public function addAttachments($attachments)
+    {
+        $this->attachments = array_merge($this->attachments, $attachments);
+    }
+
+    public function addParameters($parameters)
+    {
+        $this->parameters = array_merge($this->parameters, $parameters);
+    }
+
+    public function write($values = null)
+    {
+        parent::write($values);
+        $model = new CommunicationAttachmentModel();
+        foreach($this->attachments as $attachment) {
+            $model->write([
+                'communication_id' => $this->communication_id,
+                'name' => $attachment['name'],
+                'file_type' => $attachment['file_type'],
+            ]);
+        }
+        $model = new CommunicationParameterModel();
+        foreach($this->parameters as $parameter) {
+            $model->write([
+                'communication_id' => $this->communication_id,
+                'name' => $parameter['name'],
+                'value' => $parameter['value'],
+            ]);
+        }
+
+        return $this;
     }
 }

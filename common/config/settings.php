@@ -1,10 +1,5 @@
 <?php
 
-// Some error handling to be removed later
-ini_set('display_errors', 1);
-ini_set("error_log", dirname(getcwd())."/storage/log/error.log");
-error_reporting(E_ALL);
-set_time_limit(3000);
 
 // TODO: set this in a config file
 date_default_timezone_set('America/New_York');
@@ -18,6 +13,11 @@ if (!defined("SITE_ROOT") ){
 if (!defined("DEBUG") ){
 	define('DEBUG', false);
 }
+// Some error handling to be removed later
+ini_set('display_errors', 1);
+ini_set("error_log", OPUS_ROOT."/storage/error.log");
+error_reporting(E_ALL);
+set_time_limit(3000);
 
 if(!function_exists('import_env_vars')) {
 	function import_env_vars( $file ) {

@@ -1,7 +1,7 @@
 <?php
 namespace BlueFission\Framework\Generation;
 
-class ValueObjectGenerator extends ScaffoldGenerator
+class ValueObjectGenerator extends BaseGenerator
 {
     public function getType(): string
     {

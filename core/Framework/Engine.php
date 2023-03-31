@@ -80,6 +80,18 @@ class Engine extends Application {
 
 		$this->_configurations['communication'] = $communication;
 
+		// Natural Langauge Processing
+		
+		$grammar = require dirname( dirname( dirname( __FILE__ ) ) ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'nlp'.DIRECTORY_SEPARATOR.'grammar.php';
+		$dictionary = require dirname( dirname( dirname( __FILE__ ) ) ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'nlp'.DIRECTORY_SEPARATOR.'dictionary.php';
+		$roots = require dirname( dirname( dirname( __FILE__ ) ) ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'nlp'.DIRECTORY_SEPARATOR.'roots.php';
+
+		$this->_configurations['nlp'] = [
+			'grammar' => $grammar,
+			'dictionary' => $dictionary,
+			'roots' => $roots,
+		];
+
 		// Machine Learning
 
 		$machinelearning = require dirname( dirname( dirname( __FILE__ ) ) ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'machinelearning.php';
@@ -125,13 +137,24 @@ class Engine extends Application {
 
 	public function command( $service, $behavior, $data = null, $callback = null )
 	{
+		$result = null;
 		$module = $this->_services[$service];
-		$result = $module->message($behavior, $data);
 
-		if ( $callback ) {
-			return $callback($result);
+		if ( $module ) {
+			$module->message($behavior, $data);
+			if (method_exists($module, 'response')) {
+				$result = $module->response();
+			} else if (method_exists($module, 'status')) {
+				$result = $module->status();
+			}
+
+			if ( $callback ) {
+				return $callback($result);
+			}
+		} else {
+			return $callback("Module not found");
 		}
-		return 'test!';
+		return;
 	}
 
 	/**

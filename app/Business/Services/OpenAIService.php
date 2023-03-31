@@ -1,5 +1,5 @@
 <?php
-
+//https://stackoverflow.com/questions/72711031/stream-data-from-openai-gpt-3-api-using-php
 namespace App\Business\Services;
 
 use BlueFission\Services\Service;

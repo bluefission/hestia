@@ -2,10 +2,10 @@
 
 namespace App\Business\Drivers;
 
-use App\Domain\Communication\Models\CommunicationModel;
+use App\Domain\Communication\Communication;
 use BotMan\BotMan\BotMan;
 
-class BotManCommunicationDriver extends BaseDriver
+class BotManCommunicationDriver extends CommunicationDriver
 {
     protected $botman;
 
@@ -14,10 +14,13 @@ class BotManCommunicationDriver extends BaseDriver
         $this->botman = \App::instance()->service('botman');
     }
 
-    public function send(CommunicationModel $message)
+    public function send(Communication $message)
     {
         // Send the message using the BotMan instance
-        $user = $message->user; // Assuming the CommunicationModel has a reference to the User object
-        $this->botman->say($message->content, $user->getId());
+        $user = $message->user_id; // Assuming the Communication has a reference to the User object
+        sleep(1);
+        $this->botman->typesAndWaits(2);
+
+        $this->botman->say($message->content, $user);
     }
 }

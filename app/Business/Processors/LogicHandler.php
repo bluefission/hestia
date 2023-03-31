@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Business\Processors\Logic;
+namespace App\Business\Processors;
 
 use App\Domain\API\APICall;
 use App\Domain\Function\FunctionExec;

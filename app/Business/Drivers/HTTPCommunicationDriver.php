@@ -2,11 +2,11 @@
 
 namespace App\Business\Drivers;
 
-use App\Domain\User\Models\CommunicationModel;
+use App\Domain\Communication\Communication;
 
-class HTTPCommunicationDriver extends BaseDriver
+class HTTPCommunicationDriver extends CommunicationDriver
 {
-    public function send(CommunicationModel $message)
+    public function send(Communication $message)
     {
         // Send the message using an HTTP request
         // ...

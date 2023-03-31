@@ -29,18 +29,16 @@ class HearsIntentMiddleware implements Received, Sending
 
         // Update context with any relevant information.
         // For example, updating the user's name:
-        $this->context->set('user_name', $message->getSender());
-
-        $this->matchedSkill = $this->matcher->match($text, $this->context);
-
+        $this->context->set('username', $message->getSender());
         $this->context->set('message', $text);
 
-        if ($this->matchedSkill) {
-            $this->matchedSkill->execute($this->context);
-        }
-        if ($this->matchedSkill) {
-            $this->response = $this->matchedSkill->response();
-        }
+        $intentScores = $this->matcher->match($text, $this->context);
+        $message->addExtras('intent_scores', $intentScores);
+
+        // if ($this->matchedSkill) {
+        //     $this->matchedSkill->execute($this->context);
+        //     $this->response = $this->matchedSkill->response();
+        // }
 
         return $next($message);
     }

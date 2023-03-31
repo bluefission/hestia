@@ -37,7 +37,7 @@ class CommandProcessor
         }
 
         if ($this->storage->currentCmd) {
-            $command = $command = $this->convertToCommand($this->storage->currentCmd);
+            $command = $this->convertToCommand($this->storage->currentCmd);
             $newCommand = $this->parser->parse($input);
 
             if (empty($command->resources)) {
@@ -103,7 +103,6 @@ class CommandProcessor
         $this->storage->lastResource = $command->resources[0];
         $this->storage->lastVerb = $command->verb;
         $this->storage->write();
-
         try {
             $result = $this->app->command($service, $behavior, $data, function ($output) {
                 return $output;

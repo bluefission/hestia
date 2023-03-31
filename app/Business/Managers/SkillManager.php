@@ -6,6 +6,7 @@ use BlueFission\Framework\Skill\Intent\Intent;
 use BlueFission\Framework\Skill\Intent\Matcher;
 use BlueFission\Framework\Skill\BaseSkill;
 use BlueFission\Services\Service;
+use BlueFission\Bot\NaturalLanguage\EntityExtractor;
 
 class SkillManager extends Service
 {
@@ -38,9 +39,14 @@ class SkillManager extends Service
         return $this;
     }
 
-    public function getIntent(string $intentName): ?Intent
+    public function getIntent(string $intentLabel): ?Intent
     {
-        return $this->matcher->getIntent($intentName);
+        return $this->matcher->getIntent($intentLabel);
+    }
+
+    public function getIntents(): ?Intent
+    {
+        return $this->matcher->getIntents();
     }
 
     public function getSkill(string $skillName): ?BaseSkill
@@ -50,25 +56,36 @@ class SkillManager extends Service
 
     public function getSkillsForIntent(Intent $intent): array
     {
-        $intentName = $intent->getName();
-        $associatedSkillNames = $this->matcher->map()[$intentName] ?? [];
+        $intentLabel = $intent->getLabel();
+        $associatedSkillNames = $this->matcher->map()[$intentLabel] ?? [];
 
         return array_map(function ($skillName) {
             return $this->matcher->getSkill($skillName);
         }, $associatedSkillNames);
     }
 
-    public function runSkill( $behavior, $skillName )
+    public function process( $intent, $context ) {
+        return $this->matcher->process($intent, $context);
+    }
+
+    public function runSkill( $behavior, $args )
     {
-        // TODO: Figure out cause of this weird array structure
-        if (isset($skillName[0]) && isset($skillName[0][0])) {
-            $name = $skillName[0][0];
+        if (empty($args) || $args == null) {
+            $this->_response = "Here's a list of skills";
+            return;
+        }
+
+        if (isset($args) && isset($args[0])) {
+            $extractor = new EntityExtractor();
+            $name = $extractor->object($args)[0];
+            // $name = $args[0];
 
             // TODO: Build context from available information
 
             $skill = $this->matcher->getSkill($name);
             if ($skill) {
-                return $skill->execute();
+                $skill->execute();
+                $this->_response = $skill->response();
             }
         }
     }

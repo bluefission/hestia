@@ -4,6 +4,7 @@ namespace BlueFission\Framework\Model;
 use BlueFission\Collections\Collection;
 use BlueFission\Data\IData;
 use BlueFission\Data\Storage\Storage;
+use BlueFission\DevValue;
 use BlueFission\DevString;
 use BlueFission\DevArray;
 use BlueFission\DevObject;
@@ -175,7 +176,10 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 * @return mixed ID of the object.
 	 */
 	public function id() {
-		return $this->data()[$this->_idField];
+		if($this->_idField) {
+			return $this->data()[$this->_idField];
+		}
+		return 0;
 	}
 
 	/**
@@ -214,13 +218,14 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	public function assign( $data )
 	{
 		$this->clear();
-		if ( is_object( $data ) || DevArray::isAssoc( $data ) ) {
+		if ( is_object( $data ) || ( DevValue::isNotEmpty( $data ) && DevArray::isAssoc( $data ) ) ) {
 			foreach ( $data as $a=>$b ) {
 				$this->field($a, $b);
 			}
 		}
-		else
+		else if ( $data !== null ) {
 			throw new \InvalidArgumentException( "Can't import from variable type " . gettype($data) );
+		}
 	}
 
 	/**

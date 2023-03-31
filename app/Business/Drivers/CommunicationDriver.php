@@ -1,9 +1,9 @@
 <?php
 namespace App\Business\Drivers;
 
-use App\Domain\User\Models\CommunicationModel;
+use App\Domain\Communication\Communication;
 
 abstract class CommunicationDriver
 {
-    abstract public function send(CommunicationModel $message);
+    abstract public function send(Communication $message);
 }

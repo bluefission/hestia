@@ -110,7 +110,7 @@ class ModelSql extends BaseModel {
 	 *
 	 * @return bool True on success, false on failure
 	 */
-	public function write()
+	public function write($values = null)
 	{
 		$force_created_timestamp = false;
 		$force_updated_timestamp = false;
@@ -126,7 +126,7 @@ class ModelSql extends BaseModel {
 		}
 		$this->_dataObject->config('fields', $this->_fields);
 		// Do the work
-		$result = parent::write();
+		$result = parent::write($values);
 		if ($force_created_timestamp) {
 			if (($key = array_search("created", $this->_fields)) !== false) {
 			    unset($this->_fields[$key]);
@@ -139,7 +139,7 @@ class ModelSql extends BaseModel {
 		}
 		$this->_dataObject->config('fields', $this->_fields);
 
-		return $result;
+		return $this;
 	}
 
 	/**

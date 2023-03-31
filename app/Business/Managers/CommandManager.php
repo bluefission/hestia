@@ -1,0 +1,67 @@
+<?php
+namespace App\Business\Managers;
+
+use BlueFission\Services\Service;
+use BlueFission\Bot\Collections\OrganizedCollection;
+use BlueFission\Bot\NaturalLanguage\Grammar;
+use BlueFission\Bot\NaturalLanguage\SyntaxTreeWalker;
+use BlueFission\Bot\NaturalLanguage\EntityExtractor;
+
+class CommandManager extends Service {
+	protected $_collection;
+	protected $_grammar;
+
+	public function __construct(Grammar $grammar)
+	{
+		$this->_collection = new OrganizedCollection();
+		$this->_grammar = $grammar;
+
+		parent::__construct();
+	}
+
+	public function parse($statement)
+	{
+		$statement = strtolower($statement);
+		$tree = [];
+		try {
+			$tokens = $this->_grammar->tokenize($statement);
+			$tree = $this->_grammar->parse($tokens);
+		} catch (\Exception $e) {
+			// return false;
+			tell($e->getMessage(), 'botman');
+		}
+
+		$walker = new SyntaxTreeWalker($tree);
+		$results = $walker->walk();
+
+		if (!$results['subject']) {
+			$results['subject'] = 'app';
+		}
+
+		$extractor = new EntityExtractor();
+		$methods = [
+		    'hex',
+		    'email',
+		    'web',
+		    'date',
+		    'time',
+		    'name',
+		    'object',
+		    'number',
+		    'adverb',
+		    'mentions',
+		    'tags',
+		    'values',
+		    'operation'
+		];
+
+		$entities = [];
+
+		foreach ($methods as $method) {
+		    $entities[$method] = $extractor->$method($statement);
+		}
+		$results['entities'] = $entities;
+
+		return $results;
+	}
+}

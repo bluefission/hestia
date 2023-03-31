@@ -1,6 +1,7 @@
 <?php
 use App\Business\Drivers\HTTPCommunicationDriver;
 use App\Business\Drivers\BotManCommunicationDriver;
+use App\Domain\Communication\Communication;
 
 return [
 	'drivers' => [

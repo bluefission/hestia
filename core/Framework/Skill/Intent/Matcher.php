@@ -30,21 +30,21 @@ class Matcher
 
     public function registerIntent($intent): self
     {
-        // self::$intents[$intent->getName()] = $skillName;
-        self::$intents[$intent->getName()] = $intent;
+        // self::$intents[$intent->getLabel()] = $skillName;
+        self::$intents[$intent->getLabel()] = $intent;
         return $this;
     }
 
     public function associate($intent, $skill): self
     {
-        $intentName = $intent->getName();
+        $intentLabel = $intent->getLabel();
         $skillName = $skill->name();
 
-        if (!isset($this->intentSkillMap[$intentName])) {
-            self::$intentSkillMap[$intentName] = [];
+        if (!isset($this->intentSkillMap[$intentLabel])) {
+            self::$intentSkillMap[$intentLabel] = [];
         }
 
-        self::$intentSkillMap[$intentName][] = $skillName;
+        self::$intentSkillMap[$intentLabel][] = $skillName;
 
         return $this;
     }
@@ -54,9 +54,9 @@ class Matcher
         return self::$intentSkillMap;
     }
 
-    public function getIntent(string $intentName): ?Intent
+    public function getIntent(string $intentLabel): ?Intent
     {
-        return self::$intents[$intentName] ?? null;
+        return self::$intents[$intentLabel] ?? null;
     }
 
     public function getSkill(string $skillName): ?BaseSkill
@@ -64,15 +64,35 @@ class Matcher
         return self::$skills[$skillName] ?? null;
     }
 
-    public function match($input, Context $context): ?BaseSkill
+    public function getIntents(): array
+    {
+        return self::$intents;
+    }
+
+    public function getSkills(): array
+    {
+        return self::$skills;
+    }
+
+    public function match($input, Context $context): ?array
     {
         $intentScores = $this->intentAnalyzer->analyze($input, $context, self::$intents);
 
-        if (count($intentScores) <= 0) return null;
-
-        $bestMatchIntent = array_search(max($intentScores), $intentScores);
-        $bestMatchSkills = self::$intentSkillMap[$bestMatchIntent] ?? null;
-
-        return $bestMatchSkills ? self::$skills[$bestMatchSkills[0]] : null;
+        return $intentScores;
     }
+
+    public function process($intent, Context $context): ?string
+    {
+        if ( is_string($intent) ) {
+            $intent = $this->getIntent($intent);
+        }
+        $skillNames = self::$intentSkillMap[$intent->getLabel()];
+
+        $skill = $this->getSkill($skillNames[0]);
+
+        $skill->execute($context);
+
+        return $skill->response();
+    }
+
 }

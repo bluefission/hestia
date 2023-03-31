@@ -3,22 +3,24 @@
 namespace App\Business\Managers;
 
 use BlueFission\Services\Service;
-use BlueFission\Data\Storage\Storage;
-use App\Domain\Communication\Models\CommunicationModel;
-use App\Domain\Communication\Communication;
-use BlueFission\Data\Storage\Storage;
 use BlueFission\Services\Authenticator;
+use BlueFission\Data\Storage\Storage;
+use App\Domain\Communication\Communication;
+use App\Domain\Communication\Repositories\ICommunicationRepository;
+use App\Domain\Communication\Repositories\CommunicationRepositorySql;
+use App\Domain\Communication\Queries\IUndeliveredCommunicationsQuery;
 use Closure;
 
 class CommunicationManager extends Service
 {
-    protected $storage;
+    protected $repo;
+    protected $undeliveredQuery;
     protected $drivers;
 
-    public function __construct(array $driverConfigurations = [])
+    public function __construct( ICommunicationRepository $repo, IUndeliveredCommunicationsQuery $undeliveredQuery, $driverConfigurations = [])
     {
-        $this->storage = new CommunicationModel();
-        $storage->clear();
+        $this->repo = $repo;
+        $this->undeliveredQuery = $undeliveredQuery;
         $this->drivers = [];
 
         foreach ($driverConfigurations as $driverClass => $condition) {
@@ -36,45 +38,43 @@ class CommunicationManager extends Service
     // Basic CRUD methods for the communications table.
     public function create(Communication $message)
     {
-        $this->storage->assign($message);
-        $this->storage->write();
+        $this->repo->save($message);
     }
 
     public function read($communication_id)
     {
-    	$this->storage->assign(['communication_id' => $communication_id]);
-        return $this->storage->read();
+        return $this->repo->find($communication_id);
     }
 
     public function update(Communication $message)
     {
-    	$this->storage->assign($message);
-        $this->storage->update();
+        if ($message->communication_id) {
+            $this->repo->save($message);
+        }
     }
 
     public function delete($communication_id)
     {
-    	$this->storage->assign(['communication_id' => $communication_id]);
-        $this->storage->delete();
+        $this->repo->remove($communication_id);
     }
 
     public function queueMessage(Communication $message)
     {
-        // If no storage is configured, directly route the message
-        if ($this->storage === null) {
+        // If no model is configured, directly route the message
+        // if (!MysqlLink::tableExists('communications') || $message->isSecret()) {
+        if ($this->repo === null || $message->isSecret()) {
             $this->routeMessage($message);
             return;
         }
 
         // Otherwise, store the message in the queue
-        $this->storage->assign($message)
-        $this->storage->write();
+        $this->repo->save($message);
     }
 
     public function processUndeliveredMessages()
     {
-        // If no storage is configured, return immediately
-        if ($this->storage === null) {
+        // If no model is configured, return immediately
+        if ($this->repo === null) {
             return;
         }
 
@@ -87,8 +87,8 @@ class CommunicationManager extends Service
 
     protected function getUndeliveredMessages()
     {
-        $this->storage->assign(['status' => Communication::SENT]);
-        $messages = $this->storage->getRecordSet();
+        $messages = $this->undeliveredQuery->fetch();
+        
         return $messages;
     }
 
@@ -96,7 +96,6 @@ class CommunicationManager extends Service
     {
         // Choose the appropriate driver based on the message type
         $driver = $this->resolveDriver($message);
-
         if ($driver) {
             // Deliver the message using the chosen driver
             $driver->send($message);
@@ -126,12 +125,12 @@ class CommunicationManager extends Service
 	}
 
 
-    public static function send(string $content, string $channel = null, int $userId = null, array $attachments = [], array $parameters = [], bool $isSecret = false)
+    public static function send(string $content, string $channel = null, int $userId = null, bool $prompt = false, array $attachments = [], array $parameters = [], bool $isSecret = false)
     {
         // Get the default values for sender and recipient
         $senderId = 0; // Assuming 0 is the system ID
-        $auth = new Authenticator($storage);
-        $recipientId = $auth->userID() ?? 0; // Assuming the currently logged-in user or anonymous user if not logged in
+        $auth = new Authenticator(new Storage);
+        $recipientId = $auth->id ?? 0; // Assuming the currently logged-in user or anonymous user if not logged in
 
         if ($userId) {
             // If user_id is passed, it's a message from the user to the system
@@ -148,15 +147,12 @@ class CommunicationManager extends Service
 	    $message->communication_channel_id = $channel;
 
         if (!$isSecret) {
+            // $repo = new CommunicationRepositorySql;
+            $repo = \App::makeInstance(CommunicationRepositorySql::class);
+            // $model = new CommunicationModel();
 
-	        $model->clear();
-	        $model->assign($message);
-	        $model->addAttachments($attachments);
-	        $model->addParameters($parameters);
-
-            $model->write();
-            $model->read();
-            $message->message_id = $model->id();
+            $repo->save($message, $attachments, $parameters);
+            $message->message_id = $repo->lastInsertId();
         }
         // If the message is secret, bypass saving and send directly
         $manager = \App::instance()->service('communication');

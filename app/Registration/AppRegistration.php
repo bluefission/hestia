@@ -1,5 +1,8 @@
 <?php
 namespace App\Registration;
+use App\Business\Managers\CommandManager;
+use App\Business\Managers\InterpretationManager;
+use App\Business\Managers\CommunicationManager;
 use App\Business\Managers\SkillManager;
 use App\Business\MysqlConnector;
 use BlueFission\Framework\Skill\Intent\Matcher;
@@ -74,6 +77,9 @@ class AppRegistration {
 		$botman = BotManFactory::create([], $cache);
 		$this->_app->delegate('botman', $botman);
 
+		$this->_app->delegate('communication', CommunicationManager::class);
+		$this->_app->delegate('command', CommandManager::class);
+		$this->_app->delegate('interpreter', InterpretationManager::class);
 		$this->_app->delegate('skill', SkillManager::class);
 
 		$this->_app->delegate('intentmatcher', Matcher::class);
@@ -87,6 +93,12 @@ class AppRegistration {
 		$this->_app->bind('App\Domain\User\Queries\IAllUsersQuery', 'App\Domain\User\Queries\AllUsersQuerySql');
 		$this->_app->bind('App\Domain\User\Queries\IAllCredentialStatusesQuery', 'App\Domain\User\Queries\AllCredentialStatusesQuerySql');
 		$this->_app->bind('App\Domain\User\Repositories\IUserRepository', 'App\Domain\User\Repositories\UserRepositorySql');
+		$this->_app->bind('App\Domain\User\Repositories\ICredentialRepository', 'App\Domain\User\Repositories\CredentialRepositorySql');
+
+		$this->_app->bind('App\Domain\Communication\Repositories\ICommunicationRepository', 'App\Domain\Communication\Repositories\CommunicationRepositorySql');
+		$this->_app->bind('App\Domain\Communication\Queries\IUndeliveredCommunicationsQuery', 'App\Domain\Communication\Queries\UndeliveredCommunicationsQuerySql');
+
+
 		$this->_app->bind('BlueFission\Data\Storage\Storage', 'BlueFission\Data\Storage\Mysql');
 
 		$this->_app->bind('BlueFission\Framework\Skill\Intent\IAnalyzer', 'BlueFission\Framework\Skill\Intent\KeywordIntentAnalyzer');
@@ -98,6 +110,12 @@ class AppRegistration {
 	public function arguments() {
 		$this->_app->bindArgs( ['config'=>$this->_app->configuration('database')['mysql']], 'BlueFission\Connections\Database\MysqlLink');
 		$this->_app->bindArgs( ['config'=>$this->_app->configuration('machinelearning')['sagemaker']], 'BlueFission\Framework\Datasource\SageMaker');
-		$this->_app->bindArgs( ['driverConfigurations'=>$this->_app->configuration('communication')['drivers']], 'App\Domain\Managers\CommunicationManager');
+		$this->_app->bindArgs( ['driverConfigurations'=>$this->_app->configuration('communication')['drivers']], 'App\Business\Managers\CommunicationManager');
+		$this->_app->bindArgs( [
+				'rules'=>$this->_app->configuration('nlp')['grammar']['rules'],
+				'commands'=>$this->_app->configuration('nlp')['grammar']['commands'],
+				'tokens'=>$this->_app->configuration('nlp')['dictionary']
+			], 'BlueFission\Bot\NaturalLanguage\Grammar');
+		$this->_app->bindArgs( ['config'=>$this->_app->configuration('nlp')['roots']], 'BlueFission\Bot\NaturalLanguage\StemmerLemmatizer');
 	}
 }

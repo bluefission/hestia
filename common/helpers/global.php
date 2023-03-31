@@ -65,9 +65,16 @@ if (!function_exists('slugify')) {
 }
 
 if (!function_exists('tell')) {
-    function tell(string $content, int $userId = null, array $attachments = [], array $parameters = [])
+    function tell(string $content, string $channel = null, int $userId = null, array $attachments = [], array $parameters = [])
     {
-        return CommunicationManager::send($content, $userId, $attachments, $parameters);
+        return CommunicationManager::send($content, $channel, $userId, false, $attachments, $parameters);
+    }
+}
+
+if (!function_exists('ask')) {
+    function ask(string $content, string $channel = null, int $userId = null, array $attachments = [], array $parameters = [])
+    {
+        return CommunicationManager::send($content, $channel, $userId, true, $attachments, $parameters);
     }
 }
 

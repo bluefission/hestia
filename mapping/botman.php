@@ -7,8 +7,12 @@ use App\Business\Conversations;
 use App\Domain\Conversation\DialogueType;
 use BlueFission\Net\HTTP;
 use App\Business\Middleware\HearsIntentMiddleware;
+use App\Business\Middleware\ProcessesCommandMiddleware;
 use BlueFission\Data\Storage\Session;
 use BlueFission\Framework\Command\CommandProcessor;
+use BlueFission\Framework\Skill\Intent\Matcher;
+use BlueFission\Framework\Skill\Intent\Context;
+use BlueFission\Data\Storage\Storage;
 
 $app = \App::instance();
 $botman = $app->service('botman');
@@ -16,6 +20,11 @@ $botman = $app->service('botman');
 $hearsIntentMiddleware = $app->getDynamicInstance(HearsIntentMiddleware::class);
 $botman->middleware->received($hearsIntentMiddleware);
 $botman->middleware->sending($hearsIntentMiddleware);
+
+$processesCommandMiddleware = $app->getDynamicInstance(ProcessesCommandMiddleware::class);
+$botman->middleware->received($processesCommandMiddleware);
+// $botman->middleware->sending($processesCommandMiddleware);
+
 // $botman->middleware->received(function (IncomingMessage $message, $next, BotMan $bot) use ($hearsIntentMiddleware) {
 //     return $hearsIntentMiddleware->received($message, $next, $bot);
 // });
@@ -45,58 +54,11 @@ $botman->hears('onboard.machinelearning', function(BotMan $bot) {
 	$bot->startConversation(new BlueFission\Framework\Conversation\ModelBuilderConversation);
 });
 
-$botman->hears('{input}', function(BotMan $bot, $input) {
-	// $input = "create a model named products and generate a FileManager controller";
-	$sessionStorage = new Session(['location'=>'cache','name'=>'system']);
-	$commandProcessor = new CommandProcessor($sessionStorage);
+// This should probably be the last `hears` call
+$botman->hears('.*', function (BotMan $bot) {
+    
+	$interpreter = \App::instance()->service('interpreter');
+	$response = $interpreter->process($bot->getMessage());
 
-	$response = $commandProcessor->process($input);
-	$bot->reply($response);
+    tell($response, 'botman');
 });
-
-// $botman->fallback(function($bot) {
-//     $bot->reply('Sorry, I did not understand these commands.');
-// });
-
-/*
-$botman->group(['middleware' => $dialogflow], function($botman) {
-	// Apply matching middleware per hears command
-	$botman->hears('basic.time', function (BotMan $bot) {
-	    
-	    $timekeeper = new Timekeeper( $bot );
-
-	    $reply = $timekeeper->time();
-
-   		$convo = instance('convo');
-	 	$convo->send($bot, [$reply], DialogueType::RESPONSE);
-
-	});
-	$botman->hears('basic.date', function (BotMan $bot) {
-	    $message = $bot->getMessage()->getText();
-	    $extras = $bot->getMessage()->getExtras();
-	    
-	    $apiReply = $extras['apiReply'];
-	    $apiAction = $extras['apiAction'];
-	    $apiIntent = $extras['apiIntent'];
-
-		$timekeeper = new Timekeeper( $bot );
-	    $reply = $timekeeper->date();
-
-		$convo = instance('convo');
-	 	$convo->send($bot, [$reply], DialogueType::RESPONSE);
-	});
-
-	$botman->fallback(function( $bot ) {
-		$message = $bot->getMessage()->getText();
-	    $extras = $bot->getMessage()->getExtras();
-	    
-	    $apiReply = $extras['apiReply'];
-	    $apiAction = $extras['apiAction'];
-	    $apiIntent = $extras['apiIntent'];
-
-		$convo = instance('convo');
-	 	$replies = $convo->process($message, $apiReply, $apiIntent); 
-		$convo->send($bot, $replies, DialogueType::RESPONSE);
-	});
-});
-*/

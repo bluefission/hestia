@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d25aab03bd9cfa857f86f1feeb590a3b",
+    "content-hash": "4d49919eee55b0d955efa860e23335b1",
     "packages": [
         {
             "name": "bluefission/bot-ai",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/bot-ai.git",
-                "reference": "85f37a66026e6e05f61f3c83a733ddcd0414e436"
+                "reference": "0d60573d3b1709de25e65b30ed9dd934ed0015b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/bot-ai/zipball/85f37a66026e6e05f61f3c83a733ddcd0414e436",
-                "reference": "85f37a66026e6e05f61f3c83a733ddcd0414e436",
+                "url": "https://api.github.com/repos/bluefission/bot-ai/zipball/0d60573d3b1709de25e65b30ed9dd934ed0015b7",
+                "reference": "0d60573d3b1709de25e65b30ed9dd934ed0015b7",
                 "shasum": ""
             },
             "require": {
@@ -61,7 +61,7 @@
                 "source": "https://github.com/bluefission/bot-ai/tree/master",
                 "issues": "https://github.com/bluefission/bot-ai/issues"
             },
-            "time": "2022-08-11T23:50:42+00:00"
+            "time": "2023-03-28T16:11:41+00:00"
         },
         {
             "name": "bluefission/develation",
@@ -69,12 +69,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/develation.git",
-                "reference": "cdbfe57d20348f926373bfc467f7925d0d8b2058"
+                "reference": "5bcf8949b556292193621b086669291eda823068"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/develation/zipball/cdbfe57d20348f926373bfc467f7925d0d8b2058",
-                "reference": "cdbfe57d20348f926373bfc467f7925d0d8b2058",
+                "url": "https://api.github.com/repos/bluefission/develation/zipball/5bcf8949b556292193621b086669291eda823068",
+                "reference": "5bcf8949b556292193621b086669291eda823068",
                 "shasum": ""
             },
             "require-dev": {
@@ -115,7 +115,7 @@
                 "source": "https://github.com/bluefission/develation/tree/master",
                 "issues": "https://github.com/bluefission/develation/issues"
             },
-            "time": "2023-03-21T02:38:06+00:00"
+            "time": "2023-03-21T03:14:16+00:00"
         },
         {
             "name": "botman/botman",
@@ -478,16 +478,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.49.2",
+            "version": "v1.49.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "18d37b0b9fa761eaff909f360f96efa9ca2d6ca7"
+                "reference": "236ceda7ac172e635715903192ea1244afc91422"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/18d37b0b9fa761eaff909f360f96efa9ca2d6ca7",
-                "reference": "18d37b0b9fa761eaff909f360f96efa9ca2d6ca7",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/236ceda7ac172e635715903192ea1244afc91422",
+                "reference": "236ceda7ac172e635715903192ea1244afc91422",
                 "shasum": ""
             },
             "require": {
@@ -538,9 +538,9 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.49.2"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.49.3"
             },
-            "time": "2023-03-10T20:22:17+00:00"
+            "time": "2023-03-25T14:54:11+00:00"
         },
         {
             "name": "google/cloud-dialogflow",
@@ -804,16 +804,16 @@
         },
         {
             "name": "google/longrunning",
-            "version": "v0.2.4",
+            "version": "v0.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/php-longrunning.git",
-                "reference": "651cbb7065bd77ae7395196695da391f641f739c"
+                "reference": "557817921225911100ea04ed8c59a4f8205b62f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/651cbb7065bd77ae7395196695da391f641f739c",
-                "reference": "651cbb7065bd77ae7395196695da391f641f739c",
+                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/557817921225911100ea04ed8c59a4f8205b62f6",
+                "reference": "557817921225911100ea04ed8c59a4f8205b62f6",
                 "shasum": ""
             },
             "require-dev": {
@@ -842,9 +842,9 @@
             ],
             "description": "Google LongRunning Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/php-longrunning/tree/v0.2.4"
+                "source": "https://github.com/googleapis/php-longrunning/tree/v0.2.5"
             },
-            "time": "2023-02-10T16:10:50+00:00"
+            "time": "2023-03-25T14:54:11+00:00"
         },
         {
             "name": "google/protobuf",
@@ -1267,7 +1267,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v10.4.1",
+            "version": "v10.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -1322,7 +1322,7 @@
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v10.4.1",
+            "version": "v10.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -1368,7 +1368,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v10.4.1",
+            "version": "v10.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -1416,7 +1416,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v10.4.1",
+            "version": "v10.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -1727,6 +1727,59 @@
                 }
             ],
             "time": "2022-11-04T12:25:39+00:00"
+        },
+        {
+            "name": "php-ai/php-ml",
+            "version": "0.10.0",
+            "source": {
+                "type": "git",
+                "url": "git@gitlab.com:php-ai/php-ml.git",
+                "reference": "543f11158c57bf64ef8ddecd5bab51d396d39f50"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/php-ai%2Fphp-ml/repository/archive.zip?sha=543f11158c57bf64ef8ddecd5bab51d396d39f50",
+                "reference": "543f11158c57bf64ef8ddecd5bab51d396d39f50",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpbench/phpbench": "^1.2",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12",
+                "phpstan/phpstan-strict-rules": "^0.12",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpml\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arkadiusz Kondas",
+                    "email": "arkadiusz.kondas@gmail.com"
+                }
+            ],
+            "description": "PHP-ML - Machine Learning library for PHP",
+            "homepage": "https://gitlab.com/php-ai/php-ml",
+            "keywords": [
+                "Neural network",
+                "artificial intelligence",
+                "computational learning theory",
+                "data science",
+                "feature extraction",
+                "machine learning",
+                "pattern recognition"
+            ],
+            "time": "2022-11-09T09:25:29+00:00"
         },
         {
             "name": "psr/cache",
@@ -3982,16 +4035,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.6.5",
+            "version": "9.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "86e761949019ae83f49240b2f2123fb5ab3b2fc5"
+                "reference": "b65d59a059d3004a040c16a82e07bbdf6cfdd115"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/86e761949019ae83f49240b2f2123fb5ab3b2fc5",
-                "reference": "86e761949019ae83f49240b2f2123fb5ab3b2fc5",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b65d59a059d3004a040c16a82e07bbdf6cfdd115",
+                "reference": "b65d59a059d3004a040c16a82e07bbdf6cfdd115",
                 "shasum": ""
             },
             "require": {
@@ -4064,7 +4117,8 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.5"
+                "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.6"
             },
             "funding": [
                 {
@@ -4080,7 +4134,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-09T06:34:10+00:00"
+            "time": "2023-03-27T11:43:46+00:00"
         },
         {
             "name": "sebastian/cli-parser",
