@@ -2,9 +2,9 @@
 // KeywordIntentAnalyzer.php
 namespace BlueFission\Framework\Skill\Intent;
 
-use BlueFission\Framework\Skill\Intent\Context;
+use BlueFission\Framework\IAnalyzer;
+use BlueFission\Framework\Context;
 use BlueFission\Bot\Strategies\NaiveBayesTextClassification;
-
 use Phpml\FeatureExtraction\TokenCountVectorizer;
 use Phpml\Tokenization\WhitespaceTokenizer;
 use Phpml\FeatureExtraction\TfIdfTransformer;
@@ -50,9 +50,13 @@ class KeywordIntentAnalyzer implements IAnalyzer
 
                     // Calculate the multiplier based on the input word count
                     $multiplier = 1 / $inputWordCount;
+                    $multiplier = $multiplier*$keyword['priority'];
 
                     // Increase the score based on the similarity and multiplier
-                    $score += $keyword['priority'] * $similarityScore * $multiplier;
+                    // $score += $keyword['priority'] * $similarityScore * $multiplier;
+                    if ( $similarityScore > $score ) {
+                        $score = $similarityScore*$multiplier;
+                    }
                 }
             }
 
@@ -82,7 +86,7 @@ class KeywordIntentAnalyzer implements IAnalyzer
             $scores[$classification] = 0;
         }
 
-        $scores[$classification] += 3;
+        $scores[$classification] = $this->classificationBonus($scores[$classification], .1);
 
         if ( !empty($scores) ) {
             arsort($scores);
@@ -91,4 +95,15 @@ class KeywordIntentAnalyzer implements IAnalyzer
         return $scores;
     }
 
+    private function classificationBonus($current_score, $bonus_percentage) {
+        // Ensure current_score and bonus_percentage are within the valid range
+        $current_score = max(0, min(1, $current_score));
+        $bonus_percentage = max(0, min(1, $bonus_percentage));
+
+        // Calculate the new score
+        $new_score = $current_score + (1 - $current_score) * $bonus_percentage;
+
+        // Return the new score
+        return $new_score;
+    }
 }

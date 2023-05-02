@@ -7,13 +7,14 @@
 
 use BlueFission\Utils\Loader;
 use BlueFission\Utils\Util;
-use BlueFission\Net\HTTP;
 use BlueFission\Framework\Engine as App;
 // Require the autoloader for composer-based dependencies
 require '../vendor/autoload.php';
 
 // Require the autoloader for non-composer based scripts
-$autoloader = require '../common/config/settings.php';
+// $autoloader = require '../common/config/settings.php';
+require '../common/config/settings.php';
+require '../common/helpers/global.php';
 
 // Initialize the Loader utility for non-composer compatible scripts
 $loader = Loader::instance();
@@ -24,8 +25,8 @@ $loader->addPath(dirname(getcwd()).DIRECTORY_SEPARATOR."app");
 session_start();
 
 // Set a CSRF token in the session
-if (empty(HTTP::session('_token'))) {
-    HTTP::session('_token', Util::csrf_token());
+if (empty(store('_token'))) {
+    store('_token', Util::csrf_token());
 }
 
 // Initialize the BlueFission Framework Engine and run it

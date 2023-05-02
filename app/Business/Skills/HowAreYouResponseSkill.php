@@ -2,7 +2,7 @@
 // HowAreYouResponseSkill.php
 namespace App\Business\Skills;
 
-use BlueFission\Framework\Skill\Intent\Context;
+use BlueFission\Framework\Context;
 use BlueFission\Framework\Skill\BaseSkill;
 use BlueFission\System\Machine;
 
@@ -19,15 +19,20 @@ class HowAreYouResponseSkill extends BaseSkill
     {
         $machine = new Machine();
 
-        $memoryUsage = $machine->getMemoryUsage();
-        $memoryPeakUsage = $machine->getMemoryPeakUsage();
-        $uptime = $machine->getUptime();
-        $cpuUsage = $machine->getCPUUsage();
-        $temperature = $machine->getTemperature();
-        $fanSpeed = $machine->getFanSpeed();
-        $powerConsumption = $machine->getPowerConsumption();
+        try {
+            $memoryUsage = $machine->getMemoryUsage();
+            $memoryPeakUsage = $machine->getMemoryPeakUsage();
+            $uptime = $machine->getUptime();
+            $cpuUsage = $machine->getCPUUsage();
+            $temperature = $machine->getTemperature();
+            $fanSpeed = $machine->getFanSpeed();
+            $powerConsumption = $machine->getPowerConsumption();
+        } catch (\Exception $e) {
+            $this->response = "I'm not doing well, there was an error retrieving my system resources.";
+            return;
+        }
 
-        $userMessage = strtolower($context->get('message'));
+        $userMessage = strtolower($context->get('message') ?? "");
         $feelingsKeywords = ['I\'m', 'I am', 'fine'];
 
         $userMentionedFeelings = false;

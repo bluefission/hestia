@@ -15,6 +15,7 @@ if (!defined("DEBUG") ){
 }
 // Some error handling to be removed later
 ini_set('display_errors', 1);
+ini_set('html_errors', 1);
 ini_set("error_log", OPUS_ROOT."/storage/error.log");
 error_reporting(E_ALL);
 set_time_limit(3000);

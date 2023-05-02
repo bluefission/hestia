@@ -1,7 +1,8 @@
 <?php
 namespace App\Domain\User;
+use BlueFission\Framework\ValueObject;
 
-class LoginAttempt {
+class LoginAttempt extends ValueObject{
 	public $login_attempt_id;
 	public $ip_address;
 	public $username;

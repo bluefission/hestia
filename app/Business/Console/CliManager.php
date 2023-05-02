@@ -4,12 +4,16 @@ namespace App\Business\Console;
 use BotMan\BotMan\BotMan;
 use BlueFission\Services\Service;
 use App\Business\Console\BotMan\CommandLineDriver;
+use BlueFission\Framework\Command\CommandProcessor;
 
 class CliManager extends Service {
 
-	public function __construct( )
+	protected $_processor;
+
+	public function __construct(CommandProcessor $commandProcessor )
     {
 		parent::__construct();
+		$this->_processor = $commandProcessor;
 	}
 
 	public function cmd()
@@ -20,11 +24,24 @@ class CliManager extends Service {
 		$last_line = false;
 		$message = '';
 		while (!$last_line) {
-		    $next_line = fgets($fp, 1024); // read the special file to get the user input from keyboard
-		    if (".\n" == $next_line) {
+		    $next_line = trim(fgets($fp, 1024)); // read the special file to get the user input from keyboard
+		    if ("." == $next_line) {
 		      $last_line = true;
 		    } else {
 		      $message .= $next_line;
+
+		      if ( $next_line == 'chat' ) {
+		      	$convo = instance('convo');
+		      	$transcript = $convo->generateRecentDialogueText(1000, 30000);
+		      	echo $transcript;
+		      } elseif ( $next_line == 'history' ) {
+		      	$thread = instance('thread');
+		      	$transcript = $thread->history();
+		      	echo $transcript;
+		      } else {
+			      $response = $this->_processor->process($next_line);
+			      echo "\n$response\n\n";
+			  }
 		    }
 		}
 	}
@@ -43,7 +60,7 @@ class CliManager extends Service {
 	    $last_line = false;
 	    while (!$last_line) {
         	printf("%c%c",0x08,0x08);
-			echo '> ';
+			echo "\e[0m> ";
 
 	        $next_line = trim(fgets($fp, 1024)); // read the special file to get the user input from keyboard
 	        if ("." == $next_line) {

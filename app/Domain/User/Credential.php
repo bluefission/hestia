@@ -1,7 +1,8 @@
 <?php
 namespace App\Domain\User;
+use BlueFission\Framework\ValueObject;
 
-class Credential {
+class Credential extends ValueObject {
 	public $credential_id;
 	public $username;
 	public $password;

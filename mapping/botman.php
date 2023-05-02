@@ -5,24 +5,27 @@ use BotMan\Middleware\DialogFlow\V2\DialogFlow;
 use BotMan\BotMan\Drivers\DriverManager;
 use App\Business\Conversations;
 use App\Domain\Conversation\DialogueType;
-use BlueFission\Net\HTTP;
 use App\Business\Middleware\HearsIntentMiddleware;
 use App\Business\Middleware\ProcessesCommandMiddleware;
+use App\Business\Middleware\IntelligenceMiddleware;
 use BlueFission\Data\Storage\Session;
 use BlueFission\Framework\Command\CommandProcessor;
 use BlueFission\Framework\Skill\Intent\Matcher;
 use BlueFission\Framework\Skill\Intent\Context;
 use BlueFission\Data\Storage\Storage;
 
-$app = \App::instance();
-$botman = $app->service('botman');
+$app = instance();
+$botman = instance('botman');
 
 $hearsIntentMiddleware = $app->getDynamicInstance(HearsIntentMiddleware::class);
 $botman->middleware->received($hearsIntentMiddleware);
 $botman->middleware->sending($hearsIntentMiddleware);
 
-$processesCommandMiddleware = $app->getDynamicInstance(ProcessesCommandMiddleware::class);
-$botman->middleware->received($processesCommandMiddleware);
+$intelligenceMiddleware = $app->getDynamicInstance(IntelligenceMiddleware::class);
+$botman->middleware->received($intelligenceMiddleware);
+
+// $processesCommandMiddleware = $app->getDynamicInstance(ProcessesCommandMiddleware::class);
+// $botman->middleware->received($processesCommandMiddleware);
 // $botman->middleware->sending($processesCommandMiddleware);
 
 // $botman->middleware->received(function (IncomingMessage $message, $next, BotMan $bot) use ($hearsIntentMiddleware) {
@@ -46,19 +49,43 @@ $botman->hears('pause conversation', function(BotMan $bot) {
 	$bot->reply('stopped');
 })->skipsConversation();
 
-$botman->hears('build ml', function(BotMan $bot) {
-	$bot->startConversation(new BlueFission\Framework\Conversation\ModelCriteriaConversation);
+$botman->hears('clear conversation', function(BotMan $bot) {
+	store('conversation', "");
+	$bot->reply("Conversation cache is cleared");
 });
 
-$botman->hears('onboard.machinelearning', function(BotMan $bot) {
-	$bot->startConversation(new BlueFission\Framework\Conversation\ModelBuilderConversation);
-});
+// $botman->hears('set {key} to {value}', function(BotMan $bot) {
+// 	store($key, $value);
+// 	$bot->reply("Value set");
+// });
+
+// $botman->hears('get {key}', function(BotMan $bot) {
+// 	$value = store($key);
+// 	$bot->reply("{$key} is $value");
+// });
+
 
 // This should probably be the last `hears` call
 $botman->hears('.*', function (BotMan $bot) {
-    
-	$interpreter = \App::instance()->service('interpreter');
-	$response = $interpreter->process($bot->getMessage());
+	$interpreter = instance('interpreter');
+	$responses = $interpreter->process($bot->getMessage());
 
-    tell($response, 'botman');
+    do {
+		foreach ($responses as $response) {
+			if ($response) {
+	    		tell($response, 'botman');
+			}
+	    }
+	    $responses = [];
+
+	    if ( $interpreter->continue() ) {
+			$responses = $interpreter->process();
+	    }
+	} while ( $interpreter->continue() );
+
+	foreach ($responses as $response) {
+		if ($response) {
+    		tell($response, 'botman');
+		}
+    }
 });

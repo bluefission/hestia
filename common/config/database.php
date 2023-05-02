@@ -10,5 +10,15 @@ return [
 		'table'=>'',
 		'key'=>'_rowid',
 		'ignore_null'=>false,
-	]
+	],
+	'database'=> [
+		'location'=>null
+	],
+	'elasticsearch'=> [
+		'host'=>env('ELASTICSEARCH_HOST', 'localhost'),
+		'port'=>env('ELASTICSEARCH_PORT', '9200'),
+		'index'=>env('ELASTICSEARCH_INDEX', 'opus'),
+		'type'=>env('ELASTICSEARCH_TYPE', 'opus'),
+		'key'=>'_id',
+	],
 ];

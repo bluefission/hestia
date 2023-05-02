@@ -11,6 +11,41 @@ Mapping::add('/chatwindow', function() {
 
 // Conversations
 Mapping::add('/parse', ['App\Business\Managers\ConversationManager', 'parse'], 'parse', 'get');
+Mapping::add('/history', function() {
+	/*
+	$thread = instance('thread');
+	$prompt = null !== store('aiPrompt') ? store('aiPrompt')['prompt'] : "You are a very clever and helpful bot designed to assist people in building enterprise machine learning web applications and consulting them in best practices. Your key features are curiosity and an I've-got-this attitude!";
+	$thread->setPrompt( $prompt );
+	$xml = $thread->history();
+
+	$dom = new \DOMDocument('1.0');
+	$dom->preserveWhiteSpace = true;
+	$dom->formatOutput = true;
+	$dom->loadXML($xml);
+	$xml_pretty = $dom->saveXML();
+
+	echo $xml_pretty;
+	*/
+	echo "Dialogue\n\n";
+	$convo = instance('convo');
+	$transcript = $convo->generateRecentDialogueText(1000, 30000);
+	die(var_dump($transcript));
+});
+
+Mapping::add('/command', function() {
+	$processor = instance()->getDynamicInstance(BlueFission\Framework\Command\CommandProcessor::class);
+
+	$result = $processor->process('help with news');
+
+	var_dump($result);
+});
+
+Mapping::add('/clear', function() {
+	$convo = instance('convo');
+	$convo->clearConversation();
+	
+	echo "All clear!";
+});
 
 // Authentication
 Mapping::add('/login', ['App\Business\Http\LoginController', 'login'], 'login', 'get');

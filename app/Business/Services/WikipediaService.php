@@ -3,7 +3,9 @@
 // WikipediaService.php
 namespace App\Business\Services;
 
-class WikipediaService
+use BlueFission\Services\Service;
+
+class WikipediaService extends Service
 {
     private $baseUrl = 'https://en.wikipedia.org/w/api.php';
 

@@ -5,7 +5,7 @@ namespace App\Business\Skills;
 
 use BlueFission\Data\Log;
 use BlueFission\System\Machine;
-use BlueFission\Framework\Skill\Intent\Context;
+use BlueFission\Framework\Context;
 use BlueFission\Framework\Skill\BaseSkill;
 
 class StatusSkill extends BaseSkill
@@ -22,7 +22,7 @@ class StatusSkill extends BaseSkill
         $machine = new Machine();
         $log = Log::instance();
         $log->config(['file'=>OPUS_ROOT.'storage/error.log']);
-        $userMessage = strtolower($context->get('message'));
+        $userMessage = strtolower($context->get('message') ?? "");
 
         $recentLogMessages = $this->getRecentLogMessages($log);
         $eventLogs = ''; // Retrieve recent event logs here

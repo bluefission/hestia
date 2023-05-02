@@ -11,16 +11,15 @@ class BotManCommunicationDriver extends CommunicationDriver
 
     public function __construct()
     {
-        $this->botman = \App::instance()->service('botman');
+        $this->botman = instance('botman');
     }
 
-    public function send(Communication $message)
+    public function send(Communication $communication)
     {
-        // Send the message using the BotMan instance
-        $user = $message->user_id; // Assuming the Communication has a reference to the User object
-        sleep(1);
+        // Send the communication using the BotMan instance
+        $user = $communication->user_id; // Assuming the Communication has a reference to the User object
         $this->botman->typesAndWaits(2);
 
-        $this->botman->say($message->content, $user);
+        $this->botman->say(nl2br($communication->content), $user);
     }
 }

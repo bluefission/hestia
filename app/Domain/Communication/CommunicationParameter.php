@@ -1,8 +1,9 @@
 <?php
-
 namespace App\Domain\Communication;
 
-class CommunicationParameter
+use BlueFission\Framework\ValueObject;
+
+class CommunicationParameter extends ValueObject
 {
     public $communication_parameter_id;
     public $communication_id;

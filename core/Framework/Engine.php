@@ -85,11 +85,15 @@ class Engine extends Application {
 		$grammar = require dirname( dirname( dirname( __FILE__ ) ) ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'nlp'.DIRECTORY_SEPARATOR.'grammar.php';
 		$dictionary = require dirname( dirname( dirname( __FILE__ ) ) ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'nlp'.DIRECTORY_SEPARATOR.'dictionary.php';
 		$roots = require dirname( dirname( dirname( __FILE__ ) ) ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'nlp'.DIRECTORY_SEPARATOR.'roots.php';
+		$dialogue = require dirname( dirname( dirname( __FILE__ ) ) ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'nlp'.DIRECTORY_SEPARATOR.'dialogue.php';
+		$statements = require dirname( dirname( dirname( __FILE__ ) ) ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'nlp'.DIRECTORY_SEPARATOR.'statements.php';
 
 		$this->_configurations['nlp'] = [
 			'grammar' => $grammar,
 			'dictionary' => $dictionary,
 			'roots' => $roots,
+			'dialogue' => $dialogue,
+			'statements' => $statements,
 		];
 
 		// Machine Learning
@@ -139,9 +143,12 @@ class Engine extends Application {
 	{
 		$result = null;
 		$module = $this->_services[$service];
+		
+		// $module = instance($service);
 
 		if ( $module ) {
 			$module->message($behavior, $data);
+			$module = instance($service);
 			if (method_exists($module, 'response')) {
 				$result = $module->response();
 			} else if (method_exists($module, 'status')) {
@@ -152,7 +159,7 @@ class Engine extends Application {
 				return $callback($result);
 			}
 		} else {
-			return $callback("Module not found");
+			return $callback("Resource not found");
 		}
 		return;
 	}

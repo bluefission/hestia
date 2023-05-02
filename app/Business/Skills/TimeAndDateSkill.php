@@ -2,7 +2,7 @@
 // TimeAndDateSkill.php
 namespace App\Business\Skills;
 
-use BlueFission\Framework\Skill\Intent\Context;
+use BlueFission\Framework\Context;
 use BlueFission\Framework\Skill\BaseSkill;
 use BlueFission\Utils\DateTime;
 
@@ -22,12 +22,12 @@ class TimeAndDateSkill extends BaseSkill
         $responseParts = [];
 
         if (strpos($message, 'time') !== false) {
-            $currentTime = $dateTimeUtil->time();
+            $currentTime = $dateTimeUtil->time(time());
             $responseParts[] = "The current time is {$currentTime}";
         }
 
         if (strpos($message, 'date') !== false) {
-            $currentDate = $dateTimeUtil->date();
+            $currentDate = $dateTimeUtil->date(time());
             $responseParts[] = "The current date is {$currentDate}";
         }
 
@@ -37,7 +37,7 @@ class TimeAndDateSkill extends BaseSkill
         }
 
         if (empty($responseParts)) {
-            $currentTime = $dateTimeUtil->time();
+            $currentTime = $dateTimeUtil->time(time());
             $responseParts[] = "The current time is {$currentTime}";
         }
 

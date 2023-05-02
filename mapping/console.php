@@ -21,5 +21,5 @@ $app->register('database', 'delta', 'runMigrations');
 $app->register('database', 'revert', 'revertMigrations');
 $app->register('database', 'populate', 'populate');
 
-$app->delegate('code', CodeManager::class );
-$app->register('code', 'generate', 'generate');
+// $app->delegate('code', CodeManager::class );
+// $app->register('code', 'generate', 'generate');

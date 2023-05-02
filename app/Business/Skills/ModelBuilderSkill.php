@@ -2,7 +2,7 @@
 // ModelBuilderSkill.php
 namespace App\Business\Skills;
 
-use BlueFission\Framework\Skill\Intent\Context;
+use BlueFission\Framework\Context;
 use BlueFission\Framework\Skill\BaseSkill;
 use BlueFission\Framework\Conversation\ModelBuilderConversation;
 
@@ -17,7 +17,7 @@ class ModelBuilderSkill extends BaseSkill
 
     public function execute(Context $context = null)
     {
-        $botman = \App::instance()->service('botman');
+        $botman = instance('botman');
         $conversation = new ModelBuilderConversation();
         $botman->startConversation($conversation);
         

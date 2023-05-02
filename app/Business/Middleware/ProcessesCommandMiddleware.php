@@ -1,5 +1,4 @@
 <?php
-
 // ProcessesCommandMiddleware.php
 namespace App\Business\Middleware;
 

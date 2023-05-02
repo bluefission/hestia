@@ -36,6 +36,7 @@
         "illuminate/collections": "^10.3",
         "orhanerday/open-ai": "^2.2",
         "php-ai/php-ml": "^0.10.0",
+        "simplehtmldom/simplehtmldom": "^2.0@RC",
         "symfony/cache": "^6.0"
     },
     "require-dev": {

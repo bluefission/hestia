@@ -5,6 +5,7 @@ namespace App\Business\Managers;
 use BlueFission\Framework\Skill\Intent\Intent;
 use BlueFission\Framework\Skill\Intent\Matcher;
 use BlueFission\Framework\Skill\BaseSkill;
+use BlueFission\Framework\Context;
 use BlueFission\Services\Service;
 use BlueFission\Bot\NaturalLanguage\EntityExtractor;
 
@@ -18,6 +19,18 @@ class SkillManager extends Service
     {
         $this->matcher = $matcher;
         parent::__construct();
+    }
+
+    public function listSkills(): array
+    {
+        $skills = $this->matcher->getSkills();
+        $list = [];
+        foreach ($skills as $skill) {
+            $list[] = $skill->name();
+        }
+        $response = '- '.implode("\n- ", $list);
+        $this->_response = $response;
+        return $list;
     }
 
     public function registerSkill(BaseSkill $skill): self
@@ -71,21 +84,37 @@ class SkillManager extends Service
     public function runSkill( $behavior, $args )
     {
         if (empty($args) || $args == null) {
-            $this->_response = "Here's a list of skills";
+            $response = "Here's a list of skills\n";
+            $list = $this->listSkills();
+            $response .= '- '.implode("\n- ", $list);
+            $response .= "\n\nWhich skill would you like to run?";
+            $response .= "\n\nYou can also say 'run skill <skill name>'";
+
+            $this->_response = $response;
+
             return;
         }
 
         if (isset($args) && isset($args[0])) {
             $extractor = new EntityExtractor();
-            $name = $extractor->object($args)[0];
-            // $name = $args[0];
+            // $name = $extractor->object($args[0]);
+            // if (!empty($name)) {
+            //     $name = $name[0];
+            // } else {
+            //     $name = $args[0];
+            // }
+
+            $name = isset($args[0]) ? $args[0] : '';
 
             // TODO: Build context from available information
+            $context = new Context();
 
             $skill = $this->matcher->getSkill($name);
             if ($skill) {
-                $skill->execute();
+                $skill->execute($context);
                 $this->_response = $skill->response();
+            } else {
+                $this->_response = "Skill '$name' not found";
             }
         }
     }

@@ -12,7 +12,7 @@ class InitialUserData extends Generator
 	public function populate() {
 		$statuses = [
 			'Unverified'=>CredentialStatus::UNVERIFIED,
-			'Verfied'=>CredentialStatus::VERIFIED,
+			'Verified'=>CredentialStatus::VERIFIED,
 			'Expired'=>CredentialStatus::EXPIRED,
 			'Invalid'=>CredentialStatus::INVALID,
 		];
@@ -24,6 +24,7 @@ class InitialUserData extends Generator
 			$status->label = $label;
 			$status->write();
 
+			echo "Creating status: {$status->label} ";
 			echo $status->status()."\n";
 		}
 
@@ -42,9 +43,9 @@ class InitialUserData extends Generator
 		$user->realname = 'System Admin';
 		$user->displayname = 'Admin';
 		$user->write();
-		$user->read();
-
+		echo "Creating Admin user: {$user->displayname} ";
 		echo $user->status()."\n";
+		$user->read();
 
 		$credential->username = 'admin';
 		$credential->password = $password;
@@ -54,6 +55,7 @@ class InitialUserData extends Generator
 		$credential->user_id = $user->id();
 
 		$credential->write();
+		echo "Saving credentials for {$credential->username} ";
 		echo $credential->status()."\n";
 
 		echo "Complete.\n";

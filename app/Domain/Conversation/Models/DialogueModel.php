@@ -1,0 +1,18 @@
+<?php
+namespace App\Domain\Conversation\Models;
+
+use BlueFission\Framework\Model\ModelSql as Model;
+
+class DialogueModel extends Model {
+	
+	protected $_table = 'dialogues';
+	protected $_fields = [
+		'dialogue_id',
+		'dialogue_type_id',
+		'language_id',
+		'topic_id',
+		'text',
+		'tokenzied',
+		'weight',
+	];
+}

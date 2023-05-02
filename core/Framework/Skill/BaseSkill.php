@@ -2,7 +2,7 @@
 // BaseSkill.php
 namespace BlueFission\Framework\Skill;
 
-use BlueFission\Framework\Skill\Intent\Context;
+use BlueFission\Framework\Context;
 abstract class BaseSkill {
     protected $name;
 

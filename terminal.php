@@ -13,7 +13,9 @@ require 'vendor/autoload.php';
 /**
  * Load the autoloader from the settings file.
  */
-$autoloader = require 'common/config/settings.php';
+require 'common/config/settings.php';
+require 'common/helpers/global.php';
+// $autoloader = require 'common/config/settings.php';
 
 // Loader utility for non-composer compatible scripts
 $loader = Loader::instance();

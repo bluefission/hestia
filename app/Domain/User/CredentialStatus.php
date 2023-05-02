@@ -1,7 +1,8 @@
 <?php
 namespace App\Domain\User;
+use BlueFission\Framework\ValueObject;
 
-class CredentialStatus {
+class CredentialStatus extends ValueObject {
 	const UNVERIFIED = 'credential_status_unverified';
 	const VERIFIED = 'credential_status_verified';
 	const EXPIRED = 'credential_status_expired';

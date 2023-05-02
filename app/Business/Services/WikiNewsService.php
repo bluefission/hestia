@@ -3,7 +3,10 @@
 // WikiNewsRequest.php
 namespace App\Business\Services;
 
-class WikiNewsService
+use BlueFission\Services\Service;
+
+
+class WikiNewsService extends Service
 {
     private $baseUrl = 'https://en.wikinews.org/w/api.php';
 
@@ -20,7 +23,7 @@ class WikiNewsService
             'list' => 'search',
             'srsearch' => $searchQuery,
             'srprop' => 'size|wordcount|timestamp|snippet',
-            'srlimit' => 5,
+            'srlimit' => 25,
         ];
 
         $url = $this->baseUrl . '?' . http_build_query($params);
@@ -29,7 +32,7 @@ class WikiNewsService
         $headlines = [];
         if (isset($response['query']['search'])) {
             foreach ($response['query']['search'] as $result) {
-                $headlines[] = $result['title'];
+                $headlines[] = $result;
             }
         }
 

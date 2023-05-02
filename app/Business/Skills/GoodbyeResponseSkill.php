@@ -2,7 +2,7 @@
 // GoodbyeResponseSkill.php
 namespace App\Business\Skills;
 
-use BlueFission\Framework\Skill\Intent\Context;
+use BlueFission\Framework\Context;
 use BlueFission\Framework\Skill\BaseSkill;
 
 class GoodbyeResponseSkill extends BaseSkill

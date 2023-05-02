@@ -2,6 +2,7 @@
 namespace App\Business\Managers;
 
 use BlueFission\Services\Service;
+use BlueFission\Framework\Command\CommandProcessor;
 use BlueFission\Bot\Collections\OrganizedCollection;
 use BlueFission\Bot\NaturalLanguage\Grammar;
 use BlueFission\Bot\NaturalLanguage\SyntaxTreeWalker;
@@ -10,12 +11,14 @@ use BlueFission\Bot\NaturalLanguage\EntityExtractor;
 class CommandManager extends Service {
 	protected $_collection;
 	protected $_grammar;
+	protected $_processor;
 
-	public function __construct(Grammar $grammar)
+
+	public function __construct(Grammar $grammar, CommandProcessor $processor)
 	{
 		$this->_collection = new OrganizedCollection();
+		$this->_processor = $processor;
 		$this->_grammar = $grammar;
-
 		parent::__construct();
 	}
 

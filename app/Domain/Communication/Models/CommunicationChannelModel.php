@@ -11,5 +11,6 @@ class CommunicationChannelModel extends Model
         'communication_channel_id',
         'name',
         'label',
+        'description',
     ];
 }

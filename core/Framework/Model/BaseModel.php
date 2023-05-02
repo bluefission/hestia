@@ -10,6 +10,7 @@ use BlueFission\DevArray;
 use BlueFission\DevObject;
 use BlueFission\Behavioral\Behaviors\State;
 use BlueFission\Framework\Engine as App;
+use Elasticsearch\ClientBuilder;
 use JsonSerializable;
 
 /**
@@ -17,6 +18,10 @@ use JsonSerializable;
  * It implements IData, JsonSerializable interfaces.
  */
 class BaseModel extends DevObject implements IData, JsonSerializable {
+	/**
+     * @var Elasticsearch\Client Elasticsearch client instance.
+     */
+    protected $_elasticsearchClient;
 
 	/**
 	 * @var string Format for timestamp.
@@ -47,6 +52,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 * Constructor for BaseModel class.
 	 *
 	 * Initializes the _dataObject as a Storage object.
+     * Initializes the _elasticsearchClient as an Elasticsearch client object.
 	 */
 	public function __construct($values = null) 
 	{ 
@@ -56,6 +62,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 		// This is essentially just a container for a DB object.
 		// We'll just extend new classes for new storage types;
 		$this->_dataObject = new Storage();
+        // $this->_elasticsearchClient = ClientBuilder::fromConfig(\App::instance()->configuration('database')['elasticsearch'];
 		return $this;
 	}
 
@@ -105,14 +112,38 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 		return $this;
 	}
 
+	public function limit($limit)
+	{
+		$this->_dataObject->limit($limit);
+		return $this;
+	}
+
+	public function orderBy($field, $order = 'ASC')
+	{
+		$this->_dataObject->order($field, $order);
+		return $this;
+	}
+
+	public function condition($field, $condition, $value)
+	{
+		$this->_dataObject->condition($field, $condition, $value);
+		return $this;
+	}
+
 	/**
 	 * Reads data from the storage.
 	 */
 	public function read($values = null) { 
-		$this->assign($values);
+		if (DevValue::isNotEmpty($values)) {
+			$this->assign($values);
+		}
+
+		$this->readFromElasticsearch($this->_dataObject->data());
+		
 		$this->_dataObject->activate();
 		$this->_dataObject->read();
 		$this->loadRelationships();
+
 		return $this;
 	}
 	
@@ -122,11 +153,17 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 *
 	 * @return mixed Result of the write operation on the data object.
 	 */
-	public function write($values = null) { 
-		$this->assign($values);
+	public function write($values = null) {
+		if (DevValue::isNotEmpty($values)) {
+			$this->assign($values);
+		}
 		$this->generateTimestamp();
 		$this->_dataObject->activate();
 		$this->_dataObject->write();
+		if ($this->_dataObject->status() == Storage::STATUS_SUCCESS) {
+            // Write to Elasticsearch
+            $this->writeToElasticsearch();
+        }
 		return $this;
 	}
 
@@ -136,9 +173,16 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 * @return mixed Result of the delete operation on the data object.
 	 */
 	public function delete($values = null) { 
-		$this->assign($values);
+		if (DevValue::isNotEmpty($values)) {
+			$this->assign($values);
+		}
 		$this->_dataObject->activate();
 		$this->_dataObject->delete();
+
+		if ($this->_dataObject->status() == Storage::STATUS_SUCCESS) {
+            // Delete from Elasticsearch
+            $this->deleteFromElasticsearch($this->id());
+        }
 		return $this;
 	}
 
@@ -290,7 +334,6 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 		$data = $model->result()->toArray();
 		$result = new Collection();
 		foreach ( $data as $row ) {
-			$model->clear();
 			$model->assign($row);
 			$model->read();
 			$result[] = clone $model;
@@ -382,6 +425,72 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 		}
 		return $response;
 	}
+
+    protected function readFromElasticsearch($searchParams = [])
+	{
+		if (!$this->_elasticsearchClient) {
+			return;
+		}
+	    $query = [];
+
+	    // Build the query based on provided search parameters
+	    foreach ($searchParams as $field => $value) {
+	        $query['bool']['must'][] = [
+	            'match' => [
+	                $field => $value
+	            ]
+	        ];
+	    }
+
+	    // Prepare the Elasticsearch search request
+	    $params = [
+	        'index' => $this->_dataObject->config('name'),
+	        'body'  => [
+	            'query' => $query
+	        ]
+	    ];
+
+	    // Execute the search request
+	    $response = $this->_elasticsearchClient->search($params);
+
+	    // Check if any results were found
+	    if ($response['hits']['total']['value'] > 0) {
+	        // Assign the first result's _source to the data object
+	        $this->assign($response['hits']['hits'][0]['_source']);
+	    } else {
+	        // No results found, handle this case as needed (e.g., throw an exception or return null)
+	    }
+	}
+
+    /**
+     * Writes data to Elasticsearch.
+     */
+    protected function writeToElasticsearch()
+    {
+    	if (!$this->_elasticsearchClient) {
+			return;
+		}
+        $params = [
+            'index' => $this->_dataObject->config('name'),
+            'id'    => $this->id(),
+            'body'  => $this->data(),
+        ];
+
+        $this->_elasticsearchClient->index($params);
+    }
+
+    /**
+     * Deletes data from Elasticsearch.
+     */
+    protected function deleteFromElasticsearch($id)
+    {
+        $params = [
+            'index' => $this->_dataObject->config('name'),
+            'id'    => $id,
+        ];
+
+        $this->_elasticsearchClient->delete($params);
+    }
 
 	/**
 	 * Specify data which should be serialized to JSON

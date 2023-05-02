@@ -2,8 +2,8 @@
 namespace BlueFission\Framework\Skill\Intent;
 
 // Matcher.php
-use BlueFission\Framework\Skill\Intent\Context;
-use BlueFission\Framework\Skill\Intent\IAnalyzer;
+use BlueFission\Framework\Context;
+use BlueFission\Framework\IAnalyzer;
 use BlueFission\Framework\Skill\BaseSkill;
 use BlueFission\Services\Service;
 
@@ -86,13 +86,15 @@ class Matcher
         if ( is_string($intent) ) {
             $intent = $this->getIntent($intent);
         }
-        $skillNames = self::$intentSkillMap[$intent->getLabel()];
+        $skillNames = isset(self::$intentSkillMap[$intent->getLabel()]) ? self::$intentSkillMap[$intent->getLabel()] : [];
 
-        $skill = $this->getSkill($skillNames[0]);
+        if (!empty($skillNames)) {
+            $skill = $this->getSkill($skillNames[0]);
+            $skill->execute($context);
+            return $skill->response();
+        }
 
-        $skill->execute($context);
-
-        return $skill->response();
+        return null;
     }
 
 }

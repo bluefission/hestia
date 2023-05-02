@@ -5,19 +5,39 @@ namespace BlueFission\Framework\Command;
 class CommandParser
 {
     protected $verbs = [
-        'do' => ['do','perform','enact'],
-        'go' => ['go'],
+        'do' => ['do','perform','enact', 'run', 'use'],
+        'go' => ['go', 'navigate'],
         'make' => ['make', 'create'],
         'get' => ['get', 'retrieve'],
+        'set' => ['set', 'change', 'assign'],
         'update' => ['update'],
         'delete' => ['delete', 'remove'],
         'generate' => ['generate', 'build'],
         'message' => ['message'],
         'open' => ['open'],
+        'input' => ['input', 'enter'],
+        'send' => ['send', 'submit'],
         'edit' => ['edit'],
         'add' => ['add','append'],
         'download' => ['download'],
-        'show' => ['show', 'display'],
+        'show' => ['show', 'display', 'view'],
+        'list' => ['list'],
+        'find' => ['find', 'search', 'locate'],
+        'previous' => ['previous', 'back'],
+        'next' => ['next', 'forward'],
+        'select' => ['select', 'choose', 'take', 'check'],
+        'help' => ['help', 'assist'],
+        'save' => ['save', 'preserve', 'store'],
+        'cancel' => ['cancel', 'stop', 'nevermind'],
+        'prompt' => ['prompt', 'ask', 'inquire'],
+        'less' => ['less', 'fewer'],
+        'more' => ['more', 'greater'],
+        //Special system root commands
+        'scroll' => ['scroll'],
+        'copy' => ['copy', 'duplicate'],
+        'cut' => ['cut', 'remove'],
+        'paste' => ['paste', 'insert'],
+        'move' => ['move', 'shift'],
     ];
 
     protected $questionKeywords = [
@@ -49,11 +69,11 @@ class CommandParser
     protected $app;
 
     protected $knownResources = [
-        'model', 'controller', 'user', 'filemanager', 'database', 'code', 'skill'
+        'system', 'model', 'controller', 'user', 'filemanager', 'database', 'code', 'skill', 'command', 'info', 'weather', 'website', 'web', 'howto', 'news', 'variable', 'file', 'resource', 'todo', 'queue', 'stack', 'schedule', 'ai', 'transcript', 'task', 'step', 'calc', 'action', 'api', 'feature', 'note', 'entity'
     ];
 
     protected $noiseWords = [
-        'a', 'an', 'the', 'and', 'to', 'in', 'on', 'with', 'by',
+        'a', 'an', 'the', 'it', 'this', 'and', 'with', 'all',
     ];
 
     public function __construct()
@@ -77,7 +97,7 @@ class CommandParser
     protected function parseCommand($input, Command $command)
     {
         if (preg_match($this->grammar['command'], $input, $matches)) {
-            $verb = $this->findVerb($matches['verb']);
+            $verb = $this->findVerb(strtolower($matches['verb']));
             if ($verb) {
                 $command->verb = $verb;
                 $this->parseResourcesAndArgs($matches['rest'] ?? '', $command);
@@ -135,6 +155,30 @@ class CommandParser
         ];
     }
 
+    public function getSystemVerbs($category = null)
+    {
+        if ($category) {
+            return $this->verbs[$category] ?? [];
+        }
+
+        $verbs = [];
+        foreach ($this->verbs as $verbsInCategory) {
+            $verbs = array_merge($verbs, $verbsInCategory);
+        }
+
+        return $verbs;
+    }
+
+    public function getSystemResources()
+    {
+        return $this->knownResources;
+    }
+
+    public function getSystemPrepositions()
+    {
+        return $this->prepositions;
+    }
+
     protected function processResource($word)
     {
         foreach ($this->resourceHandlers as $name => $handlerInfo) {
@@ -151,35 +195,61 @@ class CommandParser
 
     protected function parseResourcesAndArgs($input, Command $command)
     {
-        $input = preg_replace('/\s+/', ' ', $input);
-        $words = explode(' ', $input);
+        preg_match_all('/\s*(?:(?:"([^"]*)")|([^\s"]+))/', $input, $matches, PREG_SET_ORDER);
+        $words = [];
+        $areLiterals = [];
+        foreach ($matches as $match) {
+            $areLiterals[] = !isset($match[2]);
+            $words[] = isset($match[2]) ? $match[2] : $match[1];
+        }
 
         $resources = [];
         $args = [];
         $currentArg = [];
 
+        $i = -1;
         foreach ($words as $word) {
-            if (in_array($word, $this->prepositions)) {
+            $i++;
+            if (in_array($word, $this->prepositions) && !$areLiterals[$i]) {
                 if ($currentArg) {
-                    $args[] = implode(' ', $currentArg);
+                    $arg = implode(' ', $currentArg);
+                    $args[] = $arg;
                     $currentArg = [];
                 }
                 continue;
             }
 
-            if ($this->isResource($word)) {
+            if (in_array($word, $this->noiseWords) && !$areLiterals[$i]) {
                 if ($currentArg) {
-                    $args[] = implode(' ', $currentArg);
+                    $arg = implode(' ', $currentArg);
+                    $args[] = $arg;
+                    $currentArg = [];
+                }
+                continue;
+            }
+
+            if ($this->isResource($word) && !$areLiterals[$i]) {
+                if ($currentArg) {
+                    $arg = implode(' ', $currentArg);
+                    $args[] = $arg;
                     $currentArg = [];
                 }
                 $resources[] = $this->normalizeResource($word);
+            } elseif ($areLiterals[$i]) {
+                if ( count($currentArg) > 0) {
+                    $arg = implode(' ', $currentArg);
+                    $args[] = $arg;
+                    $currentArg = [];
+                }
+                $args[] = $word;
             } else {
                 $currentArg[] = $word;
             }
         }
 
         if ($currentArg) {
-            $args[] = implode(' ', $currentArg);
+            $arg = implode(' ', $currentArg);
+            $args[] = $arg;
         }
 
         $command->resources = $resources;
@@ -265,8 +335,15 @@ class CommandParser
         }
 
         // Handle pluralization
-        if (substr($word, -1) === 's' && in_array(substr($word, 0, -1), $this->knownResources)) {
-            $word = substr($word, 0, -1);
+        // if (substr($word, -1) === 's' && in_array(substr($word, 0, -1), $this->knownResources)) {
+        //     $word = substr($word, 0, -1);
+        // }
+        foreach ($this->knownResources as $resource)
+        {
+            if ($word == pluralize($resource)) {
+                $word = $resource;
+                break;
+            }
         }
 
         // Process punctuation marks

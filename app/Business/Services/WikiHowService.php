@@ -1,17 +1,19 @@
 <?php
-
 // WikiHowService.php
 namespace App\Business\Services;
 
+use BlueFission\Services\Service;
+
 use simplehtmldom\HtmlWeb;
 
-class WikiHowService
+class WikiHowService extends Service
 {
     private $baseUrl = 'https://www.wikihow.com';
 
     public function search(string $query): array
     {
         $url = $this->baseUrl . '/Special:Search?search=' . urlencode($query);
+        // $url = $this->baseUrl . 'wikiHowTo?search=' . urlencode($query);
 
         $html = (new HtmlWeb())->load($url);
 
@@ -28,6 +30,7 @@ class WikiHowService
                 'title' => $title,
                 'description' => $description,
                 'rating' => $rating,
+                'url' => $articleUrl, // Add the full URL to the result
                 'steps' => $steps
             ];
         }
@@ -48,9 +51,9 @@ class WikiHowService
         return 0;
     }
 
-        private function getSteps(string $url): array
+    private function getSteps(string $url): array
     {
-        $html = (new HtmlWeb())->load($url);
+        $html = (new HtmlWeb())->load($this->baseUrl . '/' . $url);
         $stepsList = $html->find('.steps_list_2', 0);
         if (!$stepsList) {
             return [];

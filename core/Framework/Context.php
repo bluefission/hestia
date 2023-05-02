@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework\Skill\Intent;
+namespace BlueFission\Framework;
 
 // Context.php
 class Context
@@ -25,5 +25,11 @@ class Context
     public function all(): array
     {
         return $this->data;
+    }
+
+    public function __sleep()
+    {
+        // Return the list of properties that should be serialized.
+        return array_keys(get_object_vars($this));
     }
 }

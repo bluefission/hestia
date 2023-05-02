@@ -6,9 +6,9 @@ use App\Domain\Communication\Communication;
 
 class HTTPCommunicationDriver extends CommunicationDriver
 {
-    public function send(Communication $message)
+    public function send(Communication $communiation)
     {
-        // Send the message using an HTTP request
+        // Send the communication using an HTTP request
         // ...
     }
 }

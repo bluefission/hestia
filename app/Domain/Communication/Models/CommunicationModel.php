@@ -6,8 +6,8 @@ use BlueFission\Framework\Model\ModelSql as Model;
 
 class CommunicationModel extends Model
 {
-    private $attachments = [];
-    private $parameters = [];
+    private $_attachments = [];
+    private $_parameters = [];
 
     protected $_table = ['communications'];
     protected $_fields = [
@@ -15,7 +15,7 @@ class CommunicationModel extends Model
         'user_id',
         'recipient_id',
         'communication_type_id',
-        'channel_id',
+        'channel',
         'communication_content',
         'communication_status_id',
     ];
@@ -25,7 +25,7 @@ class CommunicationModel extends Model
         'communication_parameters',
         'communication_attachments',
         'communication_types',
-        'communication_channels',
+        // 'communication_channels',
         'communication_statuses',
     ];
 
@@ -54,31 +54,31 @@ class CommunicationModel extends Model
         return $this->ancestor('App\Domain\Communication\Models\CommunicationTypeModel', 'communication_type_id');
     }
 
-    public function channel()
-    {
-        return $this->ancestor('App\Domain\Communication\Models\CommunicationChannelModel', 'communication_channel_id', );
-    }
+    // public function channel()
+    // {
+    //     return $this->ancestor('App\Domain\Communication\Models\CommunicationChannelModel', 'communication_channel_id', );
+    // }
 
     public function communication_status()
     {
         return $this->ancestor('App\Domain\Communication\Models\CommunicationStatusModel', 'communication_status_id', );
     }
 
-    public function addAttachments($attachments)
+    public function addAttachments($attachments = [])
     {
-        $this->attachments = array_merge($this->attachments, $attachments);
+        $this->attachments = array_merge($this->_attachments, $attachments);
     }
 
-    public function addParameters($parameters)
+    public function addParameters($parameters = [])
     {
-        $this->parameters = array_merge($this->parameters, $parameters);
+        $this->parameters = array_merge($this->_parameters, $parameters);
     }
 
     public function write($values = null)
     {
         parent::write($values);
         $model = new CommunicationAttachmentModel();
-        foreach($this->attachments as $attachment) {
+        foreach($this->_attachments as $attachment) {
             $model->write([
                 'communication_id' => $this->communication_id,
                 'name' => $attachment['name'],
@@ -86,7 +86,7 @@ class CommunicationModel extends Model
             ]);
         }
         $model = new CommunicationParameterModel();
-        foreach($this->parameters as $parameter) {
+        foreach($this->_parameters as $parameter) {
             $model->write([
                 'communication_id' => $this->communication_id,
                 'name' => $parameter['name'],

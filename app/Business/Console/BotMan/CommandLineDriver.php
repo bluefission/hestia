@@ -10,6 +10,7 @@ use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 use BotMan\BotMan\Messages\Outgoing\Question;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 use BotMan\BotMan\Users\User;
+use BlueFission\HTML\HTML;
 
 class CommandLineDriver extends HttpDriver
 {
@@ -39,8 +40,8 @@ class CommandLineDriver extends HttpDriver
     {
         if (empty($this->messages)) {
             $message = "Test";
-            $userId = "cli";
-            $sender = "cli";
+            $userId = "cli user";
+            $sender = "cli user";
 
             $incomingMessage = new IncomingMessage($message, $sender, $userId, $this->payload);
 
@@ -54,7 +55,7 @@ class CommandLineDriver extends HttpDriver
 
     public function getUser(IncomingMessage $matchingMessage)
     {
-        return new User('cli', null, null, 'cli');
+        return new User('cli user', null, null, 'cli user');
     }
 
     public function isConfigured()
@@ -74,13 +75,13 @@ class CommandLineDriver extends HttpDriver
     protected function replyText($message)
     {
         printf("%c%c",0x08,0x08);
-        echo PHP_EOL . $message->getText() . PHP_EOL;
+        echo PHP_EOL . HTML::br2nl($message->getText()) . PHP_EOL;
         // echo '> ';
     }
 
     protected function replyQuestion(Question $question)
     {
-        echo PHP_EOL . $question->getText() . PHP_EOL;
+        echo PHP_EOL . HTML::br2nl($question->getText()) . PHP_EOL;
 
         $buttons = $question->getButtons();
         if (!empty($buttons)) {
@@ -110,7 +111,7 @@ class CommandLineDriver extends HttpDriver
 
         // $this->currentConversation->stop();
         // $this->setMessage( new IncomingMessage($answer, 'cli', 'cli') );
-        $this->setMessage( new IncomingMessage($input, 'cli', 'cli') );
+        $this->setMessage( new IncomingMessage($input, 'cli user', 'cli user') );
         $this->botMan->listen();
     }
 

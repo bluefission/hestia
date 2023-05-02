@@ -11,7 +11,7 @@ class ScaffoldCommunicationTables extends Delta
         Scaffold::create('communication_statuses', function (Structure $entity) {
             $entity->incrementer('communication_status_id');
             $entity->text('name');
-            $entity->text('label')->nullable();
+            $entity->text('label')->null();
             $entity->timestamps();
             $entity->comment("The status for communications (unsent, sent, delivered, read, etc).");
         });
@@ -19,17 +19,18 @@ class ScaffoldCommunicationTables extends Delta
         Scaffold::create('communication_types', function (Structure $entity) {
             $entity->incrementer('communication_type_id');
             $entity->text('name');
-            $entity->text('label')->nullable();
+            $entity->text('label')->null();
             $entity->timestamps();
-            $entity->comment("The types of communications (email, SMS, push, etc).");
+            $entity->comment("The types of communications (status, update, notice, warning, etc).");
         });
 
         Scaffold::create('communication_channels', function (Structure $entity) {
             $entity->incrementer('communication_channel_id');
             $entity->text('name');
-            $entity->text('label')->nullable();
+            $entity->text('label')->null();
+            $entity->text('description')->null();
             $entity->timestamps();
-            $entity->comment("The channels for communication (botman, HTTP, etc).");
+            $entity->comment("The channels for communication (botman, HTTP, SMS, email, etc).");
         });
 
         Scaffold::create('communications', function (Structure $entity) {
@@ -37,7 +38,7 @@ class ScaffoldCommunicationTables extends Delta
             $entity->numeric('user_id')->foreign('users', 'user_id');
             $entity->numeric('recipient_id')->foreign('users', 'user_id');
             $entity->numeric('communication_type_id')->foreign('communication_types', 'communication_type_id');
-            $entity->numeric('communication_channel_id')->foreign('communication_channels', 'communication_channel_id');
+            $entity->text('channel')->null();
             $entity->text('content');
             $entity->numeric('communication_status_id')->foreign('communication_statuses', 'communication_status_id');
             $entity->timestamps();
@@ -48,7 +49,7 @@ class ScaffoldCommunicationTables extends Delta
             $entity->incrementer('communication_parameter_id');
             $entity->numeric('communication_id')->foreign('communications', 'communication_id');
             $entity->text('name');
-            $entity->text('value')->nullable();
+            $entity->text('value')->null();
             $entity->timestamps();
             $entity->comment("Parameters for communications.");
         });
