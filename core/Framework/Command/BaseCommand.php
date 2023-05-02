@@ -139,6 +139,40 @@ class BaseCommand extends Service {
         $this->_response = $response;
     }
 
+    protected function generate($args)
+    {
+        $title = $args[0] ?? '';
+        $prompt = $args[1] ?? '';
+
+        $item = $this->_itemName ?? $this->_name;
+
+        // Check if the OpenAI API key is set
+        if (!env('OPEN_AI_API_KEY')) {
+            $this->_response = "OpenAI API key is not set.";
+            return;
+        }
+
+        $sampleJson = $this->jsonSample();
+
+        // Initialize the OpenAIService
+        $openAIService = new OpenAIService();
+
+        // Generate the object using GPT-3
+        $gpt3_prompt = "Sample:\n$sampleJson\n\nTitle:\"$title\" \n\nInstructions:\"$prompt\" \n\nUsing the example, generate a JSON file representing the described {$tiem}: ";
+        $gpt3_response = $openAIService->complete($gpt3_prompt, ['max_tokens'=>3000]);
+
+        // Check for errors in the response
+        if (isset($gpt3_response['error'])) {
+            $this->_response = "Error generating {$item}.";
+            return;
+        }
+
+        // Get the generated object
+        $object = trim($gpt3_response['choices'][0]['text']);
+
+        $this->_response = $object;
+    }
+
     protected function set($args)
     {
         $item = $this->_itemName ?? $this->_name;

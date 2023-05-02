@@ -87,7 +87,7 @@ class APICommand extends BaseCommand
         }
 
         return [
-            $key => $itemName,
+            $this->_key => $itemName,
             'description' => $description,
             'method' => $method,
             'url' => $url,
@@ -114,11 +114,11 @@ class APICommand extends BaseCommand
 
         // Generate the code using GPT-3
         $gpt3_prompt = "Sample:\n$sampleJson\n\nTitle:\"$title\" \n\nCommand:\"$prompt\" \n\nUsing the example, generate a JSON file representing the API call and the PHP to consume the response: ";
-        $gpt3_response = $openAIService->complete($gpt3_prompt, 3000);
+        $gpt3_response = $openAIService->complete($gpt3_prompt, ['max_tokens'=>3000]);
 
         // Check for errors in the response
         if (isset($gpt3_response['error'])) {
-            $this->_response = "Error generating code.";
+            $this->_response = "Error generating api.";
             return;
         }
 

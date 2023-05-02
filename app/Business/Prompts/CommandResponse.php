@@ -67,7 +67,7 @@ Always add tasks to new todos and always scroll through the latest lists and res
 
 Always listen to your log suggestions, last observations, thoughts, and criticisms and only run necessary commands that result in progress!
 
-Reasoning: The next batch of commands are the best options because they accomplish my reasoning and decided upon next immediate action by using the last command's system response suggestions in the conversation and also considering the situations for priority commands.
+Reasoning: The next batch of commands are the best options because they accomplish my reasoning and decided upon next immediate action by using the last command's system response suggestions in the conversation and also considering the situations for priority commands. It uses actual parameters with no placeholder inforamation.
 Next commands: ";
 
 // 	protected $_template = "Consider a Chatbot whose name is {agent}:
