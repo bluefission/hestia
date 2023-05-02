@@ -38,6 +38,7 @@ use App\Business\Prompts\DifficultyScore;
 use App\Business\Prompts\GoalSummary;
 use App\Business\Prompts\CommandResponse;
 use App\Business\Prompts\ObservationResponse;
+use App\Business\Prompts\GenericResponse;
 use App\Business\Prompts\InsightResponse;
 use App\Business\Prompts\CriticismResponse;
 use App\Business\Prompts\VeracityFilter;
@@ -856,7 +857,7 @@ class ConversationManager extends Service {
 	private function openAIResponse($input = "", $action = "", $context = null, $isQuery = false)
 	{
 		$thread = instance('thread');
-		$openai = instance('openai');
+		$openai = new OpenAIService();//instance('openai');
 
 		$thread->setUser($context->get('username'));
 
@@ -892,10 +893,7 @@ class ConversationManager extends Service {
         $maxSubsequentThinking = round($this->_maxDepth / 33);
         $maxSubsequentActions = round($this->_maxDepth / 10);
 
-        /*
-		if ($this->_depth == 1) {
-			$responseType = 'observation';
-		} elseif ($this->_depth == 4) {
+        if ($this->_depth == 4) {
 			$responseType = 'action';
 		} elseif ($this->_depth == 6) {
 			$responseType = 'action';
@@ -907,12 +905,10 @@ class ConversationManager extends Service {
 			$responseType = 'critique';
 		} elseif ($this->_depth == 10) {
 			$responseType = 'action';
-		} elseif ($this->_depth == 11) {
-			$responseType = 'dialogue';
-		} else
-		*/
-		if ($this->_depth == 1) {
-			$responseType = 'observation';
+		} elseif ($this->_depth == 1 || $this->_depth == 11 || $this->_depth == 21 || $this->_depth == 31) {
+			$responseType = 'generic';
+		} elseif ($this->_depth == 2) {
+			$responseType = 'action';
 		} elseif ($this->_lastResponseType != 'process' && $this->_lastResponseType != 'critique' && $this->_sequentialActions >= $maxSubsequentActions ) {
 			$responseType = 'process';
 		} elseif ($this->_lastResponseType == 'process') {
@@ -969,6 +965,11 @@ class ConversationManager extends Service {
 		}
 
 		switch( $responseType ) {
+			case 'generic':
+				$prompt = (new GenericResponse($goalPrompt, $thread->getAgent(), env('APP_NAME'), $dialogue, $goal, $task, $nextAction))->prompt();
+				$this->_sequentialThoughts++;
+				$this->_sequentialActions = 0;
+				break;
 			case 'dialogue':
 				$prompt = $thread->aiPrompt($goalPrompt, $action, $isQuery);
 				break;
@@ -995,8 +996,11 @@ class ConversationManager extends Service {
 				break;
 		}
 
-		$result = $openai->chat($prompt, ['max_tokens'=> 400, 'temperature'=>.9, 'stop'=>["\n[","[User]:","[Log]:"]]);
-		// $result = $openai->complete($prompt, ['max_tokens'=> 400, 'temperature'=>.9, 'stop'=>["\n[","[User]:","[Log]:"]]);
+		if ($responseType == 'generic') {
+			$result = $openai->complete($prompt, ['max_tokens'=> 400, 'temperature'=>.9, 'stop'=>["\n[","[User]:","[Log]:"]]);
+		} else {
+			$result = $openai->chat($prompt, ['max_tokens'=> 400, 'temperature'=>.9, 'stop'=>["\n[","[User]:","[Log]:"]]);
+		}
 
 		$replies = $thread->parseAIResponse($result, $responseType) ?? [];
 

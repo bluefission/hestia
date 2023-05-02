@@ -123,7 +123,7 @@ class NoteCommand extends Service
 
         // Check for errors in the response
         if (isset($gpt3_response['error'])) {
-            $this->_response = "Error generating code.";
+            $this->_response = "Error generating note.";
             return;
         }
 

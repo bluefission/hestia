@@ -62,9 +62,10 @@ use /add task when given a new task to complete immediately!
 use /update steps when given a new multi state goal immediately!
 use /create note when you need to store a large amount of information immediately!
 use /run calc when you have to do complex math immediate!
+use /search web for \"<keywords>\" if the User asks a general knowledge question
 Always add tasks to new todos and always scroll through the latest lists and result pages until you find and select the best option for your task.
 
-Always listen to your log suggestions, last observations, thoughts, and criticisms!
+Always listen to your log suggestions, last observations, thoughts, and criticisms and only run necessary commands that result in progress!
 
 Reasoning: The next batch of commands are the best options because they accomplish my reasoning and decided upon next immediate action by using the last command's system response suggestions in the conversation and also considering the situations for priority commands.
 Next commands: ";

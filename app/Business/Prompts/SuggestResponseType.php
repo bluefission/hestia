@@ -10,9 +10,13 @@ class SuggestResponseType extends Prompt
 
 Given the previous conversation, should the Chatbot respond by speaking, examining the situation, or by doing something?
 
-(You should always observe before dialogue or actions, you shouldn't have dialogue back to back, there shouldn't be dialogue until major actions have been accomplished, and actions generally come right after one another).
-
 Once the final answer to the User's question is found or the task has been accomplished, the response type should always be 'dialogue'.
+
+If the goal hasn't been accomplished continue to conduct actions and observations until there is progress. Never provide dialogue if there isn't any proof of progress.
+
+Prioritize actions, then observations, then dialogue
+
+(You should always observe before dialogue or actions, you shouldn't have dialogue back to back, there shouldn't be dialogue until major actions have been accomplished, and actions generally come right after one another).
 
 Best Response Type (type either dialogue, observation, or action): ";
 

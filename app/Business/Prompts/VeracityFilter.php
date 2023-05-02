@@ -12,7 +12,7 @@ class VeracityFilter extends Prompt
 
 Next planned Chatbot response: {input}
 
-Considering the next planned Chatbot response, if it answers without evidence from System commands or says it did something that has no evidence in the transcript, it's falsy or made up. If it has traceable evidence of conducting actions to support its response in the transcript, it is truthy. Penalize the Chatbot providing answers without showing its work or for not being able to prove its facts or cite its sources. Now, without considering the Chatbot's subjective assessment of its own abilities, rate the next planned Chatbot reponse in veracity on a scale from 1 to 10. Score: ";
+Considering the next planned Chatbot response. It is not entirely true. Once you figure out why, grade the statement. If the statement doesn't contain true or evidenced facts, even if they seems to be common knowledge, it is false. Every Chatbot statement must have proof from User input or System output, so be critical that the Chatbot's summary or representation of that information is accurate and not presumptuous or false. This means there should a matching successful command, relevant search, or lookup to every fact the Chatbot presents or it is lying or guessing. Now, without considering the Chatbot's subjective assessment of its own abilities, rate the next planned Chatbot reponse in veracity on a scale from 1 to 10. Score: ";
 
 // protected $_template = "{dialogue}
 
