@@ -31,13 +31,18 @@
         "bluefission/develation": "dev-master",
         "botman/botman": "^2.6",
         "botman/driver-web": "^1.5",
+        "cboden/ratchet": "^0.4.4",
         "genkovich/dialog-flow-bot-man-middleware": "^0.0.6",
         "google/cloud-language": "^0.27.0",
         "illuminate/collections": "^10.3",
         "orhanerday/open-ai": "^2.2",
         "php-ai/php-ml": "^0.10.0",
+        "phpoffice/phppresentation": "^1.0",
+        "phpoption/phpoption": "^1.9",
+        "sabberworm/php-css-parser": "^8.4",
         "simplehtmldom/simplehtmldom": "^2.0@RC",
-        "symfony/cache": "^6.0"
+        "symfony/cache": "^6.0",
+        "vlucas/phpdotenv": "^5.5"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"

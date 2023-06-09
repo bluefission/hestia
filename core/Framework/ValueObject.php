@@ -13,7 +13,6 @@ class ValueObject implements IValueObject {
 	 *
 	 * @param mixed|null $values An array or object with values to be assigned to the properties
 	 */
-
 	public function __construct($values = null) {
 		if ($values) {
 			$this->assign($values);
@@ -27,7 +26,7 @@ class ValueObject implements IValueObject {
 	 */
 	public function assign($values) {
 		foreach ( get_object_vars($this) as $property=>$value ) {
-			$this->$property = is_object($values) ? $values->$property : ( $values[$property] ?? $value );
+			$this->$property = is_object($values) ? ( $values->$property ?? $value ) : ( $values[$property] ?? $value );
 		}
 	}
 }

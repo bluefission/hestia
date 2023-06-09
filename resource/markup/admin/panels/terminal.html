@@ -1,0 +1,26 @@
+      <link rel="stylesheet" href="/assets/css/xterm.css" />
+      <div class="container-fluid p-0">
+
+          <h1 class="h3 mb-3">Terminal</h1>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title mb-0">Interact directly with the Opus terminal using the interface below.</h5>
+                </div>
+                <div class="card-body">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Connect</label>
+                    <span class="badge rounded-pill bg-danger">{connection_state}</span>
+                  </div>
+                  <div id="terminal"></div>
+                  <textarea id="terminal-input" style="position: absolute; left: -9999px;"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      <script src="/assets/js/module-terminal.js"></script>

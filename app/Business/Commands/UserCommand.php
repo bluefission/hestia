@@ -4,7 +4,7 @@ namespace App\Business\Commands;
 
 use BlueFission\Services\Service;
 use App\Domain\User\Repositories\UserRepositorySql;
-use BlueFission\Services\Authenticator;
+use BlueFission\Framework\Auth as Authenticator;
 use BlueFission\DevString;
 use App\Business\Http\Api\Admin\UserController;
 

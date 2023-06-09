@@ -4,7 +4,7 @@ namespace App\Business\Http\Api;
 use BlueFission\Services\Service;
 use BlueFission\Services\Request;
 use BlueFission\Connections\Database\MysqlLink;
-use BlueFission\Services\Authenticator;
+use BlueFission\Framework\Auth as Authenticator;
 
 class AuthenticationController extends Service {
 
@@ -24,7 +24,7 @@ class AuthenticationController extends Service {
                 $status = $auth->status();
                 
                 $response = array( 'status'=>$status, 'data' => $setSession);
-                return json_encode($response);
+                return response($response);
             }
 
             $username = $request->username;

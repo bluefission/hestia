@@ -1,7 +1,7 @@
 <?php
 namespace BlueFission\Framework\Generation;
 
-abstract class BaseGenerator
+abstract class BaseGenerator implements IGenerator
 {
     protected $templatePath;
     protected $outputPath;

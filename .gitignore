@@ -1,2 +1,14 @@
+/node_modules
 /vendor
-/env.php
+/.env
+.DS_Store
+
+*.zip
+*.pem
+storage/logs/*
+storage/data/*
+storage/files/*
+storage/models/*
+storage/system/*
+/public/assets/*
+error.log

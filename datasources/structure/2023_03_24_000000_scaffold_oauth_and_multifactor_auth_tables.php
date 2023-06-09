@@ -25,7 +25,7 @@ class ScaffoldOAuthAndMultiFactorAuthTables extends Delta
             $entity->text('multi_factor_type');
             $entity->text('multi_factor_secret')->null();
             $entity->text('multi_factor_backup_codes')->null();
-            $entity->numeric('multi_factor_enabled', 1)->default(false);
+            $entity->numeric('multi_factor_enabled', 1)->default(0);
             $entity->timestamps();
             $entity->comment("The table holding multi-factor authenticator details.");
         });

@@ -13,16 +13,16 @@ class LoginController extends Service {
 
     public function login( )
     {
-        return template('login.html');
+        return template('app/ezdatta', 'login.html');
     }
 
     public function registration( )
     {
-        return template('register.html');
+        return template('default', 'register.html');
     }
 
     public function forgotPassword( )
     {
-        return template('forgotpassword.html');
+        return template('default', 'forgotpassword.html');
     }
 }

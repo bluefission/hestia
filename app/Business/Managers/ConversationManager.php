@@ -656,7 +656,7 @@ class ConversationManager extends Service {
 
 	        // Set the $_maxDepth variable
 	        $this->_maxDepth = $complexity_score;
-	    } catch (Exception $e) {
+	    } catch (\Exception $e) {
 	        // Set the default depth to 1 in case of any errors
 	        $this->_maxDepth = 1;
 	    }
@@ -716,7 +716,7 @@ class ConversationManager extends Service {
 
 	        store('_system.conversation.prompt', $data);
 
-	    } catch (Exception $e) {
+	    } catch (\Exception $e) {
 	        return;
 	    }
 
@@ -769,7 +769,7 @@ class ConversationManager extends Service {
 	        }
 
 
-	    } catch (Exception $e) {
+	    } catch (\Exception $e) {
 	        return;
 	    }
 	}
@@ -940,7 +940,7 @@ class ConversationManager extends Service {
 			    }
 
 			    // Get the completion
-			} catch(Exception $e) {
+			} catch(\Exception $e) {
 				// die(var_dump($e));
 				echo "\n\e[31mLLM Error\e[0m \n";
 			}

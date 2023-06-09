@@ -14,8 +14,9 @@ class ScaffoldAddOnTable extends Delta
             $entity->text('version');
             $entity->numeric('is_active', 1)->default(0);
             $entity->text('primary_file');
-            $entity->text('namespace');
-            $entity->text('path');
+            $entity->text('description', 2048)->null();
+            $entity->text('namespace', 1024);
+            $entity->text('path', 1024);
             $entity->timestamps();
             $entity->comment("The table holding all of the application's addons.");
         });

@@ -43,7 +43,7 @@ class ScaffoldFrameworkTables extends Delta
 			$entity->text('ip_address');
 			$entity->text('username')->null();
 			$entity->numeric('attempts');
-			$entity->date('last_attempt');
+			$entity->datetime('last_attempt');
 			$entity->timestamps();
 			$entity->comment("Log for the attempted logins for users and credentials.");
 		});

@@ -1,6 +1,9 @@
 <?php
 namespace App\Registration;
 // use App\Business\Managers\CommandManager;
+use App\Business\Managers\NavMenuManager;
+use App\Business\Managers\DatasourceManager;
+use App\Business\Managers\AddOnManager;
 use App\Business\Managers\InterpretationManager;
 use App\Business\Managers\CommunicationManager;
 use App\Business\Managers\ConversationManager;
@@ -11,6 +14,8 @@ use App\Business\Services\OpenWeatherService;
 use App\Business\Services\LocationService;
 use App\Business\MysqlConnector;
 use BlueFission\Framework\Skill\Intent\Matcher;
+use BlueFission\Framework\Theme;
+use BlueFission\Framework\IExtension;
 // For Conversations
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\BotMan;
@@ -25,7 +30,7 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
  *
  * @package App\Registration
  */
-class AppRegistration {
+class AppRegistration implements IExtension {
 	/**
 	 * The instance of the app
 	 *
@@ -63,6 +68,8 @@ class AppRegistration {
 		$this->bindings();
 		$this->arguments();
 		$this->registrations();
+		$this->themes();
+		$this->addons();
 	}
 
 	/**
@@ -84,10 +91,13 @@ class AppRegistration {
 
 		$this->_app->delegate('communication', CommunicationManager::class);
 		// $this->_app->delegate('cmd', CommandManager::class);
+		$this->_app->delegate('nav', NavMenuManager::class);
+		$this->_app->delegate('addons', AddOnManager::class);
 		$this->_app->delegate('interpreter', InterpretationManager::class);
 		$this->_app->delegate('convo', ConversationManager::class);
 		$this->_app->delegate('thread', ThreadManager::class);
 		$this->_app->delegate('skill', SkillManager::class);
+		$this->_app->delegate('datasource', DatasourceManager::class);
 
 		$this->_app->delegate('intentmatcher', Matcher::class);
 		$this->_app->delegate('mysql', MysqlConnector::class);
@@ -107,9 +117,15 @@ class AppRegistration {
 		$this->_app->bind('App\Domain\User\Repositories\IUserRepository', 'App\Domain\User\Repositories\UserRepositorySql');
 		$this->_app->bind('App\Domain\User\Repositories\ICredentialRepository', 'App\Domain\User\Repositories\CredentialRepositorySql');
 
+		$this->_app->bind('App\Domain\AddOn\Queries\IAllAddOnsQuery', 'App\Domain\AddOn\Queries\AllAddOnsQuerySql');
+		$this->_app->bind('App\Domain\AddOn\Queries\IActivatedAddOnsQuery', 'App\Domain\AddOn\Queries\ActivatedAddOnsQuerySql');
+		$this->_app->bind('App\Domain\AddOn\Repositories\IAddOnRepository', 'App\Domain\AddOn\Repositories\AddOnRepositorySql');
+
+		$this->_app->bind('App\Domain\Content\Queries\IAllContentQuery', 'App\Domain\Content\Queries\AllContentQuerySql');
+		$this->_app->bind('App\Domain\Content\Repositories\IContentRepository', 'App\Domain\Content\Repositories\ContentRepositorySql');
+
 		$this->_app->bind('App\Domain\Communication\Repositories\ICommunicationRepository', 'App\Domain\Communication\Repositories\CommunicationRepositorySql');
 		$this->_app->bind('App\Domain\Communication\Queries\IUndeliveredCommunicationsQuery', 'App\Domain\Communication\Queries\UndeliveredCommunicationsQuerySql');
-
 
 		$this->_app->bind('BlueFission\Data\Storage\Storage', 'BlueFission\Data\Storage\Mysql');
 
@@ -129,8 +145,6 @@ class AppRegistration {
 		$this->_app->bind('App\Domain\Conversation\Queries\ITagsByTopicQuery', 'App\Domain\Conversation\Queries\TagsByTopicQuerySql');
 		$this->_app->bind('App\Domain\Conversation\Queries\IAllTopicsQuery', 'App\Domain\Conversation\Queries\AllTopicsQuerySql');
 		$this->_app->bind('App\Domain\Conversation\Queries\IFactsByKeywordsQuery', 'App\Domain\Conversation\Queries\FactsByKeywordsQuerySql');
-
-		
 	}
 
 	/**
@@ -138,7 +152,6 @@ class AppRegistration {
 	 */
 	public function arguments() {
 		$this->_app->bindArgs( ['config'=>$this->_app->configuration('database')['mysql']], 'BlueFission\Connections\Database\MysqlLink');
-		$this->_app->bindArgs( ['config'=>$this->_app->configuration('machinelearning')['sagemaker']], 'BlueFission\Framework\Datasource\SageMaker');
 		$this->_app->bindArgs( ['driverConfigurations'=>$this->_app->configuration('communication')['drivers']], 'App\Business\Managers\CommunicationManager');
 		$this->_app->bindArgs( [
 				'rules'=>$this->_app->configuration('nlp')['grammar']['rules'],
@@ -147,5 +160,18 @@ class AppRegistration {
 			], 'BlueFission\Bot\NaturalLanguage\Grammar');
 		$this->_app->bindArgs( ['config'=>$this->_app->configuration('nlp')['roots']], 'BlueFission\Bot\NaturalLanguage\StemmerLemmatizer');
 		$this->_app->bindArgs( ['storage'=>new \BlueFission\Data\Storage\Session(['location'=>'cache','name'=>'system'])], 'BlueFission\Framework\Command\CommandProcessor');
+	}
+
+	public function addons()
+	{
+		$addons = $this->_app->service('addons');
+		$addons->loadActivatedAddOns();
+	}
+
+	public function themes()
+	{
+		$this->_app->addTheme(new Theme('app/default', 'default'));
+		$this->_app->addTheme(new Theme('app/admin', 'admin'));
+		$this->_app->addTheme(new Theme('app/bluefission', 'bluefission'));
 	}
 }

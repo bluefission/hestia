@@ -1,4 +1,5 @@
 <?php
+use BlueFission\DevValue;
 use App\Business\Managers\CommunicationManager;
 
 if (!function_exists( 'get_site_url' )) {
@@ -28,6 +29,14 @@ if (!function_exists( 'instance' )) {
 		return $service;
 	}
 }
+
+if (!function_exists('listen')) {
+	function listen($event, $callback) {
+		$app = instance();
+		$app->behavior($event, $callback);
+	}
+}
+
 
 if (!defined("ROOT_URL") ){
 	define('ROOT_URL', get_site_url(null, '/' . env('DASHBOARD_DIRECTORY', 'dashboard/')));
@@ -168,4 +177,18 @@ if (!function_exists('store')) {
             return BlueFission\Net\HTTP::session($name, $value);
         }
     }
+}
+
+if (!function_exists('global')) {
+	function globals($var, $value = null)
+	{
+		if (DevValue::isNull($value) )
+			return isset( $GLOBALS[$var] ) ? $GLOBALS[$var] : null;
+			
+		$GLOBALS[$var] = $value;
+			
+		$status = ($GLOBALS[$var] = $value) ? true : false;
+		
+		return $status;
+	}
 }

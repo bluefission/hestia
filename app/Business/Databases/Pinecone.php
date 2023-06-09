@@ -1,38 +1,51 @@
 <?php
-namespace BlueFission\Data\Databases;
+namespace App\Business\Databases;
 
 use BlueFission\Data\Storage\Storage;
 use BlueFission\Connections\Curl;
 
+// https://betterprogramming.pub/enhancing-chatgpt-with-infinite-external-memory-using-vector-database-and-chatgpt-retrieval-plugin-b6f4ea16ab8
 class Pinecone extends Storage
 {
     private $_client;
+    private $_baseUrl;
 
     /**
-     * @var array $_config The configuration options for the Mongo storage class.
+     * @var array $_config The configuration options for the Pinecone storage class.
      */
-    protected $_config = array( 
+    protected $_config = [
         'location'=>'https://api.pinecone.io/',
         'name'=>'',
+        'project'=>'',
+        'region'=>'',
         'apikey'=>'',
-    );
+    ];
 
-    public function __construct($apiKey)
+    protected $_data = [
+        'id'=>'',
+        'data'=>'',
+    ];
+
+    public function __construct($config = null)
     {
-        $this->apiKey = $apiKey;
-        $this->client = new Curl([
-            'target' => $this->config('location'),
+        parent::__construct($config);
+        $this->_apiKey = $this->config('apikey');
+        $this->_baseUrl = "https://".$this->config('name')."-".$this->config('project').".svc.".$this->config('region').".pinecone.io/";
+        
+        $this->_client = new Curl([
+            'target' => $this->_baseUrl,
             'method' => 'post',
             'headers' => [
-                'x-api-key' => $this->config('apikey'),
-                'Content-Type' => 'application/json'
+                'Api-Key' => $this->apiKey,
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json'
             ]
         ]);
     }
 
     private function sendRequest($endpoint, $data)
     {
-        $this->client->config('target', $this->baseUrl . $endpoint);
+        $this->client->config('target', $this->_baseUrl . $endpoint);
         $this->client->open();
         $this->client->query($data);
         $response = $this->client->result();
@@ -41,7 +54,7 @@ class Pinecone extends Storage
         return json_decode($response, true);
     }
 
-    public function createIndex($metric = "euclidean")
+    public function createIndex($metric = "cosine")
     {
         return $this->sendRequest('index/create', [
             'index_name' => $indexName,

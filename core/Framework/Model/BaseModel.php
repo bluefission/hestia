@@ -56,6 +56,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 */
 	public function __construct($values = null) 
 	{ 
+		// parent::__construct();
 		$this->assign($values);
 		// Not using dependency injection because
 		// 	These objects are necessarily coupled.
@@ -75,6 +76,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	protected function generateTimestamp()
 	{
 		$id = $this->_idField;
+
 		if (!$this->_dataObject->$id) {
 			$this->created = date($this->_timestampFormat);
 		}
@@ -98,7 +100,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 *
 	 * @return mixed The value of the field.
 	 */
-	public function field($field, $value = null)
+	public function field(string $field, $value = null): mixed
 	{
 		return $this->_dataObject->field($field, $value);
 	}
@@ -106,10 +108,9 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	/**
 	 * Clears all data from the object.
 	 */
-	public function clear()
+	public function clear(): void
 	{
 		$this->_dataObject->clear();
-		return $this;
 	}
 
 	public function limit($limit)
@@ -157,6 +158,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 		if (DevValue::isNotEmpty($values)) {
 			$this->assign($values);
 		}
+
 		$this->generateTimestamp();
 		$this->_dataObject->activate();
 		$this->_dataObject->write();
@@ -242,7 +244,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 */
 	public function data() 
 	{
-		return $this->_dataObject->data();
+		return $this->_dataObject->data()->value();
 	}
 
 	/**
@@ -484,6 +486,10 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
      */
     protected function deleteFromElasticsearch($id)
     {
+    	if (!$this->_elasticsearchClient) {
+			return;
+		}
+		
         $params = [
             'index' => $this->_dataObject->config('name'),
             'id'    => $id,

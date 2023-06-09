@@ -13,9 +13,16 @@ use BlueFission\Services\Response;
  * @return string The rendered template
  */
 if (!function_exists( 'template' )) {
-	function template(String $file, Array $data = []) {
-		$path = dirname(getcwd()).DIRECTORY_SEPARATOR.'resource'.DIRECTORY_SEPARATOR.'markup'.DIRECTORY_SEPARATOR.$file;
-		$module_path = dirname(getcwd()).DIRECTORY_SEPARATOR.'resource'.DIRECTORY_SEPARATOR.'markup'.DIRECTORY_SEPARATOR.'modules';
+	function template(string $themeName, string $file, array $data = []) {
+		$app = instance();
+		$theme = $app->theme($themeName);
+
+
+		// $path = dirname(getcwd()).DIRECTORY_SEPARATOR.'resource'.DIRECTORY_SEPARATOR.'markup'.DIRECTORY_SEPARATOR.$file;
+		// $module_path = dirname(getcwd()).DIRECTORY_SEPARATOR.'resource'.DIRECTORY_SEPARATOR.'markup'.DIRECTORY_SEPARATOR.'modules';
+		store('asset_dir', $theme->location);
+		$path = $theme->location.$file;
+		$module_path = $theme->location.'modules';
 
 		$template = new Template();
 		
@@ -32,7 +39,6 @@ if (!function_exists( 'template' )) {
 		$output = $template->render();
 
 		// $template->cache();
-
 		return $output;
 	}
 }

@@ -30,6 +30,39 @@ class OpenAIService extends Service
         $this->_curl->config('headers', $headers);
     }
 
+    public function generate($input, callable $callback, $config = [])
+    {
+        $request_data = array_merge([
+            'prompt' => $input,
+            'model' => 'text-davinci-003',
+            'max_tokens' => 1024,
+            'temperature' => 0.7,
+            'top_p' => 1,
+            'frequency_penalty' => 0.2,
+            'presence_penalty' => 0.6,
+            'stop' => null
+        ], $config);
+
+        $this->_curl->clear();
+        $this->_curl->config('target', 'https://api.openai.com/v1/completions');
+
+        $this->_curl->option(CURLOPT_WRITEFUNCTION, function($curl, $data) use ($callback) {
+            $decoded = json_decode($data, true);
+            if (isset($decoded['error'])) {
+                throw new \Exception($decoded['error']['message']);
+            }
+            if (isset($decoded['choices'][0]['text'])) {
+                call_user_func($callback, $decoded['choices'][0]['text']);
+                return 0; // Stop processing the stream
+            }
+            return strlen($data);
+        });
+
+        $this->_curl->open();
+        $this->_curl->query($request_data);
+        $this->_curl->close();
+    }
+
     /**
      * Get GPT-3 completion based on the input.
      *

@@ -1,6 +1,6 @@
 <?php
 
-class ContentGenerator
+class ContentGenerator implements IGenerator
 {
     protected $aiCopyGenerator;
 
@@ -9,7 +9,21 @@ class ContentGenerator
         $this->aiCopyGenerator = $aiCopyGenerator;
     }
 
-    // ...
+    public function generate(string $name, string $prompt)
+    {
+        switch ($name) {
+            case 'copy':
+                return $this->copy($prompt);
+            case 'image':
+                return $this->image($prompt);
+            // ...
+        }
+    }
+
+    public function getType(): string
+    {
+        return 'content';
+    }
 
     private function copy($prompt)
     {
@@ -20,6 +34,4 @@ class ContentGenerator
     {
         return $this->aiCopyGenerator->generateImage($prompt);
     }
-
-    // ...
 }

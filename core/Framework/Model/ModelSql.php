@@ -1,6 +1,7 @@
 <?php
 namespace BlueFission\Framework\Model;
 
+use BlueFission\DevArray;
 use BlueFission\Framework\Model\BaseModel;
 use BlueFission\Data\Storage\MysqlBulk;
 use BlueFission\Connections\Database\MysqlLink;
@@ -73,6 +74,7 @@ class ModelSql extends BaseModel {
 		$this->_dataObject->activate();
 		$this->init();
 		$this->_idField = $this->_dataObject->primary();
+		$this->clear();
 	}
 
 	/**
@@ -92,9 +94,9 @@ class ModelSql extends BaseModel {
 	 *
 	 * @return mixed|null The value of the field, or null if the field does not exist.
 	 */
-	public function field($field, $value = null)
+	public function field(string $field, $value = null): mixed
 	{
-		if ( array_key_exists($field, $this->_dataObject->_data) || in_array($field, $this->_fields) ) {
+		if ( DevArray::hasKey($this->_dataObject->_data, $field) || DevArray::has($this->_fields, $field) ) {
 			return parent::field($field, $value);
 		}
 
@@ -115,8 +117,17 @@ class ModelSql extends BaseModel {
 		$force_created_timestamp = false;
 		$force_updated_timestamp = false;
 		$id = $this->_idField;
-		
-		if (!in_array('created', $this->_fields) && !$this->_save_related_tables && !$this->_dataObject->$id) {
+
+		if (
+			!in_array('created', $this->_fields) && 
+			!$this->_save_related_tables && 
+			(!$this->_dataObject->$id || 
+				(isset($values) && 
+					!(is_array($values) && isset($values[$id])) && 
+					!(is_object($values) && isset($values->$id))
+				)
+			)
+		) {
 			$this->_fields[] = 'created';
 			$force_created_timestamp = true;
 		}

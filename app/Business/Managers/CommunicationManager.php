@@ -3,7 +3,7 @@
 namespace App\Business\Managers;
 
 use BlueFission\Services\Service;
-use BlueFission\Services\Authenticator;
+use BlueFission\Framework\Auth as Authenticator;
 use BlueFission\Data\Storage\Storage;
 use App\Domain\Communication\Communication;
 use App\Domain\Communication\CommunicationStatus;

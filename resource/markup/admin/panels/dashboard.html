@@ -1,79 +1,309 @@
-  <div class="container-fluid">
-    <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
-        </li>
-        <li class="breadcrumb-item active">Dashboard</li>
-      </ol>
-      <h1>Dashboard</h1>
-      <hr>
-      <!-- Icon Cards-->
-      <div class="row">
-        <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card text-white bg-primary o-hidden h-100">
-            <div class="card-body">
-              <div class="card-body-icon">
-                <i class="fa fa-fw fa-user"></i>
-              </div>
-              <div class="mr-5">26 New Users!</div>
+        <div class="container-fluid p-0">
+
+          <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+              <h3>Overview</h3>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
-              <span class="float-left">View Details</span>
-              <span class="float-right">
-                <i class="fa fa-angle-right"></i>
-              </span>
-            </a>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card text-white bg-warning o-hidden h-100">
-            <div class="card-body">
-              <div class="card-body-icon">
-                <i class="fa fa-fw fa-list"></i>
+
+            <div class="col-auto ms-auto text-end mt-n1">
+
+              <div class="dropdown me-2 d-inline-block position-relative">
+                <a class="btn btn-light bg-white shadow-sm dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-display="static">
+        <i class="align-middle mt-n1" data-feather="calendar"></i> Today
+              </a>
+
+                <div class="dropdown-menu dropdown-menu-end">
+                  <h6 class="dropdown-header">Settings</h6>
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Separated link</a>
+                </div>
               </div>
-              <div class="mr-5">11 New Tasks!</div>
+
+              <button class="btn btn-primary shadow-sm">
+      <i class="align-middle" data-feather="filter">&nbsp;</i>
+    </button>
+              <button class="btn btn-primary shadow-sm">
+      <i class="align-middle" data-feather="refresh-cw">&nbsp;</i>
+    </button>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
-              <span class="float-left">View Details</span>
-              <span class="float-right">
-                <i class="fa fa-angle-right"></i>
-              </span>
-            </a>
           </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card text-white bg-success o-hidden h-100">
-            <div class="card-body">
-              <div class="card-body-icon">
-                <i class="fa fa-fw fa-shopping-cart"></i>
+          <div class="row">
+            <div class="col-md-6 col-xxl-3 d-flex">
+              <div class="card flex-fill">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col mt-0">
+                      <h5 class="card-title">Revenue</h5>
+                    </div>
+
+                    <div class="col-auto">
+                      <div class="stat stat-sm">
+                        <i class="align-middle" data-feather="dollar-sign"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="h1 d-inline-block mt-1 mb-3">$37,500</span>
+                  <div class="mb-0">
+                    <span class="badge badge-soft-success me-2"> 6.25% </span>
+                    <span class="text-muted">Since last week</span>
+                  </div>
+                </div>
               </div>
-              <div class="mr-5">123 New Orders!</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
-              <span class="float-left">View Details</span>
-              <span class="float-right">
-                <i class="fa fa-angle-right"></i>
-              </span>
-            </a>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card text-white bg-danger o-hidden h-100">
-            <div class="card-body">
-              <div class="card-body-icon">
-                <i class="fa fa-fw fa-support"></i>
+            <div class="col-md-6 col-xxl-3 d-flex">
+              <div class="card flex-fill">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col mt-0">
+                      <h5 class="card-title">Profit</h5>
+                    </div>
+
+                    <div class="col-auto">
+                      <div class="stat stat-sm">
+                        <i class="align-middle" data-feather="trending-up"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="h1 d-inline-block mt-1 mb-3">$3,282</span>
+                  <div class="mb-0">
+                    <span class="badge badge-soft-danger me-2"> -4.65% </span>
+                    <span class="text-muted">Since last week</span>
+                  </div>
+                </div>
               </div>
-              <div class="mr-5">13 New Tickets!</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
-              <span class="float-left">View Details</span>
-              <span class="float-right">
-                <i class="fa fa-angle-right"></i>
-              </span>
-            </a>
+            <div class="col-md-6 col-xxl-3 d-flex">
+              <div class="card flex-fill">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col mt-0">
+                      <h5 class="card-title">Activity</h5>
+                    </div>
+
+                    <div class="col-auto">
+                      <div class="stat stat-sm">
+                        <i class="align-middle" data-feather="activity"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="h1 d-inline-block mt-1 mb-3">19,312</span>
+                  <div class="mb-0">
+                    <span class="badge badge-soft-success me-2"> 8.35% </span>
+                    <span class="text-muted">Since last week</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xxl-3 d-flex">
+              <div class="card flex-fill">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col mt-0">
+                      <h5 class="card-title">Orders</h5>
+                    </div>
+
+                    <div class="col-auto">
+                      <div class="stat stat-sm">
+                        <i class="align-middle" data-feather="shopping-cart"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="h1 d-inline-block mt-1 mb-3">5</span>
+                  <div class="mb-0">
+                    <span class="badge badge-soft-success me-2"> 4.23% </span>
+                    <span class="text-muted">Since last week</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <div class="row">
+            <div class="col-12 col-md-7 col-lg-7 col-xxl-8 d-flex">
+              <div class="card flex-fill w-100">
+                <div class="card-header">
+                  <div class="card-actions float-end">
+                    <div class="dropdown position-relative">
+                      <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
+                        <i class="align-middle" data-feather="more-horizontal"></i>
+                      </a>
+
+                      <div class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                      </div>
+                    </div>
+                  </div>
+                  <h5 class="card-title mb-0">Sales / Revenue</h5>
+                </div>
+                <div class="card-body d-flex w-100">
+                  <div class="align-self-center chart">
+                    <canvas id="chartjs-dashboard-bar"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-xl-4 d-none d-xl-flex">
+              <div class="card flex-fill w-100">
+                <div class="card-header">
+                  <div class="card-actions float-end">
+                    <div class="dropdown position-relative">
+                      <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
+                        <i class="align-middle" data-feather="more-horizontal"></i>
+                      </a>
+
+                      <div class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                      </div>
+                    </div>
+                  </div>
+                  <h5 class="card-title mb-0">Lead Distribution</h5>
+                </div>
+                <div class="card-body d-flex">
+                  <div class="align-self-center w-100">
+                    <div class="py-3">
+                      <div class="chart chart-xs">
+                        <canvas id="chartjs-dashboard-pie"></canvas>
+                      </div>
+                    </div>
+
+                    <table class="table mb-0">
+                      <thead>
+                        <tr>
+                          <th>Source</th>
+                          <th class="text-end">Quantity</th>
+                          <th class="text-end">Change</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><i class="fas fa-square-full text-dark"></i> Leads</td>
+                          <td class="text-end">1,465</td>
+                          <td class="text-end text-success">+11%</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fas fa-square-full text-warning"></i> Qualified</td>
+                          <td class="text-end">1,253</td>
+                          <td class="text-end text-success">+13%</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fas fa-square-full text-primary"></i> Active</td>
+                          <td class="text-end">2,602</td>
+                          <td class="text-end text-success">+43%</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fas fa-square-full text-danger"></i> At Risk</td>
+                          <td class="text-end">541</td>
+                          <td class="text-end text-danger">+24%</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card flex-fill">
+            <div class="card-header">
+              <div class="card-actions float-end">
+                <div class="dropdown position-relative">
+                  <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
+          <i class="align-middle" data-feather="more-horizontal"></i>
+        </a>
+
+                  <div class="dropdown-menu dropdown-menu-end">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </div>
+              </div>
+              <h5 class="card-title mb-0">Top Selling Products</h5>
+            </div>
+            <table id="datatables-dashboard-products" class="table table-striped my-0">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th class="d-none d-xl-table-cell">Tech</th>
+                  <th class="d-none d-xl-table-cell">License</th>
+                  <th class="d-none d-xl-table-cell">Tickets</th>
+                  <th>Sales</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>AppStack Theme</td>
+                  <td><span class="badge bg-success">HTML</span></td>
+                  <td class="d-none d-xl-table-cell">Single license</td>
+                  <td class="d-none d-xl-table-cell">50</td>
+                  <td class="d-none d-xl-table-cell">720</td>
+                </tr>
+                <tr>
+                  <td>Spark Theme</td>
+                  <td><span class="badge bg-danger">Angular</span></td>
+                  <td class="d-none d-xl-table-cell">Single license</td>
+                  <td class="d-none d-xl-table-cell">20</td>
+                  <td class="d-none d-xl-table-cell">540</td>
+                </tr>
+                <tr>
+                  <td>Milo Theme</td>
+                  <td><span class="badge bg-warning">React</span></td>
+                  <td class="d-none d-xl-table-cell">Single license</td>
+                  <td class="d-none d-xl-table-cell">40</td>
+                  <td class="d-none d-xl-table-cell">280</td>
+                </tr>
+                <tr>
+                  <td>Ada Theme</td>
+                  <td><span class="badge bg-info">Vue</span></td>
+                  <td class="d-none d-xl-table-cell">Single license</td>
+                  <td class="d-none d-xl-table-cell">60</td>
+                  <td class="d-none d-xl-table-cell">610</td>
+                </tr>
+                <tr>
+                  <td>Abel Theme</td>
+                  <td><span class="badge bg-danger">Angular</span></td>
+                  <td class="d-none d-xl-table-cell">Single license</td>
+                  <td class="d-none d-xl-table-cell">80</td>
+                  <td class="d-none d-xl-table-cell">150</td>
+                </tr>
+                <tr>
+                  <td>Spark Theme</td>
+                  <td><span class="badge bg-success">HTML</span></td>
+                  <td class="d-none d-xl-table-cell">Single license</td>
+                  <td class="d-none d-xl-table-cell">20</td>
+                  <td class="d-none d-xl-table-cell">480</td>
+                </tr>
+                <tr>
+                  <td>Libre Theme</td>
+                  <td><span class="badge bg-warning">React</span></td>
+                  <td class="d-none d-xl-table-cell">Single license</td>
+                  <td class="d-none d-xl-table-cell">30</td>
+                  <td class="d-none d-xl-table-cell">280</td>
+                </tr>
+                <tr>
+                  <td>Von Theme</td>
+                  <td><span class="badge bg-danger">Angular</span></td>
+                  <td class="d-none d-xl-table-cell">Single license</td>
+                  <td class="d-none d-xl-table-cell">50</td>
+                  <td class="d-none d-xl-table-cell">350</td>
+                </tr>
+                <tr>
+                  <td>Material Blog Theme</td>
+                  <td><span class="badge bg-info">Vue</span></td>
+                  <td class="d-none d-xl-table-cell">Single license</td>
+                  <td class="d-none d-xl-table-cell">10</td>
+                  <td class="d-none d-xl-table-cell">480</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
         </div>
-      </div>
-    </div>
-  </div>
+        <script src="/assets/js/module-dashboard.js"></script>

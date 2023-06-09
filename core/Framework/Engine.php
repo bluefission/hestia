@@ -31,6 +31,13 @@ class Engine extends Application {
 	private $_extensions = [];
 
 	/**
+	 * An array of registered themes
+	 *
+	 * @var array
+	 */
+	private $_themes = [];
+
+	/**
 	 * An array of configurations for the application
 	 *
 	 * @var array
@@ -48,15 +55,17 @@ class Engine extends Application {
 
 		$this->_loader = Loader::instance();
 
-		$this->boost(new Event('OnAppInitialized'));
-
+		$this->dispatch('OnAppInitialized');
+		
 		$this->loadConfiguration();
 
 		$this->autoDiscoverHelpers();
 
 		$this->autoDiscoverMapping();
 
-		$this->boost(new Event('OnAppLoaded'));
+		$this->dispatch('OnAppLoaded');
+
+		$this->assetDir(store('asset_dir'));
 		
 		return $this;
 	}
@@ -96,12 +105,6 @@ class Engine extends Application {
 			'statements' => $statements,
 		];
 
-		// Machine Learning
-
-		$machinelearning = require dirname( dirname( dirname( __FILE__ ) ) ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'machinelearning.php';
-
-		$this->_configurations['machinelearning'] = $machinelearning;
-
 		// Application Logic
 
 		$config = require dirname( dirname( dirname( __FILE__ ) ) ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'application.php';
@@ -131,9 +134,11 @@ class Engine extends Application {
 	 *
 	 * @return mixed The configuration values for the specified key or all configuration values
 	 */
-	public function configuration(string $key = '')
+	public function configuration(string $key = '', mixed $value = null)
 	{
-		if ( $key ) {
+		if ( $key && $value ) {
+			$this->_configurations[$key] = $value;
+		} elseif ( $key ) {
 			return $this->_configurations[$key];
 		}
 		return $this->_configurations;
@@ -191,6 +196,31 @@ class Engine extends Application {
 	 */
 	private function addExtension( $extension ) {
 		$this->_extensions[] = $extension;
+	}
+
+	/**
+	 * Add a theme to the themes array.
+	 * 
+	 * @param string $theme The name of the theme to add.
+	 * 
+	 * @return void
+	 */
+	public function addTheme( $theme ) {
+		$this->_themes[$theme->name] = $theme;
+	}
+
+	/**
+	 * Get themes from the themes array.
+	 * 
+	 * @param string $name the name of the theme to be selected.
+	 * 
+	 * @return BlueFission\Framework\Theme
+	 */
+	public function theme( $name ) {
+		if (!strpos($name, '/')) {
+			$name = 'app/'.$name;
+		}
+		return $this->_themes[$name] ?? null;
 	}
 
 	public function getAbilities()

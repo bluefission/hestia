@@ -1,7 +1,7 @@
 <?php
 namespace BlueFission\Framework\Generation;
 
-class AdminModuleGenerator
+class AdminModuleGenerator implements IGenerator
 {
     protected $tableName;
 
@@ -10,8 +10,13 @@ class AdminModuleGenerator
         $this->tableName = $tableName;
     }
 
-    public function generate()
+    public function generate(string $name, string $prompt): bool
     {
-        // Generate an admin module for managing the data in $this->tableName
+        // Generate an admin module for managing the data in $this->tableName  
+    }
+
+    public function getType(): string
+    {
+        return 'admin_module';
     }
 }

@@ -15,11 +15,13 @@ class AddOnModel extends Model
         'primary_file',
         'namespace',
         'path',
+        'description',
     ];
 
     public function getActivatedAddOns()
     {
         $this->assign(['is_active' => 1]);
+        $this->read();
         return $this->all();
     }
 }

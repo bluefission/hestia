@@ -2,7 +2,7 @@
 
 namespace BlueFission\Framework\Generation;
 
-class CSSGenerator implements ICSSGenerator {
+class CSSGenerator implements ICSSGenerator, IGenerator {
     private $css;
 
     public function __construct($config = []) {
@@ -27,7 +27,11 @@ class CSSGenerator implements ICSSGenerator {
         return "<style>\n$this->css\n</style>";
     }
 
-    public function generate() {
+    public function generate(string $name, string $prompt) {
         return $this->render();
+    }
+
+    public function getType() {
+        return 'css';
     }
 }

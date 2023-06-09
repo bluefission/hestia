@@ -42,5 +42,5 @@ if(!function_exists('env')) {
 }
 
 if(file_exists( OPUS_ROOT.'/.env' )) {
-  import_env_vars( OPUS_ROOT.'/.env' );
+ 	import_env_vars( OPUS_ROOT.'/.env' );
 }
