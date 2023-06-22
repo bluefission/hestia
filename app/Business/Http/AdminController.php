@@ -17,44 +17,44 @@ class AdminController extends Service {
             // globals('sideNav', $navMenuManager->renderMenu('sideNav'));
             $navMenuManager = instance('nav');
             $sideNav = $navMenuManager->renderMenu('sidebar');
-            return template('default', 'admin/default.html', ['csrf_token'=>store('_token'), 'side-nav'=>$sideNav, 'title'=>env('APP_NAME')." Admin"]);
+            return template('admin', 'default.html', ['csrf_token'=>store('_token'), 'side-nav'=>$sideNav, 'title'=>env('APP_NAME')." Admin"]);
         } else {
-            return template('default', 'admin/login.html', ['csrf_token'=>store('_token')]);
+            return template('admin', 'login.html', ['csrf_token'=>store('_token')]);
         }
     }
 
     public function dashboard( ) 
     {
-        return template('default', 'admin/panels/dashboard.html');
+        return template('admin', 'panels/dashboard.html');
     }
 
     public function users( ) 
     {
-        return template('default', 'admin/panels/users.html', ['realname'=>'System Admin']);
+        return template('admin', 'panels/users.html', ['realname'=>'System Admin']);
     }
 
     public function addons( ) 
     {
-        return template('default', 'admin/panels/addons.html');
+        return template('admin', 'panels/addons.html');
     }
 
     public function content( ) 
     {
-        return template('default', 'admin/panels/content.html');
+        return template('admin', 'panels/content.html');
     }
 
     public function terminal( ) 
     {
-        return template('default', 'admin/panels/terminal.html');
+        return template('admin', 'panels/terminal.html');
     }
 
     public function registration( ) 
     {
-        return template('default', 'admin/register.html');
+        return template('admin', 'register.html');
     }
 
     public function forgotpassword( ) 
     {
-        return template('default', 'admin/forgotpassword.html');
+        return template('admin', 'forgotpassword.html');
     }
 }

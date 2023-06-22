@@ -43,8 +43,9 @@
     
           <span class="align-middle me-3">BlueFission Opus</span>
         </a>
-
-        @mod('admin/menu.html')
+        <ul class="sidebar-nav">
+          {side-nav}
+        </ul>
 
         <div class="sidebar-cta">
           <div class="sidebar-cta-content">
@@ -75,7 +76,7 @@
           </div>
         </form>
 
-        @mod('admin/megamenu.html')
+        @mod('megamenu.html')
 
         <div class="navbar-collapse collapse">
           <ul class="navbar-nav navbar-align">
@@ -240,7 +241,7 @@
               </a>
 
               <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                <img src="/assets/img/avatars/avatar.jpg" class="avatar img-fluid rounded-circle me-1" alt="Devon Scott" /> <span class="text-dark">Devon Scott</span>
+                <img src="/assets/img/avatars/avatar.jpg" class="avatar img-fluid rounded-circle me-1" alt="System Admin" /> <span class="text-dark">System Admin</span>
               </a>
               <div class="dropdown-menu dropdown-menu-end">
                 <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
@@ -256,10 +257,10 @@
       </nav>
 
       <main class="content">
-        @mod('admin/home.html')
+        @mod('home.html')
       </main>
 
-      @mod('admin/opus-dialogue-modal.html')
+      @mod('opus-dialogue-modal.html')
       <footer class="footer">
         <div class="container-fluid">
           <div class="row text-muted">

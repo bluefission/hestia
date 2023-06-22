@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Responsive Bootstrap 5 Admin &amp; Dashboard Template">
   <meta name="author" content="Bootlab">
+  <meta name="csrf-token" content="{csrf_token}">
 
   <title>Sign In | BlueFission Opus</title>
 
@@ -23,7 +24,7 @@
 
   <!-- BEGIN SETTINGS -->
   <!-- Remove this after purchasing -->
-  <link class="js-stylesheet" href="css/dark.css" rel="stylesheet">
+  <link class="js-stylesheet" href="/assets/css/dark.css" rel="stylesheet">
   <!-- END SETTINGS -->
 </head>
 <!--
@@ -59,7 +60,7 @@
                       <input type="hidden" name="_token" value="{csrf_token}" />
                       <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input class="form-control form-control-lg" id="inputUsername" type="email" name="email" placeholder="Enter your email or username" />
+                        <input class="form-control form-control-lg" id="inputUsername" type="text" name="email" placeholder="Enter your email or username" />
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Password</label>
@@ -70,12 +71,12 @@
                       </div>
                       <div>
                         <div class="form-check align-items-center">
-                          <input id="customControlInline" type="checkbox" class="form-check-input" value="remember-me" name="remember-me" checked>
-                          <label class="form-check-label text-small" for="customControlInline">Remember me next time</label>
+                          <input id="inputRemember" type="checkbox" class="form-check-input" value="remember-me" name="remember-me" checked>
+                          <label class="form-check-label text-small" for="inputRemember">Remember me next time</label>
                         </div>
                       </div>
                       <div class="text-center mt-3">
-                        <button type="submit" id="login-btn" class="btn btn-lg btn-primary">Sign in</button>
+                        <button type="button" id="login-btn" class="btn btn-lg btn-primary">Sign in</button>
                       </div>
                     </form>
                   </div>
@@ -89,8 +90,8 @@
     </main>
   </div>
 
-  <script src="js/app.js"></script>
-  <script src="assets/js/login-page.js"></script>
+  <script src="/assets/js/app.js"></script>
+  <script src="/assets/js/login-page.js"></script>
 
 </body>
 

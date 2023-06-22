@@ -27,13 +27,13 @@ class AddOnManager extends Service
     public function install($name)
     {
         $data = $this->getAddOnData($name);
-
+        $status = '';
         if ($data->libraries) {
             $system = new System();
             $system->cwd(OPUS_ROOT);
             foreach ($data->libraries as $library) {
                 $system->run("composer require {$library}");
-                $status = $system->response();
+                $status .= $system->response();
             }
         }
         $addon = new AddOn;
@@ -45,7 +45,9 @@ class AddOnManager extends Service
         $datasource->setGeneratorDirectory($addon->path . DIRECTORY_SEPARATOR . 'datasources' . DIRECTORY_SEPARATOR . 'generator' . DIRECTORY_SEPARATOR);
         ob_start();
         $datasource->runMigrations();
-        $status = ob_end_clean();
+        $datasource->populate();
+        $status .= ob_get_contents();
+        ob_end_clean();
 
         $this->callHook($addon, 'install');
         $this->_model->write($addon);
@@ -62,13 +64,14 @@ class AddOnManager extends Service
         $this->_model->delete(['addon_id' => $addOnId]);
 
         $data = $this->getAddOnData($addon->name);
+        $status = '';
 
         if ($data->libraries) {
             $system = new System();
             $system->cwd(OPUS_ROOT);
             foreach ($data->libraries as $library) {
                 $system->run("composer remove {$library}");
-                $status = $system->response();
+                $status .= $system->response();
             }
         }
 
@@ -77,7 +80,8 @@ class AddOnManager extends Service
         $datasource->setGeneratorDirectory($addon->path . DIRECTORY_SEPARATOR . 'datasources' . DIRECTORY_SEPARATOR . 'generator' . DIRECTORY_SEPARATOR);
         ob_start();
         $datasource->revertMigrations();
-        $status = ob_end_clean();
+        $status .= ob_get_contents();
+        ob_end_clean();
 
         return $status . $this->_model->status();
     }
