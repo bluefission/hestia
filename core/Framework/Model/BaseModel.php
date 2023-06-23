@@ -244,7 +244,9 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 */
 	public function data() 
 	{
-		return $this->_dataObject->data()->value();
+		$data = $this->_dataObject->data()->value();
+		var_dump($data);
+		return $data;
 	}
 
 	/**

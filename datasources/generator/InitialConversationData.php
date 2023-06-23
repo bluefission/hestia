@@ -36,7 +36,6 @@ class InitialConversationData extends Generator
 			$language->label = $label;
 			$language->write();
 			echo "Creating language: {$language->label} ";
-			echo $language->query()."\n";
 			echo $language->status()."\n";
 		}
 
@@ -61,7 +60,6 @@ class InitialConversationData extends Generator
 			$type->label = $label;
 			$type->write();
 			echo "Creating dialogue type: {$type->label} ";
-			echo $type->query()."\n";
 			echo $type->status()."\n";
 		}
 
@@ -1751,14 +1749,15 @@ yesterday";
 		$route = new TopicRouteModel();
 
 		$tagArray = explode("\n", $tags);
+		var_dump($tag->data());
 		foreach ( $tagArray as $item ) {
 			$tag->clear();
+			var_dump($tag->data());
 			$tag->label = trim($item);
 			$tag->read();
 			if ( !$tag->id() ) {
 				$tag->write();
 				echo "Creating tag: {$tag->label} ";
-				echo $tag->query()."\n";
 				echo $tag->status()."\n";
 			}
 		}
@@ -1772,7 +1771,6 @@ yesterday";
 			if ( !$topic->id() ) {
 				$topic->write();
 				echo "Creating topic: {$topic->label} ";
-				echo $topic->query()."\n";
 				echo $topic->status()."\n";
 
 				$topic->read();
@@ -1791,7 +1789,6 @@ yesterday";
 				if ( !$topic->id() ) {
 					$topic->write();
 					echo "Creating topic: {$topic->label} ";
-					echo $topic->query()."\n";
 					echo $topic->status()."\n";
 
 					$topic->read();
@@ -1803,7 +1800,6 @@ yesterday";
 				$route->weight = 1;
 				$route->write();
 				echo "Creating route: {$route->from} -> {$route->to} ";
-				echo $route->query()."\n";
 				echo $route->status()."\n";
 			}
 
@@ -1830,7 +1826,6 @@ yesterday";
 				// die(var_dump($data));
 				$dialogue->write();
 				echo "Creating dialogue: {$dialogue->text} ";
-				echo $dialogue->query()."\n";
 				echo $dialogue->status()."\n";
 			}
 
@@ -1849,7 +1844,6 @@ yesterday";
 				$topicTags->weight = 1;
 				$topicTags->write();
 				echo "Creating topic tag: {$topicTags->topic_id} -> {$topicTags->tag_id} ";
-				echo $topicTags->query()."\n";
 				echo $topicTags->status()."\n";
 			}
 		}
@@ -1878,7 +1872,6 @@ yesterday";
 			$entityType->label = ucwords($type);
 			$entityType->write();
 			echo "Creating entity type: {$entityType->label} ";
-			echo $entityType->query()."\n";
 			echo $entityType->status()."\n";
 			$entityType->read();
 
@@ -1890,7 +1883,6 @@ yesterday";
 				if ( !$entity->id() ) {
 					$entity->write();
 					echo "Creating entity: {$entity->label} ";
-					echo $entity->query()."\n";
 					echo $entity->status()."\n";
 
 					$entity->read();
@@ -1902,7 +1894,6 @@ yesterday";
 				$entityEntityTypes->weight = 1;
 				$entityEntityTypes->write();
 				echo "Creating entity type: {$entityEntityTypes->entity_type_id} -> {$entityEntityTypes->entity_id} ";
-				echo $entityEntityTypes->query()."\n";
 				echo $entityEntityTypes->status()."\n";
 			}
 		}
@@ -1916,7 +1907,6 @@ yesterday";
 			$verb->label = ucwords($action);
 			$verb->write();
 			echo "Creating verb: {$verb->label} ";
-			echo $verb->query()."\n";
 			echo $verb->status()."\n";
 		}
 
@@ -1941,7 +1931,6 @@ yesterday";
 			$factType->label = $label;
 			$factType->write();
 			echo "Creating fact type: {$factType->label} ";
-			echo $factType->query()."\n";
 			echo $factType->status()."\n";
 		}
 
@@ -1964,7 +1953,6 @@ yesterday";
 			$fact->ttl = 525960; // 1 year in minutes
 			$fact->write();
 			echo "Creating fact: {$fact->var} {$fact->fact_type_id} {$fact->value} ";
-			echo $fact->query()."\n";
 			echo $fact->status()."\n";
 		}
 	}
