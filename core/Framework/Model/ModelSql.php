@@ -154,19 +154,6 @@ class ModelSql extends BaseModel {
 	}
 
 	/**
-	 * Clears all data from the object.
-	 */
-	public function clear(): void
-	{
-		parent::clear();
-		$data = [];
-		foreach ($this->_dataObject->fields() as $field=>$info) {
-			$data[$field] = null;
-		}
-		$this->_dataObject->assign($data);
-	}
-
-	/**
 	 * Adds a condition to the current query.
 	 *
 	 * @param string $field The field to use in the condition
