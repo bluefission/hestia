@@ -5,6 +5,7 @@ class Theme
 {
 	public $name;
 	public $path;
+	public $location;
 
 	public function __construct( $name, $location = null )
 	{
@@ -24,6 +25,6 @@ class Theme
 			$location = $addonThemeDir.$location.DIRECTORY_SEPARATOR;
 		}
 
-		$this->location = $location ? $location : $path;
+		$this->_location = $location ? $location : $path;
 	}
 }

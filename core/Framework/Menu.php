@@ -9,6 +9,7 @@ class Menu
     protected $_id;
     protected $_items = [];
     protected $_theme;
+    protected $_template;
     protected $_itemTemplate;
 
     public function __construct($label, $theme = null, $template = null, $itemTemplate = null)

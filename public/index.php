@@ -8,12 +8,12 @@
 use BlueFission\Utils\Loader;
 use BlueFission\Utils\Util;
 use BlueFission\Framework\Engine as App;
+
+require '../common/config/settings.php';
 // Require the autoloader for composer-based dependencies
 require '../vendor/autoload.php';
-
 // Require the autoloader for non-composer based scripts
 // $autoloader = require '../common/config/settings.php';
-require '../common/config/settings.php';
 require '../common/helpers/global.php';
 
 // Initialize the Loader utility for non-composer compatible scripts

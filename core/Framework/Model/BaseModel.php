@@ -283,7 +283,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 * @param string $on_id_name Optional ID field name of the ancestor.
 	 * @return mixed Ancestor object.
 	 */
-	protected function ancestor($modelClass, $from_id_name, $on_id_name = '')
+	protected function ancestor($modelClass, $from_id_name, $on_id_name = null)
 	{
 		$model = \App::makeInstance($modelClass);
 		$id = $on_id_name ?? $from_id_name;
@@ -305,7 +305,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 * @param string $from_id_name (optional) the name of the id field in the current instance
 	 * @return object an instance of the model
 	 */
-	protected function descendent($modelClass, $on_id_name, $from_id_name = '')
+	protected function descendant($modelClass, $on_id_name, $from_id_name = null)
 	{
 		$model = \App::makeInstance($modelClass);
 		$id = $from_id_name ?? $on_id_name;
@@ -327,7 +327,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 * @param string $from_id_name (optional) the name of the id field in the current instance
 	 * @return array an array of instances of the model
 	 */
-	protected function descendents($modelClass, $on_id_name, $from_id_name = '')
+	protected function descendants($modelClass, $on_id_name, $from_id_name = null)
 	{
 		// $refClass = new \ReflectionClass($modelClass);
 		$model = \App::makeInstance($modelClass);

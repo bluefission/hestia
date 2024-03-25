@@ -862,7 +862,7 @@ class ConversationManager extends Service {
 		$thread->setUser($context->get('username'));
 
 		$responseType = 'dialogue';
-		$dialogue = $this->generateRecentDialogueText(35, 5000) ?? "No conversational history";
+		$dialogue = $this->generateRecentDialogueText(35, 4000) ?? "No conversational history";
 		$resources = $this->processCommand('more resources');
 
 		$storagePath = OPUS_ROOT . '/storage/system';

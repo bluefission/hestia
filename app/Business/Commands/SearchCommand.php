@@ -178,7 +178,7 @@ class SearchCommand extends Service
     private function help(): string
     {
         return "Available commands for the Search Manager:\n" .
-            "- search weg for \"<query>\": Search for information related to the given query. Provide the query as an argument. Example: 'search web for \"apple\"'\n" .
+            "- search web for \"<query>\": Search for information related to the given query. Provide the query as an argument. Example: 'search web for \"apple\"'\n" .
             "- get web help: Show this help message.";
     }
 

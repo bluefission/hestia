@@ -6,14 +6,14 @@ use BlueFission\Framework\Engine as App;
 session_start();
 
 /**
- * Include the autoloader for the dependencies.
- */
-require 'vendor/autoload.php';
-
-/**
  * Load the autoloader from the settings file.
  */
 require 'common/config/settings.php';
+
+/**
+ * Include the autoloader for the dependencies.
+ */
+require 'vendor/autoload.php';
 require 'common/helpers/global.php';
 // $autoloader = require 'common/config/settings.php';
 

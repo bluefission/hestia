@@ -1749,10 +1749,10 @@ yesterday";
 		$route = new TopicRouteModel();
 
 		$tagArray = explode("\n", $tags);
-		var_dump($tag->data());
+		// var_dump($tag->data());
 		foreach ( $tagArray as $item ) {
 			$tag->clear();
-			var_dump($tag->data());
+			// var_dump($tag->data());
 			$tag->label = trim($item);
 			$tag->read();
 			if ( !$tag->id() ) {
