@@ -107,7 +107,7 @@ Mapping::add('/privacy', function() {
 
 
 Mapping::add('/test', function() {
-	$object = new BlueFission\Obj=j;
+	$object = new BlueFission\Obj();
 	$value = new BlueFission\Num("25.0");
 	// $value = new BlueFission\Str("test");
 

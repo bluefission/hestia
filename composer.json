@@ -31,9 +31,9 @@
     ],
     "require": {
         "php": "^8.0",
-        "bluefission/bluecore": "dev-master",
-        "bluefission/automata": "dev-master",
         "bluefission/develation": "^1.0.0-alpha",
+        "bluefission/automata": "dev-master",
+        "bluefission/bluecore": "dev-main",
         "botman/botman": "^2.6",
         "botman/driver-web": "^1.5",
         "cboden/ratchet": "^0.4.4",

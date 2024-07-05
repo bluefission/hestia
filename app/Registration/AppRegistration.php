@@ -129,6 +129,7 @@ class AppRegistration implements IExtension {
 
 		$this->_app->bind('BlueFission\Data\Storage\Storage', 'BlueFission\Data\Storage\MySQL');
 
+		$this->_app->bind('BlueFission\Automata\LLM\Clients\IClient', 'BlueFission\Automata\LLM\Clients\OpenAIClient');
 		$this->_app->bind('BlueFission\Automata\Analysis\IAnalyzer', 'BlueFission\BlueCore\Skill\Intent\KeywordIntentAnalyzer');
 		$this->_app->bind('App\Domain\Conversation\Repositories\ITopicRepository', 'App\Domain\Conversation\Repositories\TopicRepositorySql');
 		$this->_app->bind('App\Domain\Conversation\Queries\IDialoguesByTopicQuery', 'App\Domain\Conversation\Queries\DialoguesByTopicQuerySql');
@@ -162,6 +163,7 @@ class AppRegistration implements IExtension {
 		$this->_app->bindArgs( ['modelDirPath'=>$this->_app->configuration('paths')['ml']['models']], 'BlueFission\BlueCore\Skill\Intent\KeywordIntentAnalyzer');
 		$this->_app->bindArgs( ['config'=>$this->_app->configuration('nlp')['roots']], 'BlueFission\Automata\Language\StemmerLemmatizer');
 		$this->_app->bindArgs( ['storage'=>new \BlueFission\Data\Storage\Session(['location'=>'cache','name'=>'system'])], 'BlueFission\BlueCore\Command\CommandProcessor');
+		$this->_app->bindArgs( ['apiKey'=>env('OPEN_AI_API_KEY')], 'BlueFission\Automata\LLM\Clients\OpenAIClient');
 	}
 
 	public function addons()

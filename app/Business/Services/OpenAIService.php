@@ -17,7 +17,7 @@ class OpenAIService extends Service
         $this->_openAI = new OpenAI(env('OPEN_AI_API_KEY'));
     }
 
-    public function generate($input, callable $callback, $config = [])
+    public function generate($input, $config = [], callable $callback = null)
     {
         $this->_openAI->generate($input, $callback, $config);
     }

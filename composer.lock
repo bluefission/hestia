@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "df53bc3b396344176d2254905e1ec77b",
+    "content-hash": "23c8281abbb0e184185d34620c157e89",
     "packages": [
         {
             "name": "bluefission/automata",
@@ -12,16 +12,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/automata.git",
-                "reference": "fbc35c5e2143037c6cdeeb4792e5e918e388c48c"
+                "reference": "07a594455a686251747521e3d92780ceba050e88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/automata/zipball/fbc35c5e2143037c6cdeeb4792e5e918e388c48c",
-                "reference": "fbc35c5e2143037c6cdeeb4792e5e918e388c48c",
+                "url": "https://api.github.com/repos/bluefission/automata/zipball/07a594455a686251747521e3d92780ceba050e88",
+                "reference": "07a594455a686251747521e3d92780ceba050e88",
                 "shasum": ""
             },
             "require": {
-                "bluefission/develation": "^1.0.0-alpha"
+                "bluefission/develation": "^1.0.0-alpha",
+                "orhanerday/open-ai": "^2.2",
+                "php-ai/php-ml": "^0.10.0"
             },
             "require-dev": {
                 "php": ">=8.0.0",
@@ -49,7 +51,7 @@
                 {
                     "name": "Devon Scott",
                     "email": "dscott@bluefission.com",
-                    "homepage": "http://bluefission.com",
+                    "homepage": "https://bluefission.com",
                     "role": "Developer"
                 }
             ],
@@ -61,7 +63,67 @@
                 "source": "https://github.com/bluefission/automata/tree/master",
                 "issues": "https://github.com/bluefission/automata/issues"
             },
-            "time": "2024-07-02T01:55:08+00:00"
+            "time": "2024-07-05T03:30:23+00:00"
+        },
+        {
+            "name": "bluefission/bluecore",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bluefission/bluecore.git",
+                "reference": "1413b96e905f8ff1a6bcba1cc311c6529cb66f65"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bluefission/bluecore/zipball/1413b96e905f8ff1a6bcba1cc311c6529cb66f65",
+                "reference": "1413b96e905f8ff1a6bcba1cc311c6529cb66f65",
+                "shasum": ""
+            },
+            "require": {
+                "bluefission/automata": "dev-master",
+                "bluefission/develation": "^1.0.0-alpha",
+                "botman/botman": "^2.6",
+                "phpoffice/phppresentation": "^1.0"
+            },
+            "require-dev": {
+                "php": ">=8.0.0",
+                "phpunit/phpunit": "^11.1@dev"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BlueFission\\": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "BlueFission\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Devon Scott",
+                    "email": "dscott@bluefission.com",
+                    "homepage": "https://bluefission.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Blue Fission Opus Framework Core",
+            "keywords": [
+                "framework, core, bluefission, opus"
+            ],
+            "support": {
+                "source": "https://github.com/bluefission/bluecore/tree/main",
+                "issues": "https://github.com/bluefission/bluecore/issues"
+            },
+            "time": "2024-07-05T01:57:39+00:00"
         },
         {
             "name": "bluefission/develation",
@@ -7314,6 +7376,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "bluefission/automata": 20,
+        "bluefission/bluecore": 20,
         "simplehtmldom/simplehtmldom": 5
     },
     "prefer-stable": true,
