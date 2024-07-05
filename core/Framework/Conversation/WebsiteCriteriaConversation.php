@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework\Conversation;
+namespace BlueFission\BlueCore\Conversation;
 
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\Messages\Incoming\Answer;

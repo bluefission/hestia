@@ -1,6 +1,6 @@
 <?php
 namespace App\Domain\Communication;
-use BlueFission\Framework\ValueObject;
+use BlueFission\BlueCore\ValueObject;
 
 class Communication extends ValueObject
 {

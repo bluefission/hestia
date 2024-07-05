@@ -2,12 +2,12 @@
 // SkillManager.php
 namespace App\Business\Managers;
 
-use BlueFission\Framework\Skill\Intent\Intent;
-use BlueFission\Framework\Skill\Intent\Matcher;
-use BlueFission\Framework\Skill\BaseSkill;
-use BlueFission\Framework\Context;
+use BlueFission\BlueCore\Skill\Intent\Intent;
+use BlueFission\BlueCore\Skill\Intent\Matcher;
+use BlueFission\BlueCore\Skill\BaseSkill;
+use BlueFission\Automata\Context;
 use BlueFission\Services\Service;
-use BlueFission\Bot\NaturalLanguage\EntityExtractor;
+use BlueFission\Automata\Language\EntityExtractor;
 
 class SkillManager extends Service
 {

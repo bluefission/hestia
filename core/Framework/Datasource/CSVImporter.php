@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework\Datasource;
+namespace BlueFission\BlueCore\Datasource;
 
 use League\Csv\Reader;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -51,7 +51,7 @@ class CSVImporter
         $migrationPath = "database/migrations/{$migrationFilename}";
 
         // Create the migration file with the required structure
-        $fileContent = "<?php\n\nuse BlueFission\Framework\Datasource\Delta;\nuse BlueFission\Data\Storage\Structure\MysqlStructure as Structure;\nuse BlueFission\Data\Storage\Structure\MysqlScaffold as Scaffold;\n\nclass Create" . ucfirst($this->tableName) . "Table extends Delta\n{\n    public function change() {\n        " . $migrationCode . "\n    }\n\n    public function revert() {\n        Scaffold::delete('{$this->tableName}');\n    }\n}\n";
+        $fileContent = "<?php\n\nuse BlueFission\BlueCore\Datasource\Delta;\nuse BlueFission\Data\Storage\Structure\MysqlStructure as Structure;\nuse BlueFission\Data\Storage\Structure\MysqlScaffold as Scaffold;\n\nclass Create" . ucfirst($this->tableName) . "Table extends Delta\n{\n    public function change() {\n        " . $migrationCode . "\n    }\n\n    public function revert() {\n        Scaffold::delete('{$this->tableName}');\n    }\n}\n";
 
         // Save the file
         file_put_contents($migrationPath, $fileContent);
@@ -75,7 +75,7 @@ class CSVImporter
         $modelPath = "app/Models/{$modelFilename}";
 
         // Create the model file with the required structure
-        $fileContent = "<?php\n\nnamespace App\Models;\n\nuse BlueFission\Framework\Model\ModelSql as Model;\nuse BlueFission\Data\Storage\MysqlBulk;\n\nclass {$modelClassName} extends Model\n{\n    protected \$_table = ['{$this->tableName}'];\n    protected \$_fields = {$modelCode};\n\n    protected \$_ignore_null = true;\n\n    protected function init()\n    {\n        // Define any necessary relations or customizations here\n    }\n}\n";
+        $fileContent = "<?php\n\nnamespace App\Models;\n\nuse BlueFission\BlueCore\Model\ModelSql as Model;\nuse BlueFission\Data\Storage\MysqlBulk;\n\nclass {$modelClassName} extends Model\n{\n    protected \$_table = ['{$this->tableName}'];\n    protected \$_fields = {$modelCode};\n\n    protected \$_ignore_null = true;\n\n    protected function init()\n    {\n        // Define any necessary relations or customizations here\n    }\n}\n";
 
         // Save the file
         file_put_contents($modelPath, $fileContent);

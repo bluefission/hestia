@@ -2,9 +2,9 @@
 // ApplicationBuilderSkill.php
 namespace App\Business\Skills;
 
-use BlueFission\Framework\Context;
-use BlueFission\Framework\Skill\BaseSkill;
-use BlueFission\Framework\Conversation\ApplicationBuilderConversation;
+use BlueFission\Automata\Context;
+use BlueFission\BlueCore\Skill\BaseSkill;
+use BlueFission\BlueCore\Conversation\ApplicationBuilderConversation;
 
 class ApplicationBuilderSkill extends BaseSkill
 {

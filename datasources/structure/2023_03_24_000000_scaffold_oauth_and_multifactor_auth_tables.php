@@ -1,6 +1,6 @@
 <?php
 
-use BlueFission\Framework\Datasource\Delta;
+use BlueFission\BlueCore\Datasource\Delta;
 use BlueFission\Data\Storage\Structure\MysqlStructure as Structure;
 use BlueFission\Data\Storage\Structure\MysqlScaffold as Scaffold;
 

@@ -1,7 +1,7 @@
 <?php
 namespace App\Business\Http\Api;
 
-use BlueFission\Framework\BaseController;
+use BlueFission\BlueCore\BaseController;
 use BlueFission\Services\Request;
 
 class ChatController extends BaseController {

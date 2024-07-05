@@ -1,15 +1,15 @@
 <?php
-namespace BlueFission\Framework\Repository;
+namespace BlueFission\BlueCore\Repository;
 
 use BlueFission\Connections\Database\MysqlLink;
-use BlueFission\Framework\Model\ModelSql as Model;
+use BlueFission\BlueCore\Model\ModelSql as Model;
 
 /**
  * RepositorySql Class.
  * 
  * Class that implements methods to access a MySQL database using the MysqlLink class.
  * 
- * @package BlueFission\Framework\Repository
+ * @package BlueFission\BlueCore\Repository
  */
 class RepositorySql extends BaseRepository
 {

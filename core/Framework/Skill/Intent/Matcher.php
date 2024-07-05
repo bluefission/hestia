@@ -1,10 +1,10 @@
 <?php
-namespace BlueFission\Framework\Skill\Intent;
+namespace BlueFission\BlueCore\Skill\Intent;
 
 // Matcher.php
-use BlueFission\Framework\Context;
-use BlueFission\Framework\IAnalyzer;
-use BlueFission\Framework\Skill\BaseSkill;
+use BlueFission\Automata\Context;
+use BlueFission\Automata\Analysis\IAnalyzer;
+use BlueFission\BlueCore\Skill\BaseSkill;
 use BlueFission\Services\Service;
 
 class Matcher

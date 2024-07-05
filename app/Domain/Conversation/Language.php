@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Conversation;
 
-use BlueFission\Framework\ValueObject;
+use BlueFission\BlueCore\ValueObject;
 
 class Language extends ValueObject {
 	public $language_id;

@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework;
+namespace BlueFission\BlueCore;
 
 class Theme 
 {
@@ -25,6 +25,6 @@ class Theme
 			$location = $addonThemeDir.$location.DIRECTORY_SEPARATOR;
 		}
 
-		$this->_location = $location ? $location : $path;
+		$this->location = $location ? $location : $path;
 	}
 }

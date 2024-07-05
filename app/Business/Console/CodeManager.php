@@ -2,7 +2,7 @@
 namespace App\Business\Console;
 
 use BlueFission\Services\Service;
-use BlueFission\Framework\Generation\ScaffoldFactory;
+use BlueFission\BlueCore\Generation\ScaffoldFactory;
 
 class CodeManager extends Service {
 

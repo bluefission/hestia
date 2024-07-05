@@ -3,7 +3,7 @@ namespace App\Business\Managers;
 
 use App\Business\Prompts\Analysis;
 use App\Business\Prompts\AssistantRules;
-use BlueFission\Framework\Chat\StatementClassifier;
+use BlueFission\Automata\LLM\StatementClassifier;
 use BlueFission\Data\Storage\Disk;
 use BlueFission\Services\Service;
 use BlueFission\Utils\DateTime;

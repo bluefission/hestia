@@ -1,12 +1,12 @@
 <?php
-namespace BlueFission\Framework\Conversation;
+namespace BlueFission\BlueCore\Conversation;
 
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\Messages\Incoming\Answer;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 use BotMan\BotMan\Messages\Outgoing\Question;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
-use BlueFission\Framework\Generation\MachineLearning\ModelCriteria;
+use BlueFission\BlueCore\Generation\MachineLearning\ModelCriteria;
 
 class ModelCriteriaConversation extends Conversation
 {

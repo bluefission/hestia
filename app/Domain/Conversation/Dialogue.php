@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Conversation;
 
-use BlueFission\Framework\ValueObject;
+use BlueFission\BlueCore\ValueObject;
 
 class Dialogue extends ValueObject {
 	public $dialogue_id;

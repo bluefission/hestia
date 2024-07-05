@@ -1,5 +1,5 @@
 <?php
-use BlueFission\Framework\Engine as App;
+use BlueFission\BlueCore\Engine as App;
 use App\Business\Commands\EncyclopediaCommand;
 use App\Business\Commands\CalculatorCommand;
 use App\Business\Commands\HowToCommand;

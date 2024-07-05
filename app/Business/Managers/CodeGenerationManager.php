@@ -2,7 +2,7 @@
 namespace App\Business\Managers;
 
 use BlueFission\Services\Service;
-use BlueFission\Framework\Generation\GenerationFactory;
+use BlueFission\BlueCore\Generation\GenerationFactory;
 
 class CodeGenerationManager extends Service {
 

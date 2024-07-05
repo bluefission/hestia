@@ -1,10 +1,10 @@
 <?php
-namespace BlueFission\Framework\Optimization;
+namespace BlueFission\BlueCore\Optimization;
 
-use BlueFission\Bot\Genetic\ConversionRateFitness;
-use BlueFission\Bot\Genetic\Population;
-use BlueFission\Bot\Genetic\UniformCrossover;
-use BlueFission\Bot\Genetic\RandomMutation;
+use BlueFission\Automata\Genetic\ConversionRateFitness;
+use BlueFission\Automata\Genetic\Population;
+use BlueFission\Automata\Genetic\UniformCrossover;
+use BlueFission\Automata\Genetic\RandomMutation;
 
 class ABTesting {
     private $fitnessFunction;

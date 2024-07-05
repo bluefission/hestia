@@ -7,9 +7,9 @@ use BotMan\BotMan\Interfaces\Middleware\Received;
 use BotMan\BotMan\Interfaces\Middleware\Sending;
 use BotMan\BotMan\Messages\Incoming\IncomingMessage;
 use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
-use BlueFission\Bot\NaturalLanguage\Grammar;
-use BlueFission\Bot\NaturalLanguage\EntityExtractor;
-use BlueFission\Bot\NaturalLanguage\SyntaxTreeWalker;
+use BlueFission\Automata\Language\Grammar;
+use BlueFission\Automata\Language\EntityExtractor;
+use BlueFission\Automata\Language\SyntaxTreeWalker;
 
 class SyntaxMiddleware implements Received, Sending
 {

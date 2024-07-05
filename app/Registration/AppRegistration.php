@@ -13,9 +13,9 @@ use App\Business\Services\OpenAIService;
 use App\Business\Services\OpenWeatherService;
 use App\Business\Services\LocationService;
 use App\Business\MysqlConnector;
-use BlueFission\Framework\Skill\Intent\Matcher;
-use BlueFission\Framework\Theme;
-use BlueFission\Framework\IExtension;
+use BlueFission\BlueCore\Skill\Intent\Matcher;
+use BlueFission\BlueCore\Theme;
+use BlueFission\BlueCore\IExtension;
 // For Conversations
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\BotMan;
@@ -127,9 +127,9 @@ class AppRegistration implements IExtension {
 		$this->_app->bind('App\Domain\Communication\Repositories\ICommunicationRepository', 'App\Domain\Communication\Repositories\CommunicationRepositorySql');
 		$this->_app->bind('App\Domain\Communication\Queries\IUndeliveredCommunicationsQuery', 'App\Domain\Communication\Queries\UndeliveredCommunicationsQuerySql');
 
-		$this->_app->bind('BlueFission\Data\Storage\Storage', 'BlueFission\Data\Storage\Mysql');
+		$this->_app->bind('BlueFission\Data\Storage\Storage', 'BlueFission\Data\Storage\MySQL');
 
-		$this->_app->bind('BlueFission\Framework\IAnalyzer', 'BlueFission\Framework\Skill\Intent\KeywordIntentAnalyzer');
+		$this->_app->bind('BlueFission\Automata\Analysis\IAnalyzer', 'BlueFission\BlueCore\Skill\Intent\KeywordIntentAnalyzer');
 		$this->_app->bind('App\Domain\Conversation\Repositories\ITopicRepository', 'App\Domain\Conversation\Repositories\TopicRepositorySql');
 		$this->_app->bind('App\Domain\Conversation\Queries\IDialoguesByTopicQuery', 'App\Domain\Conversation\Queries\DialoguesByTopicQuerySql');
 		$this->_app->bind('App\Domain\Conversation\Queries\IDialoguesByKeywordsQuery', 'App\Domain\Conversation\Queries\DialoguesByKeywordsQuerySql');
@@ -151,15 +151,17 @@ class AppRegistration implements IExtension {
 	 * Pass arguments to different components
 	 */
 	public function arguments() {
-		$this->_app->bindArgs( ['config'=>$this->_app->configuration('database')['mysql']], 'BlueFission\Connections\Database\MysqlLink');
+		$this->_app->bindArgs( ['config'=>$this->_app->configuration('database')['mysql']], 'BlueFission\Connections\Database\MySQLLink');
 		$this->_app->bindArgs( ['driverConfigurations'=>$this->_app->configuration('communication')['drivers']], 'App\Business\Managers\CommunicationManager');
 		$this->_app->bindArgs( [
 				'rules'=>$this->_app->configuration('nlp')['grammar']['rules'],
 				'commands'=>$this->_app->configuration('nlp')['grammar']['commands'],
 				'tokens'=>$this->_app->configuration('nlp')['dictionary']
-			], 'BlueFission\Bot\NaturalLanguage\Grammar');
-		$this->_app->bindArgs( ['config'=>$this->_app->configuration('nlp')['roots']], 'BlueFission\Bot\NaturalLanguage\StemmerLemmatizer');
-		$this->_app->bindArgs( ['storage'=>new \BlueFission\Data\Storage\Session(['location'=>'cache','name'=>'system'])], 'BlueFission\Framework\Command\CommandProcessor');
+			], 'BlueFission\Automata\Language\Grammar');
+		$this->_app->bindArgs( ['modelDirPath'=>$this->_app->configuration('paths')['ml']['models']], 'BlueFission\Automata\Analysis\KeywordTopicAnalyzer');
+		$this->_app->bindArgs( ['modelDirPath'=>$this->_app->configuration('paths')['ml']['models']], 'BlueFission\BlueCore\Skill\Intent\KeywordIntentAnalyzer');
+		$this->_app->bindArgs( ['config'=>$this->_app->configuration('nlp')['roots']], 'BlueFission\Automata\Language\StemmerLemmatizer');
+		$this->_app->bindArgs( ['storage'=>new \BlueFission\Data\Storage\Session(['location'=>'cache','name'=>'system'])], 'BlueFission\BlueCore\Command\CommandProcessor');
 	}
 
 	public function addons()

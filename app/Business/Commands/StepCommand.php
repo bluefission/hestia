@@ -2,8 +2,10 @@
 
 namespace App\Business\Commands;
 
+use BlueFission\Arr;
 use BlueFission\Services\Service;
 use BlueFission\Data\Storage\Disk;
+use BlueFission\Behavioral\IDispatcher;
 use App\Business\Services\OpenAIService;
 
 class StepCommand extends Service {
@@ -30,7 +32,15 @@ class StepCommand extends Service {
         }
     }
 
-    public function perform($behavior, array $args) {
+    public function perform( ): IDispatcher
+    {
+        $args = func_get_args();
+        $behavior = array_shift( $args );
+
+        if ( Arr::is($behavior) ) {
+            $behavior = array_shift($behavior);
+        }
+
         $response = "";
         $methodName = lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $behavior))));
         if (method_exists($this, $methodName)) {
@@ -40,6 +50,8 @@ class StepCommand extends Service {
         }
 
         $this->_response = $response;
+
+        return $this;
     }
 
     private function generate(array $args) {

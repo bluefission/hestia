@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Initiative;
 
-use BlueFission\Framework\ValueObject;
+use BlueFission\BlueCore\ValueObject;
 
 class Task extends ValueObject {
 	public $task_id;

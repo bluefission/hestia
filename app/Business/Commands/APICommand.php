@@ -1,7 +1,7 @@
 <?php
 namespace App\Business\Commands;
 
-use BlueFission\Framework\Command\BaseCommand;
+use BlueFission\BlueCore\Command\BaseCommand;
 use App\Business\Services\OpenAIService;
 use BlueFission\Data\Storage\Disk;
 use \BlueFission\Connections\Curl;

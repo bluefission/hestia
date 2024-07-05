@@ -1,8 +1,8 @@
 <?php
-namespace BlueFission\Framework\Optimization;
+namespace BlueFission\BlueCore\Optimization;
 
 use BlueFission\Behavioral\Configurable;
-use BlueFission\Bot\Genetic\Genetic;
+use BlueFission\Automata\Genetic\Genetic;
 
 class GeneticComponent extends Configurable {
 

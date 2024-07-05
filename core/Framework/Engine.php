@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework;
+namespace BlueFission\BlueCore;
 
 use BlueFission\Services\Application;
 use BlueFission\Services\Service;
@@ -12,7 +12,7 @@ use BlueFission\Utils\Loader;
  *
  * The Engine class is a subclass of Application that sets up and starts the BlueFission application.
  *
- * @package BlueFission\Framework
+ * @package BlueFission\BlueCore
  */
 class Engine extends Application {
 
@@ -76,6 +76,11 @@ class Engine extends Application {
 	 * @return void
 	 */
 	public function loadConfiguration() {
+		// Paths
+
+		$paths = require dirname( dirname( dirname( __FILE__ ) ) ).DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'paths.php';
+
+		$this->_configurations['paths'] = $paths;
 
 		// Data
 
@@ -214,7 +219,7 @@ class Engine extends Application {
 	 * 
 	 * @param string $name the name of the theme to be selected.
 	 * 
-	 * @return BlueFission\Framework\Theme
+	 * @return BlueFission\BlueCore\Theme
 	 */
 	public function theme( $name ) {
 		if (!strpos($name, '/')) {

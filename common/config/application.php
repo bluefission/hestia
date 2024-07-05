@@ -4,7 +4,7 @@ return [
 
 	// Class alias for scope and extensibility 
 	'aliases'=>[
-		'\App'			=>'\BlueFission\Framework\Engine'
+		'\App'			=>'\BlueFission\BlueCore\Engine'
 	],
 
 	// Extensions to the application functionality
@@ -14,10 +14,10 @@ return [
 
 	// Gateways for processing requests
 	'gateways'=> [
-		'auth'			=>'\BlueFission\Framework\Gateway\AuthenticationGateway',
-		'cache'			=>'\BlueFission\Framework\Gateway\CacheGateway',
-		'csrf'			=>'\BlueFission\Framework\Gateway\CsrfGateway',
-		'nocsrf'		=>'\BlueFission\Framework\Gateway\NoCsrfGateway',
+		'auth'			=>'\BlueFission\BlueCore\Gateway\AuthenticationGateway',
+		'cache'			=>'\BlueFission\BlueCore\Gateway\CacheGateway',
+		'csrf'			=>'\BlueFission\BlueCore\Gateway\CsrfGateway',
+		'nocsrf'		=>'\BlueFission\BlueCore\Gateway\NoCsrfGateway',
 		'admin:auth'	=>'\App\Business\Gateways\AdminAuthenticationGateway',
 	],
 ];

@@ -3,7 +3,7 @@ namespace App\Business\Http;
 
 use BlueFission\Services\Service;
 use BlueFission\Services\Request;
-use BlueFission\Framework\Auth as Authenticator;
+use BlueFission\BlueCore\Auth as Authenticator;
 
 use BlueFission\Data\Storage\Storage;
 

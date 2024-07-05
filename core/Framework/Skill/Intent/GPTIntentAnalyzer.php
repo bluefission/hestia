@@ -1,8 +1,8 @@
 <?php
 // GPTIntentAnalyzer.php
-namespace BlueFission\Framework\Skill\Intent;
+namespace BlueFission\BlueCore\Skill\Intent;
 
-use BlueFission\Framework\Skill\Intent\Context;
+use BlueFission\BlueCore\Skill\Intent\Context;
 use App\Business\OpenAIService;
 
 class GPTIntentAnalyzer implements IAnalyzer

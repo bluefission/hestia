@@ -1,18 +1,19 @@
 <?php
-namespace BlueFission\Framework\Model;
+namespace BlueFission\BlueCore\Model;
 
-use BlueFission\DevArray;
-use BlueFission\Framework\Model\BaseModel;
-use BlueFission\Data\Storage\MysqlBulk;
-use BlueFission\Connections\Database\MysqlLink;
+use BlueFission\Arr;
+use BlueFission\Obj;
+use BlueFission\BlueCore\Model\BaseModel;
+use BlueFission\Data\Storage\MySQLBulk;
+use BlueFission\Connections\Database\MySQLLink;
 
 /**
  * Class ModelSql
  *
  * This class extends the BaseModel class to create a Model for working with SQL databases.
- * It provides a convenient way to interact with SQL databases by wrapping the MysqlBulk data storage object.
+ * It provides a convenient way to interact with SQL databases by wrapping the MySQLBulk data storage object.
  *
- * @package BlueFission\Framework\Model
+ * @package BlueFission\BlueCore\Model
  */
 class ModelSql extends BaseModel {
 
@@ -54,16 +55,16 @@ class ModelSql extends BaseModel {
 	/**
 	 * ModelSql constructor.
 	 *
-	 * @param MysqlLink|null $link The database link to use for the model.
+	 * @param MySQLLink|null $link The database link to use for the model.
 	 */
-	public function __construct( MysqlLink $link = null )
+	public function __construct( MySQLLink $link = null )
 	{
 		if ($link) {
 			$link->open();
 		}
 
 		$this->_type = get_class($this);
-		$this->_dataObject = new MysqlBulk([
+		$this->_dataObject = new MySQLBulk([
 			'location'=>null,
 			'name'=>$this->_table,
 			'fields'=>$this->_fields,
@@ -96,7 +97,7 @@ class ModelSql extends BaseModel {
 	 */
 	public function field(string $field, $value = null): mixed
 	{
-		if ( DevArray::hasKey($this->_dataObject->_data, $field) || DevArray::has($this->_fields, $field) ) {
+		if ( Arr::hasKey($this->_dataObject->_data, $field) || Arr::has($this->_fields, $field) ) {
 			return parent::field($field, $value);
 		}
 
@@ -112,7 +113,7 @@ class ModelSql extends BaseModel {
 	 *
 	 * @return bool True on success, false on failure
 	 */
-	public function write($values = null)
+	public function write($values = null) :Obj
 	{
 		$force_created_timestamp = false;
 		$force_updated_timestamp = false;

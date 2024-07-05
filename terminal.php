@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 use BlueFission\Utils\Loader;
-use BlueFission\Framework\Engine as App;
+use BlueFission\BlueCore\Engine as App;
 
 session_start();
 

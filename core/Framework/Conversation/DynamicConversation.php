@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework\Conversation;
+namespace BlueFission\BlueCore\Conversation;
 
 use BlueFission\DevArray;
 use BotMan\BotMan\BotMan;
@@ -7,9 +7,9 @@ use BotMan\BotMan\Messages\Incoming\Answer;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 use BotMan\BotMan\Messages\Outgoing\Question;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
-use BlueFission\Framework\Chat\StatementClassifier;
-use BlueFission\Framework\Context;
-use BlueFission\Bot\NaturalLanguage\EntityExtractor;
+use BlueFission\Automata\LLM\StatementClassifier;
+use BlueFission\Automata\Context;
+use BlueFission\Automata\Language\EntityExtractor;
 
 class DynamicConversation extends Conversation
 {

@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework;
+namespace BlueFission\BlueCore;
 
 interface IExtension {
 	public function init();

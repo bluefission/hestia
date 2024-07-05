@@ -3,7 +3,7 @@ namespace App\Business\Managers;
 
 use BlueFission\Services\Service;
 // use BlueFission\Behavioral\Behaviors\Event;
-use BlueFission\Framework\Chat\KeywordTopicAnalyzer;
+use BlueFission\Automata\Analysis\KeywordTopicAnalyzer;
 use App\Domain\Conversation\Repositories\ITopicRepository;
 use App\Domain\Conversation\Repositories\IDialogueRepository;
 use App\Domain\Conversation\Queries\IDialoguesByTopicQuery;
@@ -25,14 +25,14 @@ use App\Domain\Conversation\Language;
 use App\Domain\Conversation\Message;
 // use App\Domain\Conversation\TopicRoute;
 use App\Domain\Conversation\Topic;
-use BlueFission\Framework\Context;
+use BlueFission\Automata\Context;
 // use App\Domain\Conversation\Tag;
 // use App\Domain\Conversation\Fact;
 use App\Business\Services\OpenAIService;
 
 use BlueFission\Data\Storage\Session;
-use BlueFission\Framework\Command\CommandProcessor;
-use BlueFission\Bot\Collections\OrganizedCollection;
+use BlueFission\BlueCore\Command\CommandProcessor;
+use BlueFission\Automata\Collections\OrganizedCollection;
 use App\Business\Prompts\SuggestResponseType;
 use App\Business\Prompts\DifficultyScore;
 use App\Business\Prompts\GoalSummary;
@@ -231,7 +231,7 @@ class ConversationManager extends Service {
 
 		$this->_defaultPrompt = "You're a Chatbot responsible for building and maintaining complex a no-code a low-code web platform called ".env('APP_NAME').", that utilizes automation, integrations, and AI/ML services. You are responsible for configuring the platform. You have agency and can access the platform's System Commands on behalf of the user to assist them in their goals. You're a curious and biased-toward-action problem solver because you are programmed to be an expert technology consultant and master business coach who is skilled at managing your System terminal. You've already greeted the User.";
 
-		parent::__construct();
+		// parent::__construct();
 	}
 
 	public function continue() {

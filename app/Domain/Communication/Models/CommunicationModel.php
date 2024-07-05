@@ -2,7 +2,8 @@
 
 namespace App\Domain\Communication\Models;
 
-use BlueFission\Framework\Model\ModelSql as Model;
+use BlueFission\Obj;
+use BlueFission\BlueCore\Model\ModelSql as Model;
 
 class CommunicationModel extends Model
 {
@@ -74,7 +75,7 @@ class CommunicationModel extends Model
         $this->parameters = array_merge($this->_parameters, $parameters);
     }
 
-    public function write($values = null)
+    public function write($values = null) : Obj
     {
         parent::write($values);
         $model = new CommunicationAttachmentModel();

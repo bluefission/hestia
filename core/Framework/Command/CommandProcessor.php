@@ -1,10 +1,10 @@
 <?php
-namespace BlueFission\Framework\Command;
+namespace BlueFission\BlueCore\Command;
 
 
-use BlueFission\Bot\NaturalLanguage\Grammar;
-use BlueFission\Bot\NaturalLanguage\SyntaxTreeWalker;
-use BlueFission\Bot\NaturalLanguage\EntityExtractor;
+use BlueFission\Automata\Language\Grammar;
+use BlueFission\Automata\Language\SyntaxTreeWalker;
+use BlueFission\Automata\Language\EntityExtractor;
 use BlueFission\Data\Storage\Storage;
 use App\Business\Prompts\ConsoleResponse;
 use App\Business\Services\OpenAIService;

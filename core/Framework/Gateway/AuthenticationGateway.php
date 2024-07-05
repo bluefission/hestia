@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework\Gateway;
+namespace BlueFission\BlueCore\Gateway;
 
 use BlueFission\Services\Gateway;
 use BlueFission\Services\Request;
@@ -9,7 +9,7 @@ use BlueFission\Services\Authenticator;
 /**
  * AuthenticationGateway class for processing authentication request and managing session
  *
- * @package BlueFission\Framework\Gateway
+ * @package BlueFission\BlueCore\Gateway
  */
 class AuthenticationGateway extends Gateway {
 

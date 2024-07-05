@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Conversation;
 
-use BlueFission\Framework\ValueObject;
+use BlueFission\BlueCore\ValueObject;
 
 class TopicRoute extends ValueObject {
 	public $context_route_id;

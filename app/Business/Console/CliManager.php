@@ -4,7 +4,7 @@ namespace App\Business\Console;
 use BotMan\BotMan\BotMan;
 use BlueFission\Services\Service;
 use App\Business\Console\BotMan\CommandLineDriver;
-use BlueFission\Framework\Command\CommandProcessor;
+use BlueFission\BlueCore\Command\CommandProcessor;
 
 class CliManager extends Service {
 

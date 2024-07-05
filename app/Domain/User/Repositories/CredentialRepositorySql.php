@@ -2,7 +2,7 @@
 namespace App\Domain\User\Repositories;
 
 use BlueFission\Connections\Database\MysqlLink;
-use BlueFission\Framework\Repository\RepositorySql;
+use BlueFission\BlueCore\Repository\RepositorySql;
 use App\Domain\User\Repositories\ICredentialRepository;
 use App\Domain\User\Models\CredentialModel as Model;
 use App\Domain\User\Credential;

@@ -35,7 +35,7 @@ Mapping::add('/history', function() {
 });
 
 Mapping::add('/command', function() {
-	$processor = instance()->getDynamicInstance(BlueFission\Framework\Command\CommandProcessor::class);
+	$processor = instance()->getDynamicInstance(BlueFission\BlueCore\Command\CommandProcessor::class);
 
 	$result = $processor->process('help with news');
 
@@ -52,19 +52,19 @@ Mapping::add('/clear', function() {
 Mapping::add('/fillin', function() {
 	// $topic = "The future of work and AI/Automation - labor concerns and observations from dawn of the GPT era.";
 	$topic = "I think that the dystopian predictions around AI are sensationalist fear mongering and a distraction from the real conversation about capitalism.";
-	$result = (new \BlueFission\Framework\Chat\FillIn(new \App\Business\Services\OpenAIService(), (new \App\Business\Prompts\SocialPostPrompt($topic))->prompt()))->run(['max_tokens'=>250]);
+	$result = (new \BlueFission\Automata\LLM\FillIn(new \App\Business\Services\OpenAIService(), (new \App\Business\Prompts\SocialPostPrompt($topic))->prompt()))->run(['max_tokens'=>250]);
 	var_dump($result); // echos: "Modern AI - from sci fi to reality"
 });
 
 Mapping::add('/chain', function() {
 	$llm = new \App\Business\Services\OpenAIService();
-	$agent = new \BlueFission\Framework\Chat\Agent($llm);
+	$agent = new \BlueFission\Automata\LLM\Agent($llm);
 
 	// Register the tools
-	// $agent->registerTool("Stock DB", new \BlueFission\Framework\Chat\Tools\StockDatabase());
-	$agent->registerTool("Stock DB", new \BlueFission\Framework\Chat\Tools\Weather());
-	$agent->registerTool("Search", new \BlueFission\Framework\Chat\Tools\WebSearch());
-	$agent->registerTool("Calculator", new \BlueFission\Framework\Chat\Tools\Calculator());
+	// $agent->registerTool("Stock DB", new \BlueFission\Automata\LLM\Tools\StockDatabase());
+	$agent->registerTool("Stock DB", new \BlueFission\Automata\LLM\Tools\Weather());
+	$agent->registerTool("Search", new \BlueFission\Automata\LLM\Tools\WebSearch());
+	$agent->registerTool("Calculator", new \BlueFission\Automata\LLM\Tools\Calculator());
 
 	// Execute a question
 	$result = $agent->execute("What is the multiplication of the ratio between stock prices for 'ABC' and 'XYZ' in January 3rd and the ratio between the same stock prices in January the 4th?");
@@ -107,9 +107,9 @@ Mapping::add('/privacy', function() {
 
 
 Mapping::add('/test', function() {
-	$object = new BlueFission\DevObject;
-	$value = new BlueFission\DevNumber("25.0");
-	// $value = new BlueFission\DevString("test");
+	$object = new BlueFission\Obj=j;
+	$value = new BlueFission\Num("25.0");
+	// $value = new BlueFission\Str("test");
 
 	$object->behavior(BlueFission\Behavioral\Behaviors\Event::CHANGE, function($event, $args) {
 		echo("I changed!");

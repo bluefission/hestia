@@ -1,7 +1,7 @@
 <?php
-namespace BlueFission\Framework\Optimization;
+namespace BlueFission\BlueCore\Optimization;
 
-use BlueFission\Bot\Genetic\FitnessFunction;
+use BlueFission\Automata\Genetic\FitnessFunction;
 
 class ConversionRateFitness extends FitnessFunction {
     public function evaluate($individual): float {

@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Initiative\Models;
 
-use BlueFission\Framework\Model\ModelSql as Model;
+use BlueFission\BlueCore\Model\ModelSql as Model;
 
 class KpiTypeModel extends Model {
 	// https://www.clearpointstrategy.com/18-key-performance-indicators/

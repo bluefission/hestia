@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Initiative\Models;
 
-use BlueFission\Framework\Model\ModelSql as Model;
+use BlueFission\BlueCore\Model\ModelSql as Model;
 
 class InitiativeToKpiTypePivot extends Model {
 	protected $_table = ['initiative_to_kpi_type'];

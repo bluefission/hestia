@@ -2,7 +2,7 @@
 namespace App\Domain\Initiative\Repositories;
 
 use BlueFission\Connections\Database\MysqlLink;
-use BlueFission\Framework\Repository\RepositorySql;
+use BlueFission\BlueCore\Repository\RepositorySql;
 use App\Domain\Initiative\Repositories\IConditionRepository;
 use App\Domain\Initiative\Models\ConditionModel as Model;
 use App\Domain\Initiative\Condition;

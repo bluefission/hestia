@@ -2,7 +2,7 @@
 namespace App\Domain\Communication\Repositories;
 
 use BlueFission\Connections\Database\MysqlLink;
-use BlueFission\Framework\Repository\RepositorySql;
+use BlueFission\BlueCore\Repository\RepositorySql;
 use App\Domain\Communication\Repositories\ICommunicationTypeRepository;
 use App\Domain\Communication\Models\CommunicationTypeModel as Model;
 use App\Domain\Communication\CommunicationType;

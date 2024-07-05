@@ -1,6 +1,6 @@
 <?php
 namespace App\Domain\User;
-use BlueFission\Framework\ValueObject;
+use BlueFission\BlueCore\ValueObject;
 
 class User extends ValueObject
 {

@@ -1,8 +1,8 @@
 <?php
-namespace BlueFission\Framework\Repository;
+namespace BlueFission\BlueCore\Repository;
 
 // use BlueFission\Data\Storage\Storage;
-use BlueFission\Framework\Model\BaseModel;
+use BlueFission\BlueCore\Model\BaseModel;
 
 /**
  * Class BaseRepository

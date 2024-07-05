@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Conversation;
 
-use BlueFission\Framework\ValueObject;
+use BlueFission\BlueCore\ValueObject;
 
 class EntityType extends ValueObject {
 	public $entity_type_id;

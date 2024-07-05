@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework;
+namespace BlueFission\BlueCore;
 
 use BlueFission\Services\Authenticator;
 

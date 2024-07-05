@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework;
+namespace BlueFission\BlueCore;
 
 /**
  * Class ValueObject implements IValueObject

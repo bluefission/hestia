@@ -9,9 +9,9 @@ use App\Business\Middleware\HearsIntentMiddleware;
 use App\Business\Middleware\ProcessesCommandMiddleware;
 use App\Business\Middleware\IntelligenceMiddleware;
 use BlueFission\Data\Storage\Session;
-use BlueFission\Framework\Command\CommandProcessor;
-use BlueFission\Framework\Skill\Intent\Matcher;
-use BlueFission\Framework\Skill\Intent\Context;
+use BlueFission\BlueCore\Command\CommandProcessor;
+use BlueFission\BlueCore\Skill\Intent\Matcher;
+use BlueFission\BlueCore\Skill\Intent\Context;
 use BlueFission\Data\Storage\Storage;
 
 $app = instance();

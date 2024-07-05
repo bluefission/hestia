@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework\Generation;
+namespace BlueFission\BlueCore\Generation;
 
 class QueryGenerator extends BaseGenerator
 {

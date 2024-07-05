@@ -1,15 +1,15 @@
 <?php
-namespace BlueFission\Framework\Model;
+namespace BlueFission\BlueCore\Model;
 
 use BlueFission\Collections\Collection;
 use BlueFission\Data\IData;
 use BlueFission\Data\Storage\Storage;
-use BlueFission\DevValue;
-use BlueFission\DevString;
-use BlueFission\DevArray;
-use BlueFission\DevObject;
+use BlueFission\Val;
+use BlueFission\Str;
+use BlueFission\Arr;
+use BlueFission\Obj;
 use BlueFission\Behavioral\Behaviors\State;
-use BlueFission\Framework\Engine as App;
+use BlueFission\BlueCore\Engine as App;
 use Elasticsearch\ClientBuilder;
 use JsonSerializable;
 
@@ -17,7 +17,7 @@ use JsonSerializable;
  * BaseModel class serves as a base model for other models.
  * It implements IData, JsonSerializable interfaces.
  */
-class BaseModel extends DevObject implements IData, JsonSerializable {
+class BaseModel extends Obj implements IData, JsonSerializable {
 	/**
      * @var Elasticsearch\Client Elasticsearch client instance.
      */
@@ -89,7 +89,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	protected function generateUuid()
 	{
 		$id = $this->_idField;
-		$this->{$id} = DevString::uuid4();
+		$this->{$id} = Str::uuid4();
 	}
 
 	/**
@@ -108,9 +108,11 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	/**
 	 * Clears all data from the object.
 	 */
-	public function clear(): void
+	public function clear(): Obj
 	{
 		$this->_dataObject->clear();
+
+		return $this;
 	}
 
 	public function limit($limit)
@@ -134,8 +136,9 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	/**
 	 * Reads data from the storage.
 	 */
-	public function read($values = null) { 
-		if (DevValue::isNotEmpty($values)) {
+	public function read($values = null) :Obj
+	{ 
+		if (Val::isNotEmpty($values)) {
 			$this->assign($values);
 		}
 
@@ -154,8 +157,9 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 *
 	 * @return mixed Result of the write operation on the data object.
 	 */
-	public function write($values = null) {
-		if (DevValue::isNotEmpty($values)) {
+	public function write($values = null) : Obj
+	{
+		if (Val::isNotEmpty($values)) {
 			$this->assign($values);
 		}
 
@@ -174,8 +178,9 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 *
 	 * @return mixed Result of the delete operation on the data object.
 	 */
-	public function delete($values = null) { 
-		if (DevValue::isNotEmpty($values)) {
+	public function delete($values = null) : Obj
+	{ 
+		if (Val::isNotEmpty($values)) {
 			$this->assign($values);
 		}
 		$this->_dataObject->activate();
@@ -193,7 +198,8 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 *
 	 * @return mixed Contents of the data object.
 	 */
-	public function contents() { 
+	public function contents() :mixed
+	{ 
 		return $this->_dataObject->contents();
 	}
 
@@ -203,7 +209,8 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 * @param string|null $message Optional message to accompany the status.
 	 * @return mixed Status of the data object.
 	 */
-	public function status( $message = null ) {
+	public function status( $message = null ) :mixed
+	{
 		return $this->_dataObject->status();
 	}
 
@@ -242,7 +249,7 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 *
 	 * @return mixed Data of the object.
 	 */
-	public function data() 
+	public function data() :mixed
 	{
 		$data = $this->_dataObject->data()->value();
 		return $data;
@@ -262,10 +269,10 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 	 * @param mixed $data Data to be assigned to the object.
 	 * @throws \InvalidArgumentException if $data is not an object or associative array.
 	 */
-	public function assign( $data )
+	public function assign( $data ) : Obj
 	{
 		$this->clear();
-		if ( is_object( $data ) || ( DevValue::isNotEmpty( $data ) && DevArray::isAssoc( $data ) ) ) {
+		if ( is_object( $data ) || ( Val::isNotEmpty( $data ) && Arr::isAssoc( $data ) ) ) {
 			foreach ( $data as $a=>$b ) {
 				$this->field($a, $b);
 			}
@@ -273,6 +280,8 @@ class BaseModel extends DevObject implements IData, JsonSerializable {
 		else if ( $data !== null ) {
 			throw new \InvalidArgumentException( "Can't import from variable type " . gettype($data) );
 		}
+
+		return $this;
 	}
 
 	/**

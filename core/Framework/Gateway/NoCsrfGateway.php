@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework\Gateway;
+namespace BlueFission\BlueCore\Gateway;
 
 use BlueFission\Services\Gateway;
 use BlueFission\Services\Request;

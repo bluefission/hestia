@@ -1,7 +1,7 @@
 <?php
 namespace App\Business\Prompts;
 
-use BlueFission\Framework\Chat\Prompt;
+use BlueFission\Automata\LLM\Prompt;
 
 class VeracityFilter extends Prompt
 {

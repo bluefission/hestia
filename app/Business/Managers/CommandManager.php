@@ -2,11 +2,11 @@
 namespace App\Business\Managers;
 
 use BlueFission\Services\Service;
-use BlueFission\Framework\Command\CommandProcessor;
-use BlueFission\Bot\Collections\OrganizedCollection;
-use BlueFission\Bot\NaturalLanguage\Grammar;
-use BlueFission\Bot\NaturalLanguage\SyntaxTreeWalker;
-use BlueFission\Bot\NaturalLanguage\EntityExtractor;
+use BlueFission\BlueCore\Command\CommandProcessor;
+use BlueFission\Automata\Collections\OrganizedCollection;
+use BlueFission\Automata\Language\Grammar;
+use BlueFission\Automata\Language\SyntaxTreeWalker;
+use BlueFission\Automata\Language\EntityExtractor;
 
 class CommandManager extends Service {
 	protected $_collection;

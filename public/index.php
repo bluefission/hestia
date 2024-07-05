@@ -7,7 +7,7 @@
 
 use BlueFission\Utils\Loader;
 use BlueFission\Utils\Util;
-use BlueFission\Framework\Engine as App;
+use BlueFission\BlueCore\Engine as App;
 
 require '../common/config/settings.php';
 // Require the autoloader for composer-based dependencies

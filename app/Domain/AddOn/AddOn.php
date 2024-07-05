@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\AddOn;
 
-use BlueFission\Framework\ValueObject;
+use BlueFission\BlueCore\ValueObject;
 
 class AddOn extends ValueObject
 {

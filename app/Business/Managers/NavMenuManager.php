@@ -3,7 +3,7 @@ namespace App\Business\Managers;
 
 use BlueFission\Connections\Database\MysqlLink;
 use BlueFission\Services\Service;
-use BlueFission\Framework\Auth as Authenticator;
+use BlueFission\BlueCore\Auth as Authenticator;
 
 class NavMenuManager extends Service
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace BlueFission\Framework\Model;
+namespace BlueFission\BlueCore\Model;
 
-use BlueFission\Framework\Model\BaseModel;
+use BlueFission\BlueCore\Model\BaseModel;
 use BlueFission\Data\Storage\Session;
 
 /**
  * Class ModelSession
  *
- * @package BlueFission\Framework\Model
+ * @package BlueFission\BlueCore\Model
  *
  * This class is a subclass of BaseModel and provides session-based data storage
  */

@@ -1,8 +1,8 @@
 <?php
 namespace App\Business\Commands;
 
-use BlueFission\Framework\Command\BaseCommand;
-use BlueFission\Bot\NaturalLanguage\EntityExtractor;
+use BlueFission\BlueCore\Command\BaseCommand;
+use BlueFission\Automata\Language\EntityExtractor;
 
 class EntityCommand extends BaseCommand
 {

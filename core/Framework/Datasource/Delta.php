@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework\Datasource;
+namespace BlueFission\BlueCore\Datasource;
 
 use BlueFission\Connections\Database\MysqlLink;
 
@@ -8,7 +8,7 @@ use BlueFission\Connections\Database\MysqlLink;
  *
  * This class provides a means to change and revert changes to a database using a MysqlLink connection.
  *
- * @package BlueFission\Framework\Datasource
+ * @package BlueFission\BlueCore\Datasource
  */
 class Delta {
 

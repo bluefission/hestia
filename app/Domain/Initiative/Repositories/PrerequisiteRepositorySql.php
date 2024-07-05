@@ -2,7 +2,7 @@
 namespace App\Domain\Initiative\Repositories;
 
 use BlueFission\Connections\Database\MysqlLink;
-use BlueFission\Framework\Repository\RepositorySql;
+use BlueFission\BlueCore\Repository\RepositorySql;
 use App\Domain\Initiative\Repositories\IPrerequisiteRepository;
 use App\Domain\Initiative\Models\PrerequisiteModel as Model;
 use App\Domain\Initiative\Prerequisite;

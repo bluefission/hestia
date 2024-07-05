@@ -3,9 +3,9 @@
 namespace App\Business\Services;
 
 use BlueFission\Services\Service;
-use BlueFission\Bot\Intelligence;
+use BlueFission\Automata\Intelligence;
 use App\Business\Managers\StrategyManager;
-use BlueFission\Bot\NaturalLanguage\EntityExtractor;
+use BlueFission\Automata\Language\EntityExtractor;
 
 class IntelligenceService extends Service
 {

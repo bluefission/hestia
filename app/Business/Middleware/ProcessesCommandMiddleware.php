@@ -5,7 +5,7 @@ namespace App\Business\Middleware;
 use BotMan\BotMan\BotMan;
 use BlueFission\Data\Storage\Session;
 use App\Business\Managers\CommandManager;
-use BlueFission\Framework\Command\CommandProcessor;
+use BlueFission\BlueCore\Command\CommandProcessor;
 use BotMan\BotMan\Interfaces\Middleware\Received;
 use BotMan\BotMan\Interfaces\Middleware\Sending;
 use BotMan\BotMan\Messages\Incoming\IncomingMessage;

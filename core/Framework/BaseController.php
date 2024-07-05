@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework;
+namespace BlueFission\BlueCore;
 
 use BlueFission\Services\Service;
 use BlueFission\Services\Model\BaseModel;

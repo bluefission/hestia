@@ -7,8 +7,8 @@ use BotMan\BotMan\Interfaces\Middleware\Received;
 use BotMan\BotMan\Interfaces\Middleware\Sending;
 use BotMan\BotMan\Messages\Incoming\IncomingMessage;
 use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
-use BlueFission\Framework\Skill\Intent\Matcher;
-use BlueFission\Framework\Context;
+use BlueFission\BlueCore\Skill\Intent\Matcher;
+use BlueFission\Automata\Context;
 
 class HearsIntentMiddleware implements Received, Sending
 {

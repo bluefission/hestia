@@ -2,7 +2,7 @@
 namespace App\Domain\AddOn\Repositories;
 
 use BlueFission\Connections\Database\MysqlLink;
-use BlueFission\Framework\Repository\RepositorySql;
+use BlueFission\BlueCore\Repository\RepositorySql;
 use App\Domain\AddOn\Repositories\IAddOnRepository;
 use App\Domain\AddOn\Models\AddOnModel as Model;
 use App\Domain\AddOn\AddOn;

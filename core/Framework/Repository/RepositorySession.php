@@ -1,7 +1,7 @@
 <?php
-namespace BlueFission\Framework\Repository;
+namespace BlueFission\BlueCore\Repository;
 
-use BlueFission\Framework\Model\ModelSession as Model;
+use BlueFission\BlueCore\Model\ModelSession as Model;
 
 /**
  * RepositorySession is a child class of BaseRepository and it allows for data to be retrieved and saved to a session.

@@ -2,7 +2,7 @@
 namespace App\Domain\Initiative\Repositories;
 
 use BlueFission\Connections\Database\MysqlLink;
-use BlueFission\Framework\Repository\RepositorySql;
+use BlueFission\BlueCore\Repository\RepositorySql;
 use App\Domain\Initiative\Repositories\IInitiativeSpanRepository;
 use App\Domain\Initiative\Models\InitiativeSpanModel as Model;
 use App\Domain\Initiative\InitiativeSpan;

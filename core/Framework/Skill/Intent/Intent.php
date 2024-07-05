@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework\Skill\Intent;
+namespace BlueFission\BlueCore\Skill\Intent;
 
 // Intent.php
 class Intent

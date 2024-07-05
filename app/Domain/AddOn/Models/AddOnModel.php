@@ -2,7 +2,7 @@
 
 namespace App\Domain\AddOn\Models;
 
-use BlueFission\Framework\Model\ModelSql as Model;
+use BlueFission\BlueCore\Model\ModelSql as Model;
 
 class AddOnModel extends Model
 {

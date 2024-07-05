@@ -1,9 +1,9 @@
 <?php
 
-namespace BlueFission\Framework\Conversation;
+namespace BlueFission\BlueCore\Conversation;
 
 use BotMan\BotMan\Messages\Incoming\Answer;
-use BlueFission\Framework\Generation\ApplicationCriteria;
+use BlueFission\BlueCore\Generation\ApplicationCriteria;
 
 class ApplicationCriteriaConversation extends DynamicConversation
 {

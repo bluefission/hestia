@@ -1,9 +1,9 @@
 {
-    "name": "bluefission/framework",
+    "name": "bluefission/opus",
     "type": "project",
-    "description": "The BlueFission Framework.",
+    "description": "Opus - The Blue Fission Platform Framework.",
     "keywords": [
-        "framework",
+        "opus",
         "eidolon"
     ],
     "license": "Exclusive",
@@ -22,13 +22,18 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/bluefission/bot-ai"
+            "url": "https://github.com/bluefission/automata"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/bluefission/bluecore"
         }
     ],
     "require": {
         "php": "^8.0",
-        "bluefission/bot-ai": "dev-master",
-        "bluefission/develation": "dev-master",
+        "bluefission/bluecore": "dev-master",
+        "bluefission/automata": "dev-master",
+        "bluefission/develation": "^1.0.0-alpha",
         "botman/botman": "^2.6",
         "botman/driver-web": "^1.5",
         "cboden/ratchet": "^0.4.4",
@@ -37,8 +42,6 @@
         "google/cloud-language": "^0.27.0",
         "illuminate/collections": "^10.3",
         "orhanerday/open-ai": "^2.2",
-        "php-ai/php-ml": "^0.10.0",
-        "phpoffice/phppresentation": "^1.0",
         "phpoption/phpoption": "^1.9",
         "sabberworm/php-css-parser": "^8.4",
         "simplehtmldom/simplehtmldom": "^2.0@RC",
@@ -55,8 +58,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
-            "BlueFission\\": "core/"
+            "App\\": "app/"
         }
     },
     "autoload-dev": {

@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework\Command;
+namespace BlueFission\BlueCore\Command;
 
 // CommandParser.php
 class CommandParser

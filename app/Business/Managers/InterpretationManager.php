@@ -3,8 +3,8 @@ namespace App\Business\Managers;
 
 use BlueFission\Services\Service;
 use BlueFission\Data\Storage\Session;
-use BlueFission\Framework\Command\CommandProcessor;
-use BlueFission\Framework\Context;
+use BlueFission\BlueCore\Command\CommandProcessor;
+use BlueFission\Automata\Context;
 use BotMan\BotMan\Messages\Incoming\IncomingMessage;
 
 class InterpretationManager extends Service {

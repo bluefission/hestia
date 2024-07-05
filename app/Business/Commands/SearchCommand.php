@@ -104,7 +104,7 @@ class SearchCommand extends Service
         }
 
         if ($url) {
-            $processor = instance()->getDynamicInstance(\BlueFission\Framework\Command\CommandProcessor::class);
+            $processor = instance()->getDynamicInstance(\BlueFission\BlueCore\Command\CommandProcessor::class);
             $response .= "\n\n";
             $processor->process("open website {$url}");
 

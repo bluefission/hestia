@@ -1,5 +1,5 @@
 <?php
-use BlueFission\Framework\Datasource\Generator;
+use BlueFission\BlueCore\Datasource\Generator;
 use BlueFission\DevString;
 
 use App\Domain\User\Models\UserModel;

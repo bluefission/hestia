@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Initiative\Models;
 
-use BlueFission\Framework\Model\ModelSql as Model;
+use BlueFission\BlueCore\Model\ModelSql as Model;
 
 class QuantifierModel extends Model {
 	protected $_table = 'quantifiers';

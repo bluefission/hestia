@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\User\Models;
 
-use BlueFission\Framework\Model\ModelSql as Model;
+use BlueFission\BlueCore\Model\ModelSql as Model;
 use BlueFission\Data\Storage\MysqlBulk;
 
 class CredentialModel extends Model {

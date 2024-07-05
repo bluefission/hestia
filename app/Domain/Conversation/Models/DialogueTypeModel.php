@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Conversation\Models;
 
-use BlueFission\Framework\Model\ModelSql as Model;
+use BlueFission\BlueCore\Model\ModelSql as Model;
 
 class DialogueTypeModel extends Model {
 	

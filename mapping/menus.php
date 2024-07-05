@@ -1,6 +1,6 @@
 <?php
-use BlueFission\Framework\Menu;
-use BlueFission\Framework\MenuItem;
+use BlueFission\BlueCore\Menu;
+use BlueFission\BlueCore\MenuItem;
 use App\Business\Managers\NavMenuManager;
 
 // Create a new instance of NavMenuManager

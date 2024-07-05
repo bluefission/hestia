@@ -1,6 +1,6 @@
 <?php
-use BlueFission\Framework\Skill\Intent\Intent;
-use BlueFission\Framework\Skill\Intent\Context;
+use BlueFission\BlueCore\Skill\Intent\Intent;
+use BlueFission\BlueCore\Skill\Intent\Context;
 use App\Business\Skills\GreetingResponseSkill;
 use App\Business\Skills\GoodbyeResponseSkill;
 use App\Business\Skills\StatusSkill;

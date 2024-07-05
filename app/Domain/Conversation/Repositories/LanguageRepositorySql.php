@@ -2,7 +2,7 @@
 namespace App\Domain\Conversation\Repositories;
 
 use BlueFission\Connections\Database\MysqlLink;
-use BlueFission\Framework\Repository\RepositorySql;
+use BlueFission\BlueCore\Repository\RepositorySql;
 use App\Domain\Conversation\Repositories\ILanguageRepository;
 use App\Domain\Conversation\Models\LanguageModel as Model;
 use App\Domain\Conversation\Language;

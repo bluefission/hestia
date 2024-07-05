@@ -8,6 +8,12 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const FileManagerPlugin = require("filemanager-webpack-plugin");
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 
+const activeTheme = getActiveThemeFromDatabase();
+
+function getActiveThemeFromDatabase() {
+  return 'default';
+}
+
 const opts = {
   rootDir: process.cwd(),
   devBuild: process.env.NODE_ENV !== "production"
@@ -50,6 +56,7 @@ module.exports = {
     'module-terminal': "./resource/src/js/modules/app/module-terminal.js",
     'module-content': "./resource/src/js/modules/app/module-content.js",
     'module-media': "./resource/src/js/modules/app/module-media.js",
+    ... (activeTheme ? {[`theme-${activeTheme}`]: `./resource/markup/${activeTheme}/src/index.js`} : {}),
     ...addonsModules, // include the addon entries here
     ...addonsEntries // include the addon entries here
   },
@@ -84,7 +91,9 @@ module.exports = {
     new Webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
-      app: ["app", 'default']
+      'window.jQuery': 'jquery',
+      app: ["app", 'default'],
+      Popper: ['popper.js', 'default']
     }),
     // Copy fonts and images to dist
     new CopyWebpackPlugin({
@@ -102,6 +111,7 @@ module.exports = {
           from: 'resource/src/css/admin.css',
           to: 'css/admin.css',
         },
+        ...(activeTheme ? [{ from: `./resource/markup/${activeTheme}/assets`, to: '.' }] : [])
       ]
     }),
     // Copy dist folder to docs/dist

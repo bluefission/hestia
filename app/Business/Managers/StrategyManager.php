@@ -3,7 +3,7 @@
 namespace App\Business\Managers;
 
 use BlueFission\Services\Service;
-use BlueFission\Bot\DataGroup;
+use BlueFission\Automata\DataGroup;
 
 class StrategyManager extends Service
 {

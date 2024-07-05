@@ -2,7 +2,7 @@
 namespace App\Business\Commands;
 
 use BlueFission\Services\Service;
-use BlueFission\Framework\Command\CommandProcessor;
+use BlueFission\BlueCore\Command\CommandProcessor;
 
 class CommandHelper extends Service {
 	protected $_collection;

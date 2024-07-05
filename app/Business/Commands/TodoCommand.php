@@ -1,7 +1,7 @@
 <?php
 namespace App\Business\Commands;
 
-use BlueFission\Framework\Command\BaseCommand;
+use BlueFission\BlueCore\Command\BaseCommand;
 use BlueFission\Data\Storage\Disk;
 
 class TodoCommand extends BaseCommand

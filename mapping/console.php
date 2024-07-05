@@ -1,5 +1,5 @@
 <?php
-use BlueFission\Framework\Engine as App;
+use BlueFission\BlueCore\Engine as App;
 use App\Business\Console\CliManager;
 use App\Business\Console\UserManager;
 use App\Business\Console\DatabaseManager;

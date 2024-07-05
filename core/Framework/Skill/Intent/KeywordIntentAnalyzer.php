@@ -1,10 +1,10 @@
 <?php
 // KeywordIntentAnalyzer.php
-namespace BlueFission\Framework\Skill\Intent;
+namespace BlueFission\BlueCore\Skill\Intent;
 
-use BlueFission\Framework\IAnalyzer;
-use BlueFission\Framework\Context;
-use BlueFission\Bot\Strategies\NaiveBayesTextClassification;
+use BlueFission\Automata\Analysis\IAnalyzer;
+use BlueFission\Automata\Context;
+use BlueFission\Automata\Strategy\NaiveBayesTextClassification;
 use Phpml\FeatureExtraction\TokenCountVectorizer;
 use Phpml\Tokenization\WhitespaceTokenizer;
 use Phpml\FeatureExtraction\TfIdfTransformer;
@@ -13,10 +13,12 @@ use Phpml\ModelManager;
 class KeywordIntentAnalyzer implements IAnalyzer
 {
     private $intentClassifier;
+    private $modelDirPath;
 
-    public function __construct(NaiveBayesTextClassification $intentClassifier)
+    public function __construct(NaiveBayesTextClassification $intentClassifier, string $modelDirPath)
     {
         $this->intentClassifier = $intentClassifier;
+        $this->modelDirPath = $modelDirPath;
     }
 
     public function analyze(string $input, Context $context, array $intents): array

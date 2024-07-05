@@ -1,5 +1,5 @@
 <?php
-namespace BlueFission\Framework\Generation;
+namespace BlueFission\BlueCore\Generation;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;

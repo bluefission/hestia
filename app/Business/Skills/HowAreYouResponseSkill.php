@@ -2,8 +2,8 @@
 // HowAreYouResponseSkill.php
 namespace App\Business\Skills;
 
-use BlueFission\Framework\Context;
-use BlueFission\Framework\Skill\BaseSkill;
+use BlueFission\Automata\Context;
+use BlueFission\BlueCore\Skill\BaseSkill;
 use BlueFission\System\Machine;
 
 class HowAreYouResponseSkill extends BaseSkill

@@ -1,7 +1,7 @@
 <?php
 namespace AddOns\Initiative\Domain;
 
-use BlueFission\Framework\ValueObject;
+use BlueFission\BlueCore\ValueObject;
 
 class Initiative extends ValueObject {
 	public $initiative_id;

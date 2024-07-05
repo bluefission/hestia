@@ -1,8 +1,8 @@
 <?php
 // BaseSkill.php
-namespace BlueFission\Framework\Skill;
+namespace BlueFission\BlueCore\Skill;
 
-use BlueFission\Framework\Context;
+use BlueFission\Automata\Context;
 abstract class BaseSkill {
     protected $name;
 
