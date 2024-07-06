@@ -363,6 +363,5 @@ class WebBrowserCommand extends Service
         store('_system.website.per_link_page', $this->_perLinkPage);
         store('_system.website.content', $this->_content);
         store('_system.website.bookmarks', $this->_bookmarks);
-
     }
 }

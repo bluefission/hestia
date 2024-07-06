@@ -52,7 +52,6 @@ class EntityCommand extends BaseCommand
 
         $this->_entries = $entities;
 
-        var_dump($this->_entries);
         $this->store();
 
         $this->_response = "Collected ".count($entities)." classes of entity.".PHP_EOL;

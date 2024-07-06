@@ -34,6 +34,7 @@
         "bluefission/develation": "^1.0.0-alpha",
         "bluefission/automata": "dev-master",
         "bluefission/bluecore": "dev-main",
+        "bluefission/custom-installer": "dev-master",
         "botman/botman": "^2.6",
         "botman/driver-web": "^1.5",
         "cboden/ratchet": "^0.4.4",
