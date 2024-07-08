@@ -1,5 +1,4 @@
 <?php
-use BlueFission\DevValue;
 use App\Business\Managers\CommunicationManager;
 
 if (!function_exists( 'get_site_url' )) {
@@ -68,63 +67,6 @@ function prompt_silent($prompt = "Enter Password:") {
   }
 }
 
-if (!function_exists('pluralize')) {
-	function pluralize($text)
-	{
-		$irregularWords = [
-			'todo'=>'todos', 'person'=>'people', 'man'=>'men', 'woman'=>'women', 'child'=>'children', 'mouse'=>'mice', 'foot'=>'feet', 'goose'=>'geese', 'die'=>'dice',
-		];
-
-		// Largely animals
-		$identicals = [
-			'news', 'fish', 'sheep', 'moose', 'swine', 'buffalo', 'shrimp', 'trout'
-		];
-
-		if ( in_array($text, $identicals) ) {
-			$plural = $text;
-		} elseif ( in_array($text, array_keys($irregularWords)) ) {
-			$plural = $irregularWords[$text];
-		} elseif (substr($text, -1) == 'y' && substr($text, -2) != 'ay' && substr($text, -2) != 'ey' && substr($text, -2) != 'iy' && substr($text, -2) != 'oy' && substr($text, -2) != 'uy') {
-			$plural = substr($text, 0, -1) . 'ies';
-		} elseif (substr($text, -1) == 's' || substr($text, -2) == 'sh' || substr($text, -2) == 'ch' || substr($text, -2) == 'ss' || substr($text, -1) == 'x' || substr($text, -1) == 'z' || substr($text, -1) == 'o') {
-			$plural = $text . 'es';
-		} elseif (substr($text, -1) == 'f') {
-			$plural = substr($text, 0, -1) . 'ves';
-		} elseif (substr($text, -2) == 'fe') {
-			$plural = substr($text, 0, -2) . 'ves';
-		} elseif (substr($text, -2) == 'us') {
-			$plural = substr($text, 0, -2) . 'i';
-		} elseif (substr($text, -2) == 'is') {
-			$plural = substr($text, 0, -2) . 'es';
-		} elseif ((substr($text, -2) == 'on' && substr($text, -4) != 'tion' && strlen($text) > 4) || (substr($text, -2) == 'um' && substr($text, -3) == 'rum')) {
-			$plural = substr($text, 0, -2) . 'a';
-		} elseif (substr($text, -2) == 'ex') {
-			$plural = substr($text, 0, -2) . 'ices';
-		} else {
-			$plural = $text . 's';
-		}
-
-	    return $plural;
-	}
-}
-
-
-if (!function_exists('slugify')) {
-	function slugify($string)
-	{
-	    // Replace non-alphanumeric characters with hyphens
-	    $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', $string);
-	    
-	    // Convert the string to lowercase
-	    $slug = strtolower($slug);
-	    
-	    // Trim hyphens from the beginning and end of the string
-	    $slug = trim($slug, '-');
-	    
-	    return $slug;
-	}
-}
-
 if (!function_exists('tell')) {
     function tell(string $content, string $channel = null, int $userId = null, array $attachments = [], array $parameters = [])
     {
@@ -143,52 +85,5 @@ if (!function_exists('whisper')) {
 	function whisper(string $content, int $userId = null, array $attachments = [], array $parameters = [])
 	{
 	    return CommunicationManager::send($content, null, $userId, $attachments, $parameters, true);
-	}
-}
-
-if (!function_exists('store')) {
-    function store($name, $value = null)
-    {
-        if (php_sapi_name() === 'cli') {
-            // CLI environment: use DiskStorage
-            $storagePath = OPUS_ROOT.'storage/data';
-            if (!is_dir($storagePath)) {
-	            mkdir($storagePath, 0777, true);
-	        }
-            $diskStorage = new \BlueFission\Data\Storage\Disk([
-                'location' => $storagePath, // Set your desired storage path
-                'name' => 'cli_storage.json'     // Set your desired storage file name
-            ]);
-            $diskStorage->activate();
-            $storedData = $diskStorage->read() ?? [];
-
-            if ($value === null) {
-                // Return the value if $value is null
-                return isset($storedData[$name]) ? $storedData[$name] : null;
-            }
-
-            $storedData[$name] = $value;
-            $diskStorage->assign($storedData);
-            $diskStorage->contents(json_encode($storedData));
-            $diskStorage->write();
-            unset($diskStorage);
-        } else {
-            // HTTP environment: use sessions
-            return BlueFission\Net\HTTP::session($name, $value);
-        }
-    }
-}
-
-if (!function_exists('global')) {
-	function globals($var, $value = null)
-	{
-		if (DevValue::isNull($value) )
-			return isset( $GLOBALS[$var] ) ? $GLOBALS[$var] : null;
-			
-		$GLOBALS[$var] = $value;
-			
-		$status = ($GLOBALS[$var] = $value) ? true : false;
-		
-		return $status;
 	}
 }
