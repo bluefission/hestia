@@ -3,7 +3,7 @@ namespace App\Business\Managers;
 
 use BlueFission\Services\Service;
 use BlueFission\Data\Storage\Session;
-use BlueFission\BlueCore\Command\CommandProcessor;
+// use BlueFission\Wise\Cmd\CommandProcessor;
 use BlueFission\Automata\Context;
 use BotMan\BotMan\Messages\Incoming\IncomingMessage;
 
@@ -11,9 +11,9 @@ class InterpretationManager extends Service {
 
 	private $context = false;
 	private $continue = false;
-	public function __construct(CommandProcessor $commandProcessor, Context $context)
+	public function __construct(Context $context)
 	{
-		$this->commandProcessor = $commandProcessor;
+		// $this->commandProcessor = $commandProcessor;
 		$this->context = $context;
 
 		parent::__construct();
@@ -71,10 +71,14 @@ class InterpretationManager extends Service {
 	}
 
     protected function command($input) {
-        $sessionStorage = new Session(['location'=>'cache','name'=>'system']);
-        $commandProcessor = new CommandProcessor($sessionStorage);
+        // $sessionStorage = new Session(['location'=>'cache','name'=>'system']);
+        // $commandProcessor = new CommandProcessor($sessionStorage);
+        // $response = $commandProcessor->process($input);
 
-        $response = $commandProcessor->process($input);
+    	$core = instance('core');
+    	$core->handle('input');
+    	$response = $core->output();
+
         return $response;
     }
 

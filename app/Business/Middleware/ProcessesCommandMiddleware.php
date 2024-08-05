@@ -4,8 +4,8 @@ namespace App\Business\Middleware;
 
 use BotMan\BotMan\BotMan;
 use BlueFission\Data\Storage\Session;
-use App\Business\Managers\CommandManager;
-use BlueFission\BlueCore\Command\CommandProcessor;
+// use App\Business\Managers\CommandManager;
+// use BlueFission\Wise\Cmd\CommandProcessor;
 use BotMan\BotMan\Interfaces\Middleware\Received;
 use BotMan\BotMan\Interfaces\Middleware\Sending;
 use BotMan\BotMan\Messages\Incoming\IncomingMessage;
@@ -14,18 +14,23 @@ use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 
 class ProcessesCommandMiddleware implements Received, Sending
 {
-    protected $commandManager;
-    protected $commandProcessor;
+    // protected $commandManager;
+    // protected $commandProcessor;
+    protected $_core;
 
-    public function __construct(CommandManager $commandManager, CommandProcessor $commandProcessor)
+    // public function __construct(CommandManager $commandManager, CommandProcessor $commandProcessor)
+    public function __construct()
     {
-        $this->commandManager = $commandManager;
-        $this->commandProcessor = $commandProcessor;
+        // $this->commandManager = $commandManager;
+        // $this->commandProcessor = $commandProcessor;
     }
 
     public function received(IncomingMessage $message, $next, BotMan $bot)
     {
-        $results = $this->commandManager->parse($message->getText());
+        // $results = $this->commandManager->parse($message->getText());
+        $core = instance('core');
+        $core->handle($message->getText());
+        $results = $core->output();
         $message->addExtras('command', $results);
 
         return $next($message);
@@ -36,12 +41,7 @@ class ProcessesCommandMiddleware implements Received, Sending
         $walkerResults = $bot->getMessage()->getExtras('command');
 
         if ($walkerResults && $walkerResults['subject'] === 'app') {
-            // ... (the existing code)
             return $next($payload)->then(function ($response) use ($bot, $walkerResults) {
-                
-                // You can perform any action you want here using $bot and $walkerResults
-
-                // For example, log the message sent and received by the user
                 $this->logMessage($bot, $walkerResults);
             });
         }
@@ -51,8 +51,6 @@ class ProcessesCommandMiddleware implements Received, Sending
 
     protected function logMessage(BotMan $bot, $walkerResults)
     {
-        // Implement your custom logic to log the message or perform other actions
-        // You can use the $bot and $walkerResults variables to access relevant information
         $command = $this->commandProcessor->process($walkerResults);
         
         if ($command->confirmationRequired()) {

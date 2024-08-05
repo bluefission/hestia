@@ -4,7 +4,7 @@ namespace App\Business\Managers;
 
 use BlueFission\Connections\Database\MysqlLink;
 use BlueFission\Services\Service;
-use App\Domain\Content\Queries\PublishedContentQuerySql;
+use BlueFission\BlueCore\Domain\Content\Queries\PublishedContentQuerySql;
 use BlueFission\Services\Mapping;
 
 class ContentManager extends Service

@@ -2,7 +2,7 @@
 
 namespace App\Business\Drivers;
 
-use App\Domain\Communication\Communication;
+use BlueFission\BlueCore\Domain\Communication\Communication;
 use BotMan\BotMan\BotMan;
 
 class BotManCommunicationDriver extends CommunicationDriver

@@ -2,22 +2,17 @@
 namespace App\Business\Managers;
 
 use BlueFission\Services\Service;
-use BlueFission\BlueCore\Command\CommandProcessor;
 use BlueFission\Automata\Collections\OrganizedCollection;
 use BlueFission\Automata\Language\Grammar;
 use BlueFission\Automata\Language\SyntaxTreeWalker;
 use BlueFission\Automata\Language\EntityExtractor;
 
 class CommandManager extends Service {
-	protected $_collection;
 	protected $_grammar;
-	protected $_processor;
 
 
-	public function __construct(Grammar $grammar, CommandProcessor $processor)
+	public function __construct(Grammar $grammar)
 	{
-		$this->_collection = new OrganizedCollection();
-		$this->_processor = $processor;
 		$this->_grammar = $grammar;
 		parent::__construct();
 	}

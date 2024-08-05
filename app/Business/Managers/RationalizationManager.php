@@ -1,6 +1,6 @@
 <?php
 namespace App\Business\Managers;
 
-class ConversationManager extends Service {
+class RationalizationManager extends Service {
 
 }

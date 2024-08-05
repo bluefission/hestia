@@ -3,35 +3,34 @@ namespace App\Business\Managers;
 
 use BlueFission\Services\Service;
 // use BlueFission\Behavioral\Behaviors\Event;
-use BlueFission\Automata\Analysis\KeywordTopicAnalyzer;
-use App\Domain\Conversation\Repositories\ITopicRepository;
-use App\Domain\Conversation\Repositories\IDialogueRepository;
-use App\Domain\Conversation\Queries\IDialoguesByTopicQuery;
-use App\Domain\Conversation\Queries\IDialoguesByKeywordsQuery;
-use App\Domain\Conversation\Queries\ITopicRoutesByTopicQuery;
-use App\Domain\Conversation\Queries\IAllTopicsQuery;
-use App\Domain\Conversation\Queries\ITagsByTopicQuery;
-use App\Domain\Conversation\Queries\IFactsByKeywordsQuery;
-// use App\Domain\Conversation\Repositories\ITopicRouteRepository;
-// use App\Domain\Conversation\Repositories\ITagRepository;
-// use App\Domain\Conversation\Repositories\IFactRepository;
-use App\Domain\Conversation\Repositories\IDialogueTypeRepository;
-use App\Domain\Conversation\Repositories\ILanguageRepository;
-// use App\Domain\Conversation\Repositories\IConversationRepository;
-// use App\Domain\Conversation\Repositories\IMessageRepository;
-use App\Domain\Conversation\DialogueType;
-use App\Domain\Conversation\Dialogue;
-use App\Domain\Conversation\Language;
-use App\Domain\Conversation\Message;
-// use App\Domain\Conversation\TopicRoute;
-use App\Domain\Conversation\Topic;
+use BlueFission\BlueCore\Domain\Conversation\Repositories\ITopicRepository;
+use BlueFission\BlueCore\Domain\Conversation\Repositories\IDialogueRepository;
+use BlueFission\BlueCore\Domain\Conversation\Queries\IDialoguesByTopicQuery;
+use BlueFission\BlueCore\Domain\Conversation\Queries\IDialoguesByKeywordsQuery;
+use BlueFission\BlueCore\Domain\Conversation\Queries\ITopicRoutesByTopicQuery;
+use BlueFission\BlueCore\Domain\Conversation\Queries\IAllTopicsQuery;
+use BlueFission\BlueCore\Domain\Conversation\Queries\ITagsByTopicQuery;
+use BlueFission\BlueCore\Domain\Conversation\Queries\IFactsByKeywordsQuery;
+// use BlueFission\BlueCore\Domain\Conversation\Repositories\ITopicRouteRepository;
+// use BlueFission\BlueCore\Domain\Conversation\Repositories\ITagRepository;
+// use BlueFission\BlueCore\Domain\Conversation\Repositories\IFactRepository;
+use BlueFission\BlueCore\Domain\Conversation\Repositories\IDialogueTypeRepository;
+use BlueFission\BlueCore\Domain\Conversation\Repositories\ILanguageRepository;
+// use BlueFission\BlueCore\Domain\Conversation\Repositories\IConversationRepository;
+// use BlueFission\BlueCore\Domain\Conversation\Repositories\IMessageRepository;
+use BlueFission\BlueCore\Domain\Conversation\DialogueType;
+use BlueFission\BlueCore\Domain\Conversation\Dialogue;
+use BlueFission\BlueCore\Domain\Conversation\Language;
+use BlueFission\BlueCore\Domain\Conversation\Message;
+// use BlueFission\BlueCore\Domain\Conversation\TopicRoute;
+use BlueFission\BlueCore\Domain\Conversation\Topic;
 use BlueFission\Automata\Context;
-// use App\Domain\Conversation\Tag;
-// use App\Domain\Conversation\Fact;
+// use BlueFission\BlueCore\Domain\Conversation\Tag;
+// use BlueFission\BlueCore\Domain\Conversation\Fact;
 use App\Business\Services\OpenAIService;
-
+use BlueFission\Automata\Analysis\KeywordTopicAnalyzer;
 use BlueFission\Data\Storage\Session;
-use BlueFission\BlueCore\Command\CommandProcessor;
+use BlueFission\Wise\Cmd\CommandProcessor;
 use BlueFission\Automata\Collections\OrganizedCollection;
 use App\Business\Prompts\SuggestResponseType;
 use App\Business\Prompts\DifficultyScore;
@@ -580,11 +579,13 @@ class ConversationManager extends Service {
 
 	private function processCommand($command): string
 	{
-		$sessionStorage = new Session(['location'=>'cache','name'=>'system']);
-        $commandProcessor = new CommandProcessor($sessionStorage);
-		$systemResponse = $commandProcessor->process($command);
+		// $sessionStorage = new Session(['location'=>'cache','name'=>'system']);
+        // $commandProcessor = new CommandProcessor($sessionStorage);
+		// $systemResponse = $commandProcessor->process($command);
+        $core = instance('core');
+        $core->handle($command);
 
-		return $systemResponse;
+		return $core->output();
 	}
 
 	public function getTags()

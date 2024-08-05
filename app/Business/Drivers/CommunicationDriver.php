@@ -1,7 +1,7 @@
 <?php
 namespace App\Business\Drivers;
 
-use App\Domain\Communication\Communication;
+use BlueFission\BlueCore\Domain\Communication\Communication;
 
 abstract class CommunicationDriver
 {

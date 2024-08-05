@@ -8,7 +8,7 @@ use BlueFission\Utils\DateTime;
 use BlueFission\DevString;
 use SimpleXMLElement;
 
-class ThreadManager extends Service {
+class OldThreadManager extends Service {
     private $_agent;
     private $_user;
     private $_description;

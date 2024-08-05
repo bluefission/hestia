@@ -5,14 +5,14 @@ namespace App\Business\Managers;
 use BlueFission\Services\Service;
 use BlueFission\BlueCore\Auth as Authenticator;
 use BlueFission\Data\Storage\Storage;
-use App\Domain\Communication\Communication;
-use App\Domain\Communication\CommunicationStatus;
-use App\Domain\Communication\Repositories\ICommunicationRepository;
-use App\Domain\Communication\Repositories\CommunicationChannelRepositorySql;
-use App\Domain\Communication\Repositories\CommunicationTypeRepositorySql;
-use App\Domain\Communication\Repositories\CommunicationStatusRepositorySql;
-use App\Domain\Communication\Repositories\CommunicationRepositorySql;
-use App\Domain\Communication\Queries\IUndeliveredCommunicationsQuery;
+use BlueFission\BlueCore\Domain\Communication\Communication;
+use BlueFission\BlueCore\Domain\Communication\CommunicationStatus;
+use BlueFission\BlueCore\Domain\Communication\Repositories\ICommunicationRepository;
+use BlueFission\BlueCore\Domain\Communication\Repositories\CommunicationChannelRepositorySql;
+use BlueFission\BlueCore\Domain\Communication\Repositories\CommunicationTypeRepositorySql;
+use BlueFission\BlueCore\Domain\Communication\Repositories\CommunicationStatusRepositorySql;
+use BlueFission\BlueCore\Domain\Communication\Repositories\CommunicationRepositorySql;
+use BlueFission\BlueCore\Domain\Communication\Queries\IUndeliveredCommunicationsQuery;
 use Closure;
 
 class CommunicationManager extends Service

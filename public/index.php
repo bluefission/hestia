@@ -13,8 +13,6 @@ require '../common/config/settings.php';
 // Require the autoloader for composer-based dependencies
 require '../vendor/autoload.php';
 // Require the autoloader for non-composer based scripts
-// $autoloader = require '../common/config/settings.php';
-require '../common/helpers/global.php';
 
 // Initialize the Loader utility for non-composer compatible scripts
 $loader = Loader::instance();
@@ -26,12 +24,11 @@ session_start();
 
 // Set a CSRF token in the session
 if (empty(store('_token'))) {
-    store('_token', Util::csrf_token());
+    store('_token', csrf_token());
 }
 
 // Initialize the BlueFission Framework Engine and run it
-$app = App::instance();
-$app
+App::instance()
 	->bootstrap()
 	->args()
 	->process()

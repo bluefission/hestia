@@ -5,8 +5,8 @@ namespace App\Business\Managers;
 use BlueFission\Connections\Database\MysqlLink;
 use BlueFission\Services\Service;
 use BlueFission\Utils\Loader;
-use App\Domain\AddOn\Models\AddOnModel;
-use App\Domain\AddOn\AddOn;
+use BlueFission\BlueCore\Domain\AddOn\Models\AddOnModel;
+use BlueFission\BlueCore\Domain\AddOn\AddOn;
 use BlueFission\DevString;
 use BlueFission\System\System;
 

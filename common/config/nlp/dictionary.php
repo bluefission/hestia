@@ -525,5 +525,5 @@ return  [
     'suddenly' => ['T_MODIFIER'],
     'maybe' => ['T_MODIFIER'],
     'indeed' => ['T_MODIFIER'],
-    'rather' => ['T_MODIFIER'],
+    'rather' => ['T_OPERATOR', 'T_MODIFIER'],
 ];

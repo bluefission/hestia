@@ -4,20 +4,21 @@ namespace App\Business\Console;
 use BotMan\BotMan\BotMan;
 use BlueFission\Services\Service;
 use App\Business\Console\BotMan\CommandLineDriver;
-use BlueFission\BlueCore\Command\CommandProcessor;
+// use BlueFission\Wise\Cmd\CommandProcessor;
 
 class CliManager extends Service {
 
-	protected $_processor;
+	// protected $_processor;
 
-	public function __construct(CommandProcessor $commandProcessor )
+	public function __construct()
     {
 		parent::__construct();
-		$this->_processor = $commandProcessor;
+		// $this->_processor = $commandProcessor;
 	}
 
 	public function cmd()
 	{
+		$core = instance('core');
 		print "Type your message. Type '.' on a line by itself when you're done.\n";
 
 		$fp = fopen('php://stdin', 'r');
@@ -39,7 +40,10 @@ class CliManager extends Service {
 		      	$transcript = $thread->history();
 		      	echo $transcript;
 		      } else {
-			      $response = $this->_processor->process($next_line);
+			      // $response = $this->_processor->process($next_line);
+			      $core->handle($next_line);
+			      $response = $core->output();
+			      
 			      echo "\n$response\n\n";
 			  }
 		    }

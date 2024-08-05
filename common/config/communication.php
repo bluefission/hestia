@@ -1,9 +1,9 @@
 <?php
 use App\Business\Drivers\HTTPCommunicationDriver;
 use App\Business\Drivers\BotManCommunicationDriver;
-use App\Domain\Communication\Repositories\CommunicationChannelRepositorySql;
-use App\Domain\Communication\Repositories\CommunicationTypeRepositorySql;
-use App\Domain\Communication\Communication;
+use BlueFission\BlueCore\Domain\Repositories\CommunicationChannelRepositorySql;
+use BlueFission\BlueCore\Domain\Repositories\CommunicationTypeRepositorySql;
+use BlueFission\BlueCore\Domain\Communication;
 
 return [
 	'drivers' => [
