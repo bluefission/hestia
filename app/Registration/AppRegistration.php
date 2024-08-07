@@ -91,7 +91,7 @@ class AppRegistration implements IExtension {
 		$botman = BotManFactory::create([], $cache);
 		$this->_app->delegate('botman', $botman);
 
-		// $this->_app->delegate('core', Core::class);
+		$this->_app->delegate('core', Core::class);
 		$this->_app->delegate('communication', CommunicationManager::class);
 		// $this->_app->delegate('cmd', CommandManager::class);
 		$this->_app->delegate('nav', NavMenuManager::class);
