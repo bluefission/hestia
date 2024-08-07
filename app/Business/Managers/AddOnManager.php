@@ -2,7 +2,7 @@
 
 namespace App\Business\Managers;
 
-use BlueFission\Connections\Database\MysqlLink;
+use BlueFission\Connections\Database\MySQLLink;
 use BlueFission\Services\Service;
 use BlueFission\Utils\Loader;
 use BlueFission\BlueCore\Domain\AddOn\Models\AddOnModel;
@@ -15,7 +15,7 @@ class AddOnManager extends Service
     private $_loader;
     protected $_model;
 
-    public function __construct(MysqlLink $link)
+    public function __construct(MySQLLink $link)
     {
         $link->open();
         $this->_model = new AddOnModel();
