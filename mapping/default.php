@@ -49,62 +49,9 @@ Mapping::add('/clear', function() {
 	echo "All clear!";
 });
 
-Mapping::add('/fillin', function() {
-	// $topic = "The future of work and AI/Automation - labor concerns and observations from dawn of the GPT era.";
-	$topic = "I think that the dystopian predictions around AI are sensationalist fear mongering and a distraction from the real conversation about capitalism.";
-	$result = (new \BlueFission\Automata\LLM\FillIn(new \App\Business\Services\OpenAIService(), (new \App\Business\Prompts\SocialPostPrompt($topic))->prompt()))->run(['max_tokens'=>250]);
-	var_dump($result); // echos: "Modern AI - from sci fi to reality"
-});
-
-Mapping::add('/chain', function() {
-	$llm = new \App\Business\Services\OpenAIService();
-	$agent = new \BlueFission\Automata\LLM\Agent($llm);
-
-	// Register the tools
-	// $agent->registerTool("Stock DB", new \BlueFission\Automata\LLM\Tools\StockDatabase());
-	$agent->registerTool("Stock DB", new \BlueFission\Automata\LLM\Tools\Weather());
-	$agent->registerTool("Search", new \BlueFission\Automata\LLM\Tools\WebSearch());
-	$agent->registerTool("Calculator", new \BlueFission\Automata\LLM\Tools\Calculator());
-
-	// Execute a question
-	$result = $agent->execute("What is the multiplication of the ratio between stock prices for 'ABC' and 'XYZ' in January 3rd and the ratio between the same stock prices in January the 4th?");
-});
-
-
 Mapping::add('/', function() {
-	return template('bluefission', 'default.html', ['title'=>"Welcome", 'name'=>env('APP_NAME'), 'csrf_token'=>HTTP::session('_token')]);
+	return template('default', 'default.html', ['title'=>"Welcome", 'name'=>env('APP_NAME'), 'csrf_token'=>HTTP::session('_token')]);
 }, 'index', 'get');
-
-// ADDED JULY 3/4 UPDATE
-Mapping::add('/opus', function() {
-	return template('bluefission', 'opus.html', ['title'=>"Opus", 'name'=>env('APP_NAME'), 'csrf_token'=>HTTP::session('_token')]);
-}, 'opus', 'get');
-Mapping::add('/services', function() {
-	return template('bluefission', 'services.html', ['title'=>"BlueFission Services", 'name'=>env('APP_NAME'), 'csrf_token'=>HTTP::session('_token')]);
-}, 'services', 'get');
-Mapping::add('/about', function() {
-	return template('bluefission', 'about.html', ['title'=>"About BlueFission", 'name'=>env('APP_NAME'), 'csrf_token'=>HTTP::session('_token')]);
-}, 'about', 'get');
-Mapping::add('/blog', function() {
-	return template('bluefission', 'blog.html', ['title'=>"Blog", 'name'=>env('APP_NAME'), 'csrf_token'=>HTTP::session('_token')]);
-}, 'blog', 'get');
-Mapping::add('/blog-single', function() {
-	return template('bluefission', 'blog-single.html', ['title'=>"Blog Post", 'name'=>env('APP_NAME'), 'csrf_token'=>HTTP::session('_token')]);
-}, 'blog_single', 'get');
-Mapping::add('/contact', function() {
-	return template('bluefission', 'contact.html', ['title'=>"Contact BlueFission", 'name'=>env('APP_NAME'), 'csrf_token'=>HTTP::session('_token')]);
-}, 'contact', 'get');
-Mapping::add('/terms', function() {
-	return template('bluefission', 'terms.html', ['title'=>"Terms and Conditions", 'name'=>env('APP_NAME'), 'csrf_token'=>HTTP::session('_token')]);
-}, 'terms', 'get');
-Mapping::add('/privacy', function() {
-	return template('bluefission', 'privacy.html', ['title'=>"Privacy Policy", 'name'=>env('APP_NAME'), 'csrf_token'=>HTTP::session('_token')]);
-}, 'privacy', 'get');
-
-
-
-
-
 
 Mapping::add('/test', function() {
 	$object = new BlueFission\Obj();
