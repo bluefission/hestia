@@ -12,16 +12,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/automata.git",
-                "reference": "97748b376b3b3e7f5fe69a7ff17c9b8bd4e2dcfe"
+                "reference": "85497ab4cad9aecfbf10de35a5c34f44e21661ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/automata/zipball/97748b376b3b3e7f5fe69a7ff17c9b8bd4e2dcfe",
-                "reference": "97748b376b3b3e7f5fe69a7ff17c9b8bd4e2dcfe",
+                "url": "https://api.github.com/repos/bluefission/automata/zipball/85497ab4cad9aecfbf10de35a5c34f44e21661ca",
+                "reference": "85497ab4cad9aecfbf10de35a5c34f44e21661ca",
                 "shasum": ""
             },
             "require": {
                 "bluefission/develation": "^1.0.0-alpha",
+                "google-gemini-php/client": "*",
                 "orhanerday/open-ai": "^2.2",
                 "php-ai/php-ml": "^0.10.0"
             },
@@ -63,7 +64,7 @@
                 "source": "https://github.com/bluefission/automata/tree/master",
                 "issues": "https://github.com/bluefission/automata/issues"
             },
-            "time": "2024-08-05T13:24:06+00:00"
+            "time": "2024-08-07T02:23:49+00:00"
         },
         {
             "name": "bluefission/bluecore",
@@ -71,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/bluecore.git",
-                "reference": "a44536f0bc55ab5949948a16fdcc2bbfee9688ae"
+                "reference": "01041bc02ff7d57578ca78d8f58e45afb33cbebb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/bluecore/zipball/a44536f0bc55ab5949948a16fdcc2bbfee9688ae",
-                "reference": "a44536f0bc55ab5949948a16fdcc2bbfee9688ae",
+                "url": "https://api.github.com/repos/bluefission/bluecore/zipball/01041bc02ff7d57578ca78d8f58e45afb33cbebb",
+                "reference": "01041bc02ff7d57578ca78d8f58e45afb33cbebb",
                 "shasum": ""
             },
             "require": {
@@ -135,7 +136,7 @@
                 "source": "https://github.com/bluefission/bluecore/tree/main",
                 "issues": "https://github.com/bluefission/bluecore/issues"
             },
-            "time": "2024-08-05T13:22:48+00:00"
+            "time": "2024-08-07T00:44:47+00:00"
         },
         {
             "name": "bluefission/develation",
@@ -143,12 +144,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/develation.git",
-                "reference": "6900b3e1e48c0900898c7ba00bc5e91e252477b8"
+                "reference": "541e5a048c428512278d20ba4361d7e9b520eb51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/develation/zipball/6900b3e1e48c0900898c7ba00bc5e91e252477b8",
-                "reference": "6900b3e1e48c0900898c7ba00bc5e91e252477b8",
+                "url": "https://api.github.com/repos/bluefission/develation/zipball/541e5a048c428512278d20ba4361d7e9b520eb51",
+                "reference": "541e5a048c428512278d20ba4361d7e9b520eb51",
                 "shasum": ""
             },
             "require": {
@@ -198,7 +199,7 @@
                 "source": "https://github.com/bluefission/develation/tree/v1.0.0-alpha",
                 "issues": "https://github.com/bluefission/develation/issues"
             },
-            "time": "2024-08-05T13:19:14+00:00"
+            "time": "2024-08-07T02:26:08+00:00"
         },
         {
             "name": "bluefission/hestia-addon",
@@ -206,12 +207,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/hestia-addon.git",
-                "reference": "9d5e006aaa7bfe64bfa01fbe67e3980745984b6d"
+                "reference": "48298d5c73ba4c33bc222378492993f268393129"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/hestia-addon/zipball/9d5e006aaa7bfe64bfa01fbe67e3980745984b6d",
-                "reference": "9d5e006aaa7bfe64bfa01fbe67e3980745984b6d",
+                "url": "https://api.github.com/repos/bluefission/hestia-addon/zipball/48298d5c73ba4c33bc222378492993f268393129",
+                "reference": "48298d5c73ba4c33bc222378492993f268393129",
                 "shasum": ""
             },
             "require": {
@@ -263,7 +264,7 @@
                 "source": "https://github.com/bluefission/hestia-addon/tree/main",
                 "issues": "https://github.com/bluefission/hestia-addon/issues"
             },
-            "time": "2024-08-06T16:59:17+00:00"
+            "time": "2024-08-06T23:03:39+00:00"
         },
         {
             "name": "bluefission/simpleclients",
@@ -271,18 +272,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/simpleclients.git",
-                "reference": "947143409268f57dd0633df6f8d05cb736fe477b"
+                "reference": "32122d5864d774140b1dc14cf3c99561410eaed7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/simpleclients/zipball/947143409268f57dd0633df6f8d05cb736fe477b",
-                "reference": "947143409268f57dd0633df6f8d05cb736fe477b",
+                "url": "https://api.github.com/repos/bluefission/simpleclients/zipball/32122d5864d774140b1dc14cf3c99561410eaed7",
+                "reference": "32122d5864d774140b1dc14cf3c99561410eaed7",
                 "shasum": ""
             },
             "require": {
-                "bluefission/automata": "dev-master",
                 "bluefission/develation": "^1.0.0-alpha",
-                "orhanerday/open-ai": "^2.2",
                 "simplehtmldom/simplehtmldom": "^2.0@RC"
             },
             "require-dev": {
@@ -318,7 +317,7 @@
                 "source": "https://github.com/bluefission/simpleclients/tree/master",
                 "issues": "https://github.com/bluefission/simpleclients/issues"
             },
-            "time": "2024-07-09T03:15:25+00:00"
+            "time": "2024-08-07T02:43:33+00:00"
         },
         {
             "name": "bluefission/wise",
@@ -1248,6 +1247,69 @@
                 "source": "https://github.com/genkovich/DialogFlowBotManMiddleware/tree/0.0.6"
             },
             "time": "2021-03-30T15:28:33+00:00"
+        },
+        {
+            "name": "google-gemini-php/client",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/google-gemini-php/client.git",
+                "reference": "9002b5d218a63e7692de76728b700600c8e61dca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/google-gemini-php/client/zipball/9002b5d218a63e7692de76728b700600c8e61dca",
+                "reference": "9002b5d218a63e7692de76728b700600c8e61dca",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1.0",
+                "php-http/discovery": "^1.19.2"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^7.8.1",
+                "guzzlehttp/psr7": "^2.6.2",
+                "laravel/pint": "^1.13.10",
+                "mockery/mockery": "^1.6.7",
+                "pestphp/pest": "^2.30",
+                "phpstan/phpstan": "^1.10"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Gemini.php"
+                ],
+                "psr-4": {
+                    "Gemini\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fatih AYDIN",
+                    "email": "aydinfatih52@gmail.com"
+                }
+            ],
+            "description": "Gemini API is a supercharged PHP API client that allows you to interact with the Gemini API",
+            "keywords": [
+                "Gemini",
+                "client",
+                "gemini-pro",
+                "language",
+                "natural",
+                "nlp",
+                "php",
+                "processing",
+                "sdk"
+            ],
+            "support": {
+                "issues": "https://github.com/google-gemini-php/client/issues",
+                "source": "https://github.com/google-gemini-php/client/tree/1.0.5"
+            },
+            "time": "2024-07-09T11:28:21+00:00"
         },
         {
             "name": "google/auth",

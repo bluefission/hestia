@@ -9,12 +9,13 @@ use App\Business\Managers\CommunicationManager;
 use App\Business\Managers\ConversationManager;
 use App\Business\Managers\ThreadManager;
 use App\Business\Managers\SkillManager;
-use App\Business\Services\OpenAIService;
 use App\Business\Services\OpenWeatherService;
 use App\Business\Services\LocationService;
 use App\Business\MysqlConnector;
+use BlueFission\Automata\LLM\Clients\OpenAIClient;
+use BlueFission\Automata\LLM\Clients\GoogleGeminiClient;
+use BlueFission\Automata\Intent\Matcher;
 use BlueFission\BlueCore\Core;
-use BlueFission\BlueCore\Skill\Intent\Matcher;
 use BlueFission\BlueCore\Theme;
 use BlueFission\BlueCore\IExtension;
 // For Conversations
@@ -90,7 +91,7 @@ class AppRegistration implements IExtension {
 		$botman = BotManFactory::create([], $cache);
 		$this->_app->delegate('botman', $botman);
 
-		$this->_app->delegate('core', Core::class);
+		// $this->_app->delegate('core', Core::class);
 		$this->_app->delegate('communication', CommunicationManager::class);
 		// $this->_app->delegate('cmd', CommandManager::class);
 		$this->_app->delegate('nav', NavMenuManager::class);
@@ -131,7 +132,7 @@ class AppRegistration implements IExtension {
 
 		$this->_app->bind('BlueFission\Data\Storage\Storage', 'BlueFission\Data\Storage\MySQL');
 
-		$this->_app->bind('BlueFission\Automata\LLM\Clients\IClient', 'BlueFission\Automata\LLM\Clients\OpenAIClient');
+		$this->_app->bind('BlueFission\Automata\LLM\Clients\IClient', GoogleGeminiClient::class);
 		$this->_app->bind('BlueFission\Automata\Analysis\IAnalyzer', 'BlueFission\BlueCore\Skill\Intent\KeywordIntentAnalyzer');
 		$this->_app->bind('BlueFission\BlueCore\Domain\Conversation\Repositories\ITopicRepository', 'BlueFission\BlueCore\Domain\Conversation\Repositories\TopicRepositorySql');
 		$this->_app->bind('BlueFission\BlueCore\Domain\Conversation\Queries\IDialoguesByTopicQuery', 'BlueFission\BlueCore\Domain\Conversation\Queries\DialoguesByTopicQuerySql');
@@ -165,7 +166,8 @@ class AppRegistration implements IExtension {
 		$this->_app->bindArgs( ['modelDirPath'=>$this->_app->configuration('paths')['ml']['models']], 'BlueFission\BlueCore\Skill\Intent\KeywordIntentAnalyzer');
 		$this->_app->bindArgs( ['config'=>$this->_app->configuration('nlp')['roots']], 'BlueFission\Automata\Language\StemmerLemmatizer');
 		$this->_app->bindArgs( ['storage'=>new \BlueFission\Data\Storage\Session(['location'=>'cache','name'=>'system'])], 'BlueFission\Wise\Cmd\CommandProcessor');
-		$this->_app->bindArgs( ['apiKey'=>env('OPEN_AI_API_KEY')], 'BlueFission\Automata\LLM\Clients\OpenAIClient');
+		// $this->_app->bindArgs( ['apiKey'=>env('OPEN_AI_API_KEY')], OpenAIClient::class);
+		$this->_app->bindArgs( ['apiKey'=>env('GOOGLE_GEMINI_API_KEY')], GoogleGeminiClient::class);
 	}
 
 	public function addons()
