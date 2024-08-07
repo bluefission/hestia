@@ -35,6 +35,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/bluefission/wise"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/bluefission/hestia-addon"
         }
     ],
     "require": {
@@ -44,6 +48,7 @@
         "bluefission/develation": "^1.0.0-alpha",
         "bluefission/simpleclients": "dev-master",
         "bluefission/wise": "dev-main",
+        "bluefission/hestia-addon": "dev-main",
         "botman/botman": "^2.6",
         "botman/driver-web": "^1.5",
         "cboden/ratchet": "^0.4.4",

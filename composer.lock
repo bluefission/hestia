@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "61548829eca320539196db2ba218efa6",
+    "content-hash": "138e88bf3935c53f95e90eefd500aae4",
     "packages": [
         {
             "name": "bluefission/automata",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/automata.git",
-                "reference": "8620491bd57578cd9d17018ff549c1ea158743e1"
+                "reference": "97748b376b3b3e7f5fe69a7ff17c9b8bd4e2dcfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/automata/zipball/8620491bd57578cd9d17018ff549c1ea158743e1",
-                "reference": "8620491bd57578cd9d17018ff549c1ea158743e1",
+                "url": "https://api.github.com/repos/bluefission/automata/zipball/97748b376b3b3e7f5fe69a7ff17c9b8bd4e2dcfe",
+                "reference": "97748b376b3b3e7f5fe69a7ff17c9b8bd4e2dcfe",
                 "shasum": ""
             },
             "require": {
@@ -63,7 +63,7 @@
                 "source": "https://github.com/bluefission/automata/tree/master",
                 "issues": "https://github.com/bluefission/automata/issues"
             },
-            "time": "2024-07-17T00:41:42+00:00"
+            "time": "2024-08-05T13:24:06+00:00"
         },
         {
             "name": "bluefission/bluecore",
@@ -71,12 +71,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/bluecore.git",
-                "reference": "d7e955e4f7d36e2ee2d64ffc69e882078a10967a"
+                "reference": "a44536f0bc55ab5949948a16fdcc2bbfee9688ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/bluecore/zipball/d7e955e4f7d36e2ee2d64ffc69e882078a10967a",
-                "reference": "d7e955e4f7d36e2ee2d64ffc69e882078a10967a",
+                "url": "https://api.github.com/repos/bluefission/bluecore/zipball/a44536f0bc55ab5949948a16fdcc2bbfee9688ae",
+                "reference": "a44536f0bc55ab5949948a16fdcc2bbfee9688ae",
                 "shasum": ""
             },
             "require": {
@@ -135,7 +135,7 @@
                 "source": "https://github.com/bluefission/bluecore/tree/main",
                 "issues": "https://github.com/bluefission/bluecore/issues"
             },
-            "time": "2024-07-10T02:36:09+00:00"
+            "time": "2024-08-05T13:22:48+00:00"
         },
         {
             "name": "bluefission/develation",
@@ -143,17 +143,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/develation.git",
-                "reference": "b2b4a4a29d057fafc1d2954ad985afab5ae92b94"
+                "reference": "6900b3e1e48c0900898c7ba00bc5e91e252477b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/develation/zipball/b2b4a4a29d057fafc1d2954ad985afab5ae92b94",
-                "reference": "b2b4a4a29d057fafc1d2954ad985afab5ae92b94",
+                "url": "https://api.github.com/repos/bluefission/develation/zipball/6900b3e1e48c0900898c7ba00bc5e91e252477b8",
+                "reference": "6900b3e1e48c0900898c7ba00bc5e91e252477b8",
                 "shasum": ""
             },
             "require": {
                 "cboden/ratchet": "^0.4.4",
-                "php": "*"
+                "php": "*",
+                "php-http/discovery": "1.x-dev",
+                "psr/http-client": "^1.0@dev",
+                "psr/http-message": "^2.0@dev"
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.1@dev"
@@ -195,7 +198,72 @@
                 "source": "https://github.com/bluefission/develation/tree/v1.0.0-alpha",
                 "issues": "https://github.com/bluefission/develation/issues"
             },
-            "time": "2024-07-25T23:44:54+00:00"
+            "time": "2024-08-05T13:19:14+00:00"
+        },
+        {
+            "name": "bluefission/hestia-addon",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bluefission/hestia-addon.git",
+                "reference": "9d5e006aaa7bfe64bfa01fbe67e3980745984b6d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bluefission/hestia-addon/zipball/9d5e006aaa7bfe64bfa01fbe67e3980745984b6d",
+                "reference": "9d5e006aaa7bfe64bfa01fbe67e3980745984b6d",
+                "shasum": ""
+            },
+            "require": {
+                "bluefission/automata": "dev-master",
+                "bluefission/develation": "^1.0.0-alpha",
+                "bluefission/simpleclients": "dev-master"
+            },
+            "require-dev": {
+                "php": ">=8.0.0",
+                "phpunit/phpunit": "^11.1@dev"
+            },
+            "default-branch": true,
+            "type": "opus-addon",
+            "autoload": {
+                "psr-4": {
+                    "AddOns\\Hestia\\": ""
+                },
+                "classmap": [
+                    ""
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "AddOns\\Hestia\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Devon Scott",
+                    "email": "dscott@bluefission.com",
+                    "homepage": "https://bluefission.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Plugin for Hestia housing tool",
+            "keywords": [
+                "addon",
+                "hestia",
+                "opus",
+                "plugin",
+                "real estate",
+                "web design",
+                "web development"
+            ],
+            "support": {
+                "source": "https://github.com/bluefission/hestia-addon/tree/main",
+                "issues": "https://github.com/bluefission/hestia-addon/issues"
+            },
+            "time": "2024-08-06T16:59:17+00:00"
         },
         {
             "name": "bluefission/simpleclients",
@@ -258,12 +326,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/wise.git",
-                "reference": "b2557ceaf1bbc3d96c1a659296afc0e5d17b459f"
+                "reference": "6ab9abe7a1be6d9eb8cfa138dd654aa2f5ebbdf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/wise/zipball/b2557ceaf1bbc3d96c1a659296afc0e5d17b459f",
-                "reference": "b2557ceaf1bbc3d96c1a659296afc0e5d17b459f",
+                "url": "https://api.github.com/repos/bluefission/wise/zipball/6ab9abe7a1be6d9eb8cfa138dd654aa2f5ebbdf6",
+                "reference": "6ab9abe7a1be6d9eb8cfa138dd654aa2f5ebbdf6",
                 "shasum": ""
             },
             "require": {
@@ -319,7 +387,7 @@
                 "source": "https://github.com/bluefission/wise/tree/main",
                 "issues": "https://github.com/bluefission/wise/issues"
             },
-            "time": "2024-07-31T20:46:59+00:00"
+            "time": "2024-08-03T04:00:52+00:00"
         },
         {
             "name": "botman/botman",
@@ -2089,7 +2157,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v10.48.18",
+            "version": "v10.48.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -2144,7 +2212,7 @@
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v10.48.18",
+            "version": "v10.48.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -2190,7 +2258,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v10.48.18",
+            "version": "v10.48.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -2238,7 +2306,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v10.48.18",
+            "version": "v10.48.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -2284,7 +2352,7 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v10.48.18",
+            "version": "v10.48.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
@@ -2355,26 +2423,27 @@
         },
         {
             "name": "laravel/serializable-closure",
-            "version": "v1.3.3",
+            "version": "v1.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "3dbf8a8e914634c48d389c1234552666b3d43754"
+                "reference": "61b87392d986dc49ad5ef64e75b1ff5fee24ef81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/3dbf8a8e914634c48d389c1234552666b3d43754",
-                "reference": "3dbf8a8e914634c48d389c1234552666b3d43754",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/61b87392d986dc49ad5ef64e75b1ff5fee24ef81",
+                "reference": "61b87392d986dc49ad5ef64e75b1ff5fee24ef81",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.3|^8.0"
             },
             "require-dev": {
-                "nesbot/carbon": "^2.61",
+                "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
+                "nesbot/carbon": "^2.61|^3.0",
                 "pestphp/pest": "^1.21.3",
                 "phpstan/phpstan": "^1.8.2",
-                "symfony/var-dumper": "^5.4.11"
+                "symfony/var-dumper": "^5.4.11|^6.2.0|^7.0.0"
             },
             "type": "library",
             "extra": {
@@ -2411,7 +2480,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2023-11-08T14:08:06+00:00"
+            "time": "2024-08-02T07:48:17+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
@@ -3012,16 +3081,16 @@
         },
         {
             "name": "php-http/discovery",
-            "version": "1.19.4",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/discovery.git",
-                "reference": "0700efda8d7526335132360167315fdab3aeb599"
+                "reference": "ed16f5209c597c564da6efa54f771e8bda743f07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/0700efda8d7526335132360167315fdab3aeb599",
-                "reference": "0700efda8d7526335132360167315fdab3aeb599",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/ed16f5209c597c564da6efa54f771e8bda743f07",
+                "reference": "ed16f5209c597c564da6efa54f771e8bda743f07",
                 "shasum": ""
             },
             "require": {
@@ -3048,6 +3117,7 @@
                 "sebastian/comparator": "^3.0.5 || ^4.0.8",
                 "symfony/phpunit-bridge": "^6.4.4 || ^7.0.1"
             },
+            "default-branch": true,
             "type": "composer-plugin",
             "extra": {
                 "class": "Http\\Discovery\\Composer\\Plugin",
@@ -3085,9 +3155,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/discovery/issues",
-                "source": "https://github.com/php-http/discovery/tree/1.19.4"
+                "source": "https://github.com/php-http/discovery/tree/1.x"
             },
-            "time": "2024-03-29T13:00:05+00:00"
+            "time": "2024-04-22T09:10:37+00:00"
         },
         {
             "name": "phpoffice/common",
@@ -7744,7 +7814,8 @@
         "bluefission/automata": 20,
         "bluefission/bluecore": 20,
         "bluefission/simpleclients": 20,
-        "bluefission/wise": 20
+        "bluefission/wise": 20,
+        "bluefission/hestia-addon": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
