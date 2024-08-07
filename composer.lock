@@ -207,12 +207,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/hestia-addon.git",
-                "reference": "48298d5c73ba4c33bc222378492993f268393129"
+                "reference": "74de160429132f0b05655242b674c1c21268be6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/hestia-addon/zipball/48298d5c73ba4c33bc222378492993f268393129",
-                "reference": "48298d5c73ba4c33bc222378492993f268393129",
+                "url": "https://api.github.com/repos/bluefission/hestia-addon/zipball/74de160429132f0b05655242b674c1c21268be6f",
+                "reference": "74de160429132f0b05655242b674c1c21268be6f",
                 "shasum": ""
             },
             "require": {
@@ -264,7 +264,7 @@
                 "source": "https://github.com/bluefission/hestia-addon/tree/main",
                 "issues": "https://github.com/bluefission/hestia-addon/issues"
             },
-            "time": "2024-08-06T23:03:39+00:00"
+            "time": "2024-08-07T04:29:21+00:00"
         },
         {
             "name": "bluefission/simpleclients",
