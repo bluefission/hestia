@@ -2,24 +2,24 @@
 use BlueFission\BlueCore\Datasource\Generator;
 use BlueFission\DevString;
 
-use App\Domain\Conversation\Models\LanguageModel;
-use App\Domain\Conversation\DialogueType;
-use App\Domain\Conversation\Models\CredentialStatusModel;
-use App\Domain\Conversation\CredentialStatus;
-use App\Domain\Conversation\Models\TopicModel;
-use App\Domain\Conversation\Models\DialogueModel;
-use App\Domain\Conversation\Models\DialogueTypeModel;
-use App\Domain\Conversation\Models\TagModel;
-use App\Domain\Conversation\Models\TopicToTagsPivot;
-use App\Domain\Conversation\Models\TopicRouteModel;
-use App\Domain\Conversation\Models\EntityTypeModel;
-use App\Domain\Conversation\Models\EntityModel;
-use App\Domain\Conversation\Models\EntityToTagsPivot;
-use App\Domain\Conversation\Models\EntityToEntityTypesPivot;
-use App\Domain\Conversation\Fact;
-use App\Domain\Conversation\Models\FactTypeModel;
-use App\Domain\Conversation\Models\FactModel;
-use App\Domain\Conversation\Models\VerbModel;
+use BlueFission\BlueCore\Domain\Conversation\Models\LanguageModel;
+use BlueFission\BlueCore\Domain\Conversation\DialogueType;
+use BlueFission\BlueCore\Domain\Conversation\Models\CredentialStatusModel;
+use BlueFission\BlueCore\Domain\Conversation\CredentialStatus;
+use BlueFission\BlueCore\Domain\Conversation\Models\TopicModel;
+use BlueFission\BlueCore\Domain\Conversation\Models\DialogueModel;
+use BlueFission\BlueCore\Domain\Conversation\Models\DialogueTypeModel;
+use BlueFission\BlueCore\Domain\Conversation\Models\TagModel;
+use BlueFission\BlueCore\Domain\Conversation\Models\TopicToTagsPivot;
+use BlueFission\BlueCore\Domain\Conversation\Models\TopicRouteModel;
+use BlueFission\BlueCore\Domain\Conversation\Models\EntityTypeModel;
+use BlueFission\BlueCore\Domain\Conversation\Models\EntityModel;
+use BlueFission\BlueCore\Domain\Conversation\Models\EntityToTagsPivot;
+use BlueFission\BlueCore\Domain\Conversation\Models\EntityToEntityTypesPivot;
+use BlueFission\BlueCore\Domain\Conversation\Fact;
+use BlueFission\BlueCore\Domain\Conversation\Models\FactTypeModel;
+use BlueFission\BlueCore\Domain\Conversation\Models\FactModel;
+use BlueFission\BlueCore\Domain\Conversation\Models\VerbModel;
 
 class InitialConversationData extends Generator
 {

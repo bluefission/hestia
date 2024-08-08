@@ -1,11 +1,11 @@
 <?php
 use BlueFission\BlueCore\Datasource\Generator;
-use BlueFission\DevString;
+use BlueFission\Str;
 
-use App\Domain\User\Models\UserModel;
-use App\Domain\User\Models\CredentialModel;
-use App\Domain\User\Models\CredentialStatusModel;
-use App\Domain\User\CredentialStatus;
+use BlueFission\BlueCore\Domain\User\Models\UserModel;
+use BlueFission\BlueCore\Domain\User\Models\CredentialModel;
+use BlueFission\BlueCore\Domain\User\Models\CredentialStatusModel;
+use BlueFission\BlueCore\Domain\User\CredentialStatus;
 
 class InitialUserData extends Generator
 {
@@ -32,7 +32,7 @@ class InitialUserData extends Generator
 		$status->name = CredentialStatus::VERIFIED;
 		$status->read();
 
-		$password = DevString::random(null, 16, true);
+		$password = Str::rand(null, 16, true);
 		if ( defined('STDIN') ) {
 			$password = prompt_silent("Enter an admin password: ");
 		}

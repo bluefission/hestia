@@ -2,8 +2,9 @@
 namespace App\Business\Console;
 
 use BlueFission\Services\Service;
+use BlueFission\Behavioral\IDispatcher;
 
-class DatabaseManager extends Service {
+class DatabaseManager extends Service implements IDispatcher {
 
 	private $_deltaDir = OPUS_ROOT.'/datasources/structure/';
 	private $_generatorDir = OPUS_ROOT.'/datasources/generator/';

@@ -18,7 +18,7 @@ class CliManager extends Service {
 
 	public function cmd()
 	{
-		$core = instance('core');
+		// $core = instance('core');
 		print "Type your message. Type '.' on a line by itself when you're done.\n";
 
 		$fp = fopen('php://stdin', 'r');
@@ -40,9 +40,9 @@ class CliManager extends Service {
 		      	$transcript = $thread->history();
 		      	echo $transcript;
 		      } else {
-			      // $response = $this->_processor->process($next_line);
-			      $core->handle($next_line);
-			      $response = $core->output();
+			      $response = $this->_processor->process($next_line);
+			      // $core->handle($next_line);
+			      // $response = $core->output();
 			      
 			      echo "\n$response\n\n";
 			  }
