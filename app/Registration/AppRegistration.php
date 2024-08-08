@@ -155,7 +155,8 @@ class AppRegistration implements IExtension {
 	 * Pass arguments to different components
 	 */
 	public function arguments() {
-		$this->bindArgs( ['session'=>new \BlueFission\Data\Storage\Session(['location'=>'identity','name'=>'auth'])], 'App\Business\Http\AdminController');
+		$this->bindArgs( ['session'=>new \BlueFission\Data\Storage\Session()], 'App\Business\Http\AdminController');
+		$this->bindArgs( ['session'=>new \BlueFission\Data\Storage\Session()], 'BlueFission\Services\Authenticator');
 
 		$this->bindArgs( ['config'=>$this->_app->configuration('database')['mysql']], 'BlueFission\Connections\Database\MySQLLink');
 		$this->bindArgs( ['driverConfigurations'=>$this->_app->configuration('communication')['drivers']], 'App\Business\Managers\CommunicationManager');

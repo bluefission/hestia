@@ -1,6 +1,6 @@
 <?php
 use BlueFission\BlueCore\Datasource\Generator;
-use BlueFission\DevString;
+use BlueFission\Str;
 
 use BlueFission\BlueCore\Domain\Conversation\Models\LanguageModel;
 use BlueFission\BlueCore\Domain\Conversation\DialogueType;
@@ -1873,7 +1873,7 @@ yesterday";
 			$entityType->write();
 			echo "Creating entity type: {$entityType->label} ";
 			echo $entityType->status()."\n";
-			$entityType->read();
+			// $entityType->read();
 
 			foreach ($entities as $ent) {
 				$entity->clear();
@@ -1885,7 +1885,7 @@ yesterday";
 					echo "Creating entity: {$entity->label} ";
 					echo $entity->status()."\n";
 
-					$entity->read();
+					// $entity->read();
 				}
 
 				$entityEntityTypes->clear();

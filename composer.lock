@@ -72,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/bluecore.git",
-                "reference": "01041bc02ff7d57578ca78d8f58e45afb33cbebb"
+                "reference": "91a48249fbdde7ae2c72f8818bcff19fd78d347e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/bluecore/zipball/01041bc02ff7d57578ca78d8f58e45afb33cbebb",
-                "reference": "01041bc02ff7d57578ca78d8f58e45afb33cbebb",
+                "url": "https://api.github.com/repos/bluefission/bluecore/zipball/91a48249fbdde7ae2c72f8818bcff19fd78d347e",
+                "reference": "91a48249fbdde7ae2c72f8818bcff19fd78d347e",
                 "shasum": ""
             },
             "require": {
@@ -136,7 +136,7 @@
                 "source": "https://github.com/bluefission/bluecore/tree/main",
                 "issues": "https://github.com/bluefission/bluecore/issues"
             },
-            "time": "2024-08-07T00:44:47+00:00"
+            "time": "2024-08-08T01:37:32+00:00"
         },
         {
             "name": "bluefission/develation",
@@ -144,12 +144,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/develation.git",
-                "reference": "541e5a048c428512278d20ba4361d7e9b520eb51"
+                "reference": "deac01a317737394385f72854be9f0cae8006dbf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/develation/zipball/541e5a048c428512278d20ba4361d7e9b520eb51",
-                "reference": "541e5a048c428512278d20ba4361d7e9b520eb51",
+                "url": "https://api.github.com/repos/bluefission/develation/zipball/deac01a317737394385f72854be9f0cae8006dbf",
+                "reference": "deac01a317737394385f72854be9f0cae8006dbf",
                 "shasum": ""
             },
             "require": {
@@ -199,7 +199,7 @@
                 "source": "https://github.com/bluefission/develation/tree/v1.0.0-alpha",
                 "issues": "https://github.com/bluefission/develation/issues"
             },
-            "time": "2024-08-07T02:26:08+00:00"
+            "time": "2024-08-08T01:36:08+00:00"
         },
         {
             "name": "bluefission/hestia-addon",

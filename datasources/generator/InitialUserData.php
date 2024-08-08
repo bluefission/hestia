@@ -2,10 +2,10 @@
 use BlueFission\BlueCore\Datasource\Generator;
 use BlueFission\Str;
 
-use BlueFission\BlueCore\Domain\User\Models\UserModel;
-use BlueFission\BlueCore\Domain\User\Models\CredentialModel;
-use BlueFission\BlueCore\Domain\User\Models\CredentialStatusModel;
-use BlueFission\BlueCore\Domain\User\CredentialStatus;
+use App\Domain\User\Models\UserModel;
+use App\Domain\User\Models\CredentialModel;
+use App\Domain\User\Models\CredentialStatusModel;
+use App\Domain\User\CredentialStatus;
 
 class InitialUserData extends Generator
 {
@@ -45,7 +45,7 @@ class InitialUserData extends Generator
 		$user->write();
 		echo "Creating Admin user: {$user->displayname} ";
 		echo $user->status()."\n";
-		$user->read();
+		// $user->read();
 
 		$credential->username = 'admin';
 		$credential->password = $password;

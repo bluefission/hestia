@@ -7,7 +7,7 @@ use BlueFission\Services\Service;
 use BlueFission\Utils\Loader;
 use BlueFission\BlueCore\Domain\AddOn\Models\AddOnModel;
 use BlueFission\BlueCore\Domain\AddOn\AddOn;
-use BlueFission\DevString;
+use BlueFission\Str;
 use BlueFission\System\System;
 
 class AddOnManager extends Service
@@ -105,9 +105,9 @@ class AddOnManager extends Service
             $data = json_decode(file_get_contents(OPUS_ROOT.'addons' . DIRECTORY_SEPARATOR . $addOn  . DIRECTORY_SEPARATOR . 'definition.json'));
             $model = new AddOn;
             $model->name = $data->name ?? $addOn;
-            $model->description = DevString::truncate($data->description ?? "");
+            $model->description = Str::truncate($data->description ?? "");
             $model->path = OPUS_ROOT.'addons' . DIRECTORY_SEPARATOR . $addOn;
-            $model->primaryFile = 'main.php';
+            $model->primary_file = 'main.php';
             // $addOn = $model;
             $list[$data->name] = $model;
         }
