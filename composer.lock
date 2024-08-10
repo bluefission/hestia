@@ -72,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/bluecore.git",
-                "reference": "31d76c2b586209792869a4ca10690c416f18cf4b"
+                "reference": "7cf48726a0f21adda4b242478258c4ec47dcd98e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/bluecore/zipball/31d76c2b586209792869a4ca10690c416f18cf4b",
-                "reference": "31d76c2b586209792869a4ca10690c416f18cf4b",
+                "url": "https://api.github.com/repos/bluefission/bluecore/zipball/7cf48726a0f21adda4b242478258c4ec47dcd98e",
+                "reference": "7cf48726a0f21adda4b242478258c4ec47dcd98e",
                 "shasum": ""
             },
             "require": {
@@ -136,7 +136,7 @@
                 "source": "https://github.com/bluefission/bluecore/tree/main",
                 "issues": "https://github.com/bluefission/bluecore/issues"
             },
-            "time": "2024-08-08T23:03:29+00:00"
+            "time": "2024-08-10T03:12:21+00:00"
         },
         {
             "name": "bluefission/develation",
@@ -144,12 +144,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/develation.git",
-                "reference": "64ccef8aad4f21a4c412c9b7f7af3c4beb6406b5"
+                "reference": "d437b12b059228ae8d8b88496ae9c063b822f07f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/develation/zipball/64ccef8aad4f21a4c412c9b7f7af3c4beb6406b5",
-                "reference": "64ccef8aad4f21a4c412c9b7f7af3c4beb6406b5",
+                "url": "https://api.github.com/repos/bluefission/develation/zipball/d437b12b059228ae8d8b88496ae9c063b822f07f",
+                "reference": "d437b12b059228ae8d8b88496ae9c063b822f07f",
                 "shasum": ""
             },
             "require": {
@@ -199,7 +199,7 @@
                 "source": "https://github.com/bluefission/develation/tree/v1.0.0-alpha",
                 "issues": "https://github.com/bluefission/develation/issues"
             },
-            "time": "2024-08-08T23:04:16+00:00"
+            "time": "2024-08-10T03:16:40+00:00"
         },
         {
             "name": "bluefission/hestia-addon",
@@ -207,12 +207,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/hestia-addon.git",
-                "reference": "2ade1bc5dc8d283976b4a571adca844cde2d4d8f"
+                "reference": "45be4f14a490505230f223b45b2de8df301a455b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/hestia-addon/zipball/2ade1bc5dc8d283976b4a571adca844cde2d4d8f",
-                "reference": "2ade1bc5dc8d283976b4a571adca844cde2d4d8f",
+                "url": "https://api.github.com/repos/bluefission/hestia-addon/zipball/45be4f14a490505230f223b45b2de8df301a455b",
+                "reference": "45be4f14a490505230f223b45b2de8df301a455b",
                 "shasum": ""
             },
             "require": {
@@ -264,7 +264,7 @@
                 "source": "https://github.com/bluefission/hestia-addon/tree/main",
                 "issues": "https://github.com/bluefission/hestia-addon/issues"
             },
-            "time": "2024-08-08T23:09:44+00:00"
+            "time": "2024-08-10T03:09:53+00:00"
         },
         {
             "name": "bluefission/simpleclients",
@@ -1373,16 +1373,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.59.0",
+            "version": "v1.59.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "56d31be2663780a7ed0736bee60d01f047bf15c0"
+                "reference": "35aae23dc4d0b860b6c3733e5cf381a510b506d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/56d31be2663780a7ed0736bee60d01f047bf15c0",
-                "reference": "56d31be2663780a7ed0736bee60d01f047bf15c0",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/35aae23dc4d0b860b6c3733e5cf381a510b506d9",
+                "reference": "35aae23dc4d0b860b6c3733e5cf381a510b506d9",
                 "shasum": ""
             },
             "require": {
@@ -1433,9 +1433,9 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.59.0"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.59.1"
             },
-            "time": "2024-06-07T22:33:41+00:00"
+            "time": "2024-08-10T02:24:23+00:00"
         },
         {
             "name": "google/cloud-dialogflow",
