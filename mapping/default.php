@@ -50,7 +50,8 @@ Mapping::add('/clear', function() {
 });
 
 Mapping::add('/', function() {
-	return template('default', 'default.html', ['title'=>"Welcome", 'name'=>env('APP_NAME'), 'csrf_token'=>HTTP::session('_token')]);
+	redirect('home');
+	// return template('default', 'default.html', ['title'=>"Welcome", 'name'=>env('APP_NAME'), 'csrf_token'=>HTTP::session('_token')]);
 }, 'index', 'get');
 
 Mapping::add('/test', function() {

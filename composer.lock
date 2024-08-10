@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/automata.git",
-                "reference": "85497ab4cad9aecfbf10de35a5c34f44e21661ca"
+                "reference": "59a776d643da62ce1b74350e1a18a370e66fef04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/automata/zipball/85497ab4cad9aecfbf10de35a5c34f44e21661ca",
-                "reference": "85497ab4cad9aecfbf10de35a5c34f44e21661ca",
+                "url": "https://api.github.com/repos/bluefission/automata/zipball/59a776d643da62ce1b74350e1a18a370e66fef04",
+                "reference": "59a776d643da62ce1b74350e1a18a370e66fef04",
                 "shasum": ""
             },
             "require": {
@@ -64,7 +64,7 @@
                 "source": "https://github.com/bluefission/automata/tree/master",
                 "issues": "https://github.com/bluefission/automata/issues"
             },
-            "time": "2024-08-07T02:23:49+00:00"
+            "time": "2024-08-08T23:09:07+00:00"
         },
         {
             "name": "bluefission/bluecore",
@@ -72,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/bluecore.git",
-                "reference": "91a48249fbdde7ae2c72f8818bcff19fd78d347e"
+                "reference": "31d76c2b586209792869a4ca10690c416f18cf4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/bluecore/zipball/91a48249fbdde7ae2c72f8818bcff19fd78d347e",
-                "reference": "91a48249fbdde7ae2c72f8818bcff19fd78d347e",
+                "url": "https://api.github.com/repos/bluefission/bluecore/zipball/31d76c2b586209792869a4ca10690c416f18cf4b",
+                "reference": "31d76c2b586209792869a4ca10690c416f18cf4b",
                 "shasum": ""
             },
             "require": {
@@ -136,7 +136,7 @@
                 "source": "https://github.com/bluefission/bluecore/tree/main",
                 "issues": "https://github.com/bluefission/bluecore/issues"
             },
-            "time": "2024-08-08T01:37:32+00:00"
+            "time": "2024-08-08T23:03:29+00:00"
         },
         {
             "name": "bluefission/develation",
@@ -144,12 +144,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/develation.git",
-                "reference": "deac01a317737394385f72854be9f0cae8006dbf"
+                "reference": "64ccef8aad4f21a4c412c9b7f7af3c4beb6406b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/develation/zipball/deac01a317737394385f72854be9f0cae8006dbf",
-                "reference": "deac01a317737394385f72854be9f0cae8006dbf",
+                "url": "https://api.github.com/repos/bluefission/develation/zipball/64ccef8aad4f21a4c412c9b7f7af3c4beb6406b5",
+                "reference": "64ccef8aad4f21a4c412c9b7f7af3c4beb6406b5",
                 "shasum": ""
             },
             "require": {
@@ -199,7 +199,7 @@
                 "source": "https://github.com/bluefission/develation/tree/v1.0.0-alpha",
                 "issues": "https://github.com/bluefission/develation/issues"
             },
-            "time": "2024-08-08T01:36:08+00:00"
+            "time": "2024-08-08T23:04:16+00:00"
         },
         {
             "name": "bluefission/hestia-addon",
@@ -207,12 +207,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bluefission/hestia-addon.git",
-                "reference": "74de160429132f0b05655242b674c1c21268be6f"
+                "reference": "2ade1bc5dc8d283976b4a571adca844cde2d4d8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bluefission/hestia-addon/zipball/74de160429132f0b05655242b674c1c21268be6f",
-                "reference": "74de160429132f0b05655242b674c1c21268be6f",
+                "url": "https://api.github.com/repos/bluefission/hestia-addon/zipball/2ade1bc5dc8d283976b4a571adca844cde2d4d8f",
+                "reference": "2ade1bc5dc8d283976b4a571adca844cde2d4d8f",
                 "shasum": ""
             },
             "require": {
@@ -264,7 +264,7 @@
                 "source": "https://github.com/bluefission/hestia-addon/tree/main",
                 "issues": "https://github.com/bluefission/hestia-addon/issues"
             },
-            "time": "2024-08-07T04:29:21+00:00"
+            "time": "2024-08-08T23:09:44+00:00"
         },
         {
             "name": "bluefission/simpleclients",
@@ -2219,7 +2219,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v10.48.19",
+            "version": "v10.48.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -2274,7 +2274,7 @@
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v10.48.19",
+            "version": "v10.48.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -2320,7 +2320,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v10.48.19",
+            "version": "v10.48.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -2368,7 +2368,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v10.48.19",
+            "version": "v10.48.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -2414,16 +2414,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v10.48.19",
+            "version": "v10.48.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "263f389d81488c237846b69469f91387ca2729f3"
+                "reference": "56c6d9895605b019e3debb9440454596ef99312a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/263f389d81488c237846b69469f91387ca2729f3",
-                "reference": "263f389d81488c237846b69469f91387ca2729f3",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/56c6d9895605b019e3debb9440454596ef99312a",
+                "reference": "56c6d9895605b019e3debb9440454596ef99312a",
                 "shasum": ""
             },
             "require": {
@@ -2481,7 +2481,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-05-16T21:33:51+00:00"
+            "time": "2024-05-20T13:31:33+00:00"
         },
         {
             "name": "laravel/serializable-closure",
