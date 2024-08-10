@@ -32,5 +32,5 @@ App::instance()
 	->bootstrap()
 	->args()
 	->process()
-	->validateCsrf()
+	// ->validateCsrf() // Temporarily remove this due to Digital Ocean's multi-instances producing conflicting tokens
 	->run();

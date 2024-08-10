@@ -14,7 +14,6 @@ class AdminController extends Service {
         $auth = new Authenticator( $session, $datasource );
 
         if ( $auth->isAuthenticated() ) {
-            // globals('sideNav', $navMenuManager->renderMenu('sideNav'));
             $navMenuManager = instance('nav');
             $sideNav = $navMenuManager->renderMenu('sidebar');
             return template('admin', 'default.html', ['csrf_token'=>store('_token'), 'side-nav'=>$sideNav, 'title'=>env('APP_NAME')." Admin"]);
